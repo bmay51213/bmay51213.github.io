@@ -22,7 +22,8 @@ According to the CDC, breast cancer is the second most common cause of death due
 The dataset that I will be examining comes from the University of California – Irvine Machine Learning Repository.  Many of these datasets have been made public for the use of machine learning algorithms to use machine learning algorithms for different types of data science problems.  
 
 The link can be found here and a detailed listing of the variables can be found here:
-https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
+
+[link](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
 
 This data was collected at the University of Wisconsin in 1995.  The file is in a csv format in which microscopic images of Fine Needle Aspirates of suspicious breast tissue was digitized.  There are a total of 32 variables with 570 subjects.  They were examining suspicious masses in those without evidence of metastasis (distant spread of cancer to other parts of the body).  The target variable is categorical and is coded as M for malignant and B for benign.  There are no missing data in the CSV file.  There are case identifiers but other demographic information such as age, co-morbidities, and family history are not available.
 
