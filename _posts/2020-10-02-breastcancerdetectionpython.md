@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning Project:  Breast Cancer Detection Using Machine Learning"
-date: 2020-09-04
+date: 2020-10-02
 tags: [machine learning, data science]
 header:
   image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
@@ -2643,7 +2643,7 @@ plt.show()
 
 
 
-![png](output_18_1.png)
+![png](/images/breastcancer/output_18_1.png)
 
 
 __Many of these variables are positively skewed.  The only variables that appear to be mostly normally distributed are symmetry_mean and possible fractal_dimension_mean.  Concave_points_worst actually appears to be bimodal.__
@@ -2716,7 +2716,7 @@ axs[7,1].set_title('Benign/Malignant vs. Fractal Dimension Worst Values')
 
 
 
-![png](output_21_1.png)
+![png](images/breastcancer/output_21_1.png)
 
 
 __Looking at the comparisons of our predictor variables vs. their diagnosis of malignant or benign, there are several interesting factors.  While there were some outliers, I still will keep these in the datasets for now.  In general, the malignant tumors seemed to have higher worst symmetry scores, worst concave points, worst concavity, worst compactness, and texture worst values.__
@@ -2793,7 +2793,7 @@ viz.show()
 ```
 
 
-![png](output_25_0.png)
+![png](images/breastcancer/output_25_0.png)
 
 
 
@@ -2999,7 +2999,7 @@ viz.show()
 ```
 
 
-![png](output_33_0.png)
+![png](/images/breastcancer/output_33_0.png)
 
 
 
