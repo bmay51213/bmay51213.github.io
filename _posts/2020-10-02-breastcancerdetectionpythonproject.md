@@ -1,3 +1,12 @@
+---
+title: "Machine Learning Project:  Breast Cancer Detection Using Machine Learning"
+date: 2020-09-04
+tags: [machine learning, data science]
+header:
+  image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
+excerpt: "Using Machine Learning to Detect Cancer on Biopsy Specimens"
+---
+
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />

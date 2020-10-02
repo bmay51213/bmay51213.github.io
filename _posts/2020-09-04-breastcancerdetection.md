@@ -1,5 +1,5 @@
 ---
-title: "Machine Learning Project:  Breast Cancer Detection Using Machine Learning"
+title: "Machine Learning Project:  Breast Cancer Detection Using Machine Learning Project Proposal"
 date: 2020-09-04
 tags: [machine learning, data science]
 header:
