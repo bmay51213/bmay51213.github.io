@@ -1927,7 +1927,7 @@ plt.show()
 ```
 
 
-![png](output_12_0.png)
+![png](/images/breastcancer/output_12_0.png)
 
 
 __Given the high rates of correlation of the above variables, we will drop them from the dataframe.  With a correlation >0.95, these are likely redundant and may introduce instability in our final algorithms.__
