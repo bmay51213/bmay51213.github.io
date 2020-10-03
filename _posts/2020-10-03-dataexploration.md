@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Breast Cancer Detection Using Machine Learning"
+title: "Machine Learning Project:  Data Exploration and Analysis"
 date: 2020-10-03
-tags: [machine learning, data exploration]
+tags: [Data Exploration, Logistic Regression]
 header:
   image: "/images/heartdisease/499ss_thinkstock_rf_heart_illustration.jpg"
-excerpt: "Data Exploration and Analysis of Heart Disease"
+excerpt: "Exploring and Predicting Heart Disease Dataset"
 ---
 
 # Heart Disease Prediction Using Logistic Regression With Exploratory Data Analysis
