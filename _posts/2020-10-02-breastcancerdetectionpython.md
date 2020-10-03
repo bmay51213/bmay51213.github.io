@@ -2716,7 +2716,7 @@ axs[7,1].set_title('Benign/Malignant vs. Fractal Dimension Worst Values')
 
 
 
-![png](images/breastcancer/output_21_1.png)
+![png](/images/breastcancer/output_21_1.png)
 
 
 __Looking at the comparisons of our predictor variables vs. their diagnosis of malignant or benign, there are several interesting factors.  While there were some outliers, I still will keep these in the datasets for now.  In general, the malignant tumors seemed to have higher worst symmetry scores, worst concave points, worst concavity, worst compactness, and texture worst values.__
@@ -2793,7 +2793,7 @@ viz.show()
 ```
 
 
-![png](images/breastcancer/output_25_0.png)
+![png](/images/breastcancer/output_25_0.png)
 
 
 
