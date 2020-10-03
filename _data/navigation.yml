@@ -4,8 +4,6 @@ main:
     url: /about/
   - title: "Machine Learning Projects"
     url: /machine-learning/
-  - title: "Data Visualization"
-    url: /data-visualization/
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
   #   url: /year-archive/
