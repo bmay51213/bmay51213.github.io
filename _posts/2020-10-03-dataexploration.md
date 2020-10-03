@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning Project:  Breast Cancer Detection Using Machine Learning"
-date: 2020-10-02
+date: 2020-10-03
 tags: [machine learning, data exploration]
 header:
   image: "/images/heartdisease/499ss_thinkstock_rf_heart_illustration.jpg"
