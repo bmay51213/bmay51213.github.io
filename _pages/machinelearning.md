@@ -5,7 +5,7 @@ title: "Machine Learning Projects by Tag"
 header:
   image: "/images/enterprise-data-science.png"
 ---
-{% include base_path %}
+
 {% include group-by-array collection=site.posts field="tags" %}
 
 {% for tag in group_names %}
@@ -14,3 +14,4 @@ header:
   {% for post in posts %}
     {% include archive-single.html %}
   {% endfor %}
+{% endfor %}
