@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Data Visualization"
+title: "The Story About Airline Safety - Part 2 - Infographic"
 date: 2020-10-03
 tags: [Data Visualization, Infographics]
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
-excerpt: "The Story About Airline Safety - Part 2 - Infographic"
+excerpt: "Data Visualization"
 ---
 
 ### Data Visualization and Presentation
@@ -13,7 +13,7 @@ excerpt: "The Story About Airline Safety - Part 2 - Infographic"
 
 The goal of this project was to use different types of data visualizations to adequately tell the story based on a hypothetical scenario.  In this scenario, there has been consistent negative press after several high profile plane crashes.  The public and media are beginning to question whether airlines are as safe as they have been reported to be.  My job was to analyze the data and use different methods of data visualizations to describe the situation.
 
-Following is the sample infographic describing the situation and key metrics used to show that airline safety is safe, yet complicated.
+Following is the sample infographic describing the situation and key metrics used to show that airlines appear to be safe when compared to other traditional forms of transportation.
 
 <embed src="https://bmay51213.github.io/AirlineSafetyInfographic.pdf" type="application/pdf" />
 

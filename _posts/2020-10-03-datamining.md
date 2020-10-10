@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Data Mining"
+title: "Echocardiograms and Survival Prediction"
 date: 2020-10-03
 tags: [Data Mining, Logistic Regression]
 header:
   image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
-excerpt: "Echocardiograms and Survival Prediction Using ML"
+excerpt: "Logistic Regression, SVG, Random Forest Classifier"
 ---
 
 # Survival Prediction After Heart Attack By Echocardiogram Measurements

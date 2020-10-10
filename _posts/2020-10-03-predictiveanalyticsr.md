@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Predictive Analytics"
+title: "Using ML to Determine Infant Heart Rate Tracings - R Portion (Part 1)"
 date: 2020-10-03
 tags: [Predictive Analytics, KNN, Random Forest, Decision Tree]
 header:
   image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
-excerpt: "Using ML to Determine Infant Heart Rate Tracings - R Portion and Data Analysis"
+excerpt: "Predictive Analytics, Exploratory Data Analysis"
 ---
 
 ## Predictive Analytics: Final Project

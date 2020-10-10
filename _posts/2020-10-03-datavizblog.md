@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Data Visualization"
+title: "The Story About Airline Safety - Part 3 - Blog Post"
 date: 2020-10-03
 tags: [Data Visualization, Blog Post]
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
-excerpt: "The Story About Airline Safety - Part 3 - Blog Post"
+excerpt: "Data Visualization"
 ---
 
 ### Data Visualization and Presentation

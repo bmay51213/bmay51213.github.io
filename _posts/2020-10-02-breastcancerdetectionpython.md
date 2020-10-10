@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Machine Learning and Breast Cancer Detection"
+title: "Detection of Breast Cancer of Biopsy Specimens Using Machine Learning"
 date: 2020-10-02
 tags: [machine learning, data science]
 header:
   image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
-excerpt: "Using Machine Learning to Detect Cancer on Biopsy Specimens"
+excerpt: "Logistic Regression, KNN, Random Forest"
 ---
 
 # Machine Learning and Breast Cancer Detection

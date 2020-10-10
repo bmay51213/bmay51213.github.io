@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Data Exploration and Analysis"
+title: "Exploring and Predicting Heart Disease"
 date: 2020-10-03
 tags: [Data Exploration, Logistic Regression]
 header:
   image: "/images/heartdisease/499ss_thinkstock_rf_heart_illustration.jpg"
-excerpt: "Exploring and Predicting Heart Disease Dataset"
+excerpt: "Data Exploration and Analysis, Logistic Regression"
 ---
 
 # Heart Disease Prediction Using Logistic Regression With Exploratory Data Analysis

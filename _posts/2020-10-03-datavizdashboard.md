@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning Project:  Data Visualization"
+title: "The Story About Airline Safety - Part 1 - Dashboard"
 date: 2020-10-03
 tags: [Data Visualization, Dashboards]
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
-excerpt: "The Story About Airline Safety - Part 1 - Dashboard"
+excerpt: "Data Visualization"
 ---
 
 ### Data Visualization and Presentation
@@ -13,7 +13,7 @@ excerpt: "The Story About Airline Safety - Part 1 - Dashboard"
 
 The goal of this project was to use different types of data visualizations to adequately tell the story based on a hypothetical scenario.  In this scenario, there has been consistent negative press after several high profile plane crashes.  The public and media are beginning to question whether airlines are as safe as they have been reported to be.  My job was to analyze the data and use different methods of data visualizations to describe the situation.
 
-Following is the sample dashboard describing the situation and key metrics used to show that airline safety is safe, yet complicated.
+Following is the sample dashboard describing the situation and key metrics used to show that airlines do appear to be mostly safe as compared to other traditional methods of travel.
 
 <embed src="https://bmay51213.github.io/AirlineSafetyDashboard.pdf" type="application/pdf" />
 
