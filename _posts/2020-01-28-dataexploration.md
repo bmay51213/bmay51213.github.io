@@ -1,10 +1,10 @@
 ---
-title: "Exploring and Predicting Heart Disease"
-date: 2020-10-03
-tags: [Data Exploration, Logistic Regression]
+title: "Data Exploration and Analysis of Heart Disease Dataset"
+date: 2020-01-28
+tags: [machine learning, data science]
 header:
-  image: "/images/heartdisease/499ss_thinkstock_rf_heart_illustration.jpg"
-excerpt: "Data Exploration and Analysis, Logistic Regression"
+  image: "/images/heartdisease/493ss_thinkstock_rf_heart_illustration.jpg"
+excerpt: "Project Proposal"
 ---
 
 # Heart Disease Prediction Using Logistic Regression With Exploratory Data Analysis
@@ -31,26 +31,11 @@ __Source Cited:__
 
 Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science.
 
+## Data Importing and Cleaning
 
-```python
-#Importing Required Packages
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import thinkplot
-import thinkstats2
-import warnings
+Note this dataset is completed using the dependencies from ThinkStats2.
 
-#Ignoring Warnings
-warnings.filterwarnings('ignore')
-
-#Importing our CSV file: heart.csv
-df = pd.read_csv("heart.csv")
-df
-```
-
-
-
+To begin with, data was imported using Pandas into a Dataframe.
 
 <div>
 <style scoped>
@@ -172,113 +157,9 @@ df
       <td>2</td>
       <td>1</td>
     </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>57</td>
-      <td>0</td>
-      <td>0</td>
-      <td>140</td>
-      <td>241</td>
-      <td>0</td>
-      <td>1</td>
-      <td>123</td>
-      <td>1</td>
-      <td>0.2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>45</td>
-      <td>1</td>
-      <td>3</td>
-      <td>110</td>
-      <td>264</td>
-      <td>0</td>
-      <td>1</td>
-      <td>132</td>
-      <td>0</td>
-      <td>1.2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>68</td>
-      <td>1</td>
-      <td>0</td>
-      <td>144</td>
-      <td>193</td>
-      <td>1</td>
-      <td>1</td>
-      <td>141</td>
-      <td>0</td>
-      <td>3.4</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>57</td>
-      <td>1</td>
-      <td>0</td>
-      <td>130</td>
-      <td>131</td>
-      <td>0</td>
-      <td>1</td>
-      <td>115</td>
-      <td>1</td>
-      <td>1.2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>57</td>
-      <td>0</td>
-      <td>1</td>
-      <td>130</td>
-      <td>236</td>
-      <td>0</td>
-      <td>0</td>
-      <td>174</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
   </tbody>
 </table>
-<p>303 rows × 14 columns</p>
 </div>
-
 
 
 ### Description of Dataset and Variables: ###
@@ -312,315 +193,24 @@ __thal (Measure of Heart Tissue Defects):__ Categorical (3 = Normal, 6 = Fixed D
 __Target:__ Categorical (CAD Presence/Absence) 0 is Absent, 1 is Present - Target Variable
 
 
-__There are 303 different data points as well as 14 separate variables, which includes the target variable.__
+There are 303 different data points as well as 14 separate variables, which includes the target variable.
 
 
 ```python
 #Searching for Null Values
-df.isnull()
+df.isnull().values.any()
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>cp</th>
-      <th>trestbps</th>
-      <th>chol</th>
-      <th>fbs</th>
-      <th>restecg</th>
-      <th>thalach</th>
-      <th>exang</th>
-      <th>oldpeak</th>
-      <th>slope</th>
-      <th>ca</th>
-      <th>thal</th>
-      <th>target</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-  </tbody>
-</table>
-<p>303 rows × 14 columns</p>
-</div>
+    False
 
 
 
 __There are no null values in this dataset.__
 
-
-```python
-#Checking Datatypes of Variables
-df.dtypes
-```
-
-
-
-
-    age           int64
-    sex           int64
-    cp            int64
-    trestbps      int64
-    chol          int64
-    fbs           int64
-    restecg       int64
-    thalach       int64
-    exang         int64
-    oldpeak     float64
-    slope         int64
-    ca            int64
-    thal          int64
-    target        int64
-    dtype: object
-
-
-
-
-```python
-#Recoding Variable Types - Sex, CP, fbs, restecg, exang, slope, and target as they are Categorical, Not Numeric
-
-df['sex'] = df['sex'].astype('category')
-df['cp'] = df['cp'].astype('category')
-df['fbs'] = df['fbs'].astype('category')
-df['restecg'] = df['restecg'].astype('category')
-df['exang'] = df['exang'].astype('category')
-df['slope'] = df['slope'].astype('category')
-df['thal'] = df['thal'].astype('category')
-df['target'] = df['target'].astype('category')
-```
-
-
-```python
-#Checking to Make Sure Encoded Correctly
-df.dtypes
-```
-
-
-
-
-    age            int64
-    sex         category
-    cp          category
-    trestbps       int64
-    chol           int64
-    fbs         category
-    restecg     category
-    thalach        int64
-    exang       category
-    oldpeak      float64
-    slope       category
-    ca             int64
-    thal        category
-    target      category
-    dtype: object
-
-
+The respective categories were recoded into their proper categorical sub-types and descriptive analysis was performed on the numerical and categorical variables.
 
 
 ```python
@@ -835,7 +425,6 @@ df.describe(include=['category'])
 </div>
 
 
-
 ### Descriptive Analysis of Categorical Variables
 
 The most common values were males, fasting blood sugars <120, EKG showing ST/T abnormalities.  Most of the participants did not have exercise induced angina or chest pain on stress testing.  Further, the most common value for the target variable was confirmed heart disease.
@@ -847,7 +436,7 @@ The most common values were males, fasting blood sugars <120, EKG showing ST/T a
 #Visualizing Distributions of Numerical Variables
 
 #Creating Dataframe of Only Numerical Variables
-df1 = df.drop(['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal', 'target'], axis = 1)
+df1 = df.drop(['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal', 'target', 'ca'], axis = 1)
 
 #Setting Figure Size
 plt.figure(figsize=[100,100])
@@ -863,13 +452,10 @@ for idx, ax in enumerate(a):
 plt.show()
 ```
 
-
-    <Figure size 7200x7200 with 0 Axes>
-
+![png](/images/heartdisease/output_16_2.png)
 
 
-![png](/images/heartdisease/output_14_1.png)
-
+Age, Max HR achieved during exercise (thalach) appeared to be negatively skewed with a higher proportion of higher values.  Resting Systolic BP, Cholesterol, ST depression during exercise were more positively skewed.
 
 
 ```python
@@ -881,42 +467,42 @@ import seaborn as sns
 #Creating Dataframe for Only Categorical Variables
 df2 = df.drop(['age', 'trestbps', 'chol', 'thalach', 'oldpeak', 'ca'], axis = 1)
 
-sns.countplot(x = sex, data = df2)
+sns.countplot(x = df2.sex, data = df2)
 plt.title('Gender Distribution')
 plt.xticks([0,1], ['Female', 'Male'])
 plt.xlabel(xlabel = None)
 plt.ylabel('Counts')
 plt.show()
 
-sns.countplot(x = cp, data = df2)
+sns.countplot(x = df2.cp, data = df2)
 plt.xticks([0, 1, 2, 3], ['Typical Angina', 'Atypical Angina', 'Non-Anginal Pain', 'Asymptomatic'])
 plt.xlabel(xlabel = None)
 plt.ylabel('Counts')
 plt.title('Type of Chest Pain')
 plt.show()
 
-sns.countplot(x = fbs, data = df2)
+sns.countplot(x = df2.fbs, data = df2)
 plt.xticks([0,1], ['FBS <120', 'FBS >120'])
 plt.xlabel(xlabel= None)
 plt.ylabel('Counts')
 plt.title('Fasting Blood Sugar Distribution')
 plt.show()
 
-sns.countplot(x = restecg, data = df2)
+sns.countplot(x = df2.restecg, data = df2)
 plt.xticks([0,1,2], ['Normal', 'ST-T wave Abnormalities', 'Probable LVH'])
 plt.xlabel(xlabel = None)
 plt.ylabel('Counts')
 plt.title('Resting ECG Findings')
 plt.show()
 
-sns.countplot(x = exang, data = df2)
+sns.countplot(x = df2.exang, data = df2)
 plt.xticks([0,1], ['No Symptoms', 'Angina During Stress Test'])
 plt.xlabel(xlabel = None)
 plt.ylabel('Counts')
 plt.title('Symptoms During Stress Test')
 plt.show()
 
-sns.countplot(x = slope, data = df2)
+sns.countplot(x = df2.slope, data = df2)
 plt.xticks([0,1,2], ['Upsloping ST Segment', 'Flat ST Segment', 'Downsloping ST Segment'])
 plt.xlabel(xlabel = None)
 plt.ylabel('Counts')
@@ -925,34 +511,34 @@ plt.show()
 ```
 
 
-![png](/images/heartdisease/output_15_0.png)
+![png](/images/heartdisease/output_18_0.png)
 
 
 
-![png](/images/heartdisease/output_15_1.png)
+![png](/images/heartdisease/output_18_1.png)
 
 
 
-![png](/images/heartdisease/output_15_2.png)
+![png](/images/heartdisease/output_18_2.png)
 
 
 
-![png](/images/heartdisease/output_15_3.png)
+![png](/images/heartdisease/output_18_3.png)
 
 
 
-![png](/images/heartdisease/output_15_4.png)
+![png](/images/heartdisease/output_18_4.png)
 
 
 
-![png](/images/heartdisease/output_15_5.png)
+![png](/images/heartdisease/output_18_5.png)
 
 
-Based on the results above, the majority of patient's tested were males, had typical angina, had fasting blood sugars <120, with either normal/ST-T changes noted on their EKG, and had no symptoms during the stress test.  Further EKG findings during the stress test showed either flat or downsloping ST segments.
+Based on the results above, the majority of patient's tested were males, had typical angina, had fasting blood sugars <120, with either normal/ST-T changes noted on their EKG, and had no symptoms during the stress test.  Further EKG findings during the stress test showed either flat or downsloping ST segments.  Note that downsloping ST segments is an unfavorable finding with a cardiac stress test.
 
 These are important factors to note in that males as well as those with typical angina are more likely to have coronary artery disease based on pre-test probabilities so this raises questions that the patient population used in this dataset could have already had a higher likelihood of having CAD.
 
-### Specialized Visualizations Including Probability Mass Functions, Cumulative Distribution Plots, And Probability Plots
+### Examining Specialized Visualizations Including Probability Mass Functions, Cumulative Distribution Plots, And Probability Plots
 
 
 ```python
@@ -990,7 +576,7 @@ thinkplot.Show(title = 'PMF Of Cholesterol Values Separated By CAD Presence and 
 ```
 
 
-![png](/images/heartdisease/output_19_0.png)
+![png](/images/heartdisease/output_22_0.png)
 
 
 
@@ -1017,7 +603,7 @@ thinkplot.Show(title = 'PMF Of Blood Pressure Values Separated By CAD Presence a
 ```
 
 
-![png](/images/heartdisease/output_21_0.png)
+![png](/images/heartdisease/output_24_0.png)
 
 
 
@@ -1044,7 +630,7 @@ thinkplot.Show(title = 'PMF Of Age Separated By CAD Presence and Absence'
 ```
 
 
-![png](/images/heartdisease/output_23_0.png)
+![png](/images/heartdisease/output_26_0.png)
 
 
 
@@ -1072,15 +658,15 @@ thinkplot.Show(title = 'CDF for Cholesterol', xlabel = "Cholesterol (mg/dL)", yl
 ```
 
 
-![png](/images/heartdisease/output_25_0.png)
+![png](/images/heartdisease/output_28_0.png)
 
 
 
-![png](/images/heartdisease/output_25_1.png)
+![png](/images/heartdisease/output_28_1.png)
 
 
 
-![png](/images/heartdisease/output_25_2.png)
+![png](/images/heartdisease/output_28_2.png)
 
 
 
@@ -1140,15 +726,15 @@ MakeNormalPlot2(chol)
 ```
 
 
-![png](/images/heartdisease/output_27_0.png)
+![png](/images/heartdisease/output_30_0.png)
 
 
 
-![png](/images/heartdisease/output_27_1.png)
+![png](/images/heartdisease/output_30_1.png)
 
 
 
-![png](/images/heartdisease/output_27_2.png)
+![png](/images/heartdisease/output_30_2.png)
 
 
 
@@ -1282,23 +868,8 @@ plt.title('CAD Presence/Absence vs. Age')
 plt.xlabel(xlabel = None)
 plt.ylabel('Age')
 plt.xticks([0,1], ['No Heart Disease', 'Heart Disease'])
-```
+plt.show()
 
-
-
-
-    ([<matplotlib.axis.XTick at 0x1c5d1b35370>,
-      <matplotlib.axis.XTick at 0x1c5d1b35f40>],
-     [Text(0, 0, 'No Heart Disease'), Text(0, 0, 'Heart Disease')])
-
-
-
-
-![png](/images/heartdisease/output_33_1.png)
-
-
-
-```python
 #Plotting Cholesterol vs CAD
 sns.swarmplot(categories, df.chol)
 plt.title('CAD Presence/Absence vs. Cholesterol')
@@ -1306,14 +877,7 @@ plt.ylabel('Cholesterol (mg/dL)')
 plt.xlabel(xlabel = None)
 plt.xticks([0,1], ['No Heart Disease', 'Heart Disease'])
 plt.show()
-```
 
-
-![png](/images/heartdisease/output_34_0.png)
-
-
-
-```python
 #Plotting Resting BP vs. CAD
 sns.swarmplot(categories, df.trestbps)
 plt.title('CAD Presence/Absence vs. Resting Systolic BP')
@@ -1321,14 +885,7 @@ plt.ylabel('BP (mmHg)')
 plt.xlabel(xlabel = None)
 plt.xticks([0,1], ['No Heart Disease', 'Heart Disease'])
 plt.show()
-```
 
-
-![png](/images/heartdisease/output_35_0.png)
-
-
-
-```python
 #Plotting Max HR Achieved vs. CAD
 sns.swarmplot(categories, df.thalach)
 plt.title('CAD Presence/Absence vs. Max HR Achieved During Stress Test')
@@ -1341,6 +898,18 @@ plt.show()
 
 
 ![png](/images/heartdisease/output_36_0.png)
+
+
+
+![png](/images/heartdisease/output_36_1.png)
+
+
+
+![png](/images/heartdisease/output_36_2.png)
+
+
+
+![png](/images/heartdisease/output_36_3.png)
 
 
 
@@ -1382,6 +951,8 @@ plt.show()
 As expected, these variables are positively correlated with one another and verify common associations that as you age, your BP and cholesterol values increase.  Likewise, there is a known association between increased cholesterol values and increased blood pressure.
 
 ### Using Logistic Regression Model To Predict Heart Disease
+
+The next step was to determine if a logistic regression model could be used to predict heart disease presence or absence based on the variables in this dataset.
 
 
 ```python
@@ -1454,7 +1025,7 @@ viz.show()
 ```
 
 
-![png](/images/heartdisease/output_42_0.png)
+![png](/images/heartdisease/output_43_0.png)
 
 
 
@@ -1464,11 +1035,11 @@ viz.show()
 
 
 
-Looking at some of the most important features in this logistic regression model, non-anginal pain or being asymptomatic, female sex, max HR obtained during stress test, downsloping ST segments, and anginal pain.
+Based on coefficients, some of the most important features in this logistic regression model were pain that was non-anginal, being asymptomatic, female sex, max HR obtained during stress test, downsloping ST segments, and anginal pain.
 
 Considering factors traditionally associated with having a higher probability of heart disease, anginal pain, downsloping ST segments, and max HR obtained during stress test are predictive of CAD.  Those with angina (typical CAD related pain) and those with lower Max HR during stress tests are more likely to have CAD.  Interestingly enough, female sex was also considered very important as was non-anginal pain.  This is counter intuitive.  This could simply be a result of the population tested in the dataset if not represented of a homogeneous population.
 
-However, this does suggest that other types of machine learning algorithms may be useful in predicting heart disease.
+However, this does suggest that logistic regression and other types of machine learning algorithms may be useful in predicting heart disease.
 
 
 ```python
