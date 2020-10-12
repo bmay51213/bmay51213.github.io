@@ -1,10 +1,9 @@
 ---
 title: "Data Exploration and Analysis of Heart Disease Dataset And Prediction with Logistic Regression"
 date: 2020-01-28
-tags: [machine learning, data science]
 header:
   image: "/images/heartdisease/493ss_thinkstock_rf_heart_illustration.jpg"
-excerpt: "Project Proposal"
+excerpt: "Data Exploration and Analysis, Data Visualization, Logistic Regression"
 ---
 
 
@@ -183,7 +182,7 @@ __oldpeak (ST depression induced by exercise):__  Float
 
 __slope (Slope of ST Segment During Stress Testing):__ Categorical (0=Upsloping, 1 = Flat, 2 = Downsloping)
 
-__ca (Number of Major Vesslels Imaged During Angiogram):__ Float
+__ca (Number of Major Vessels Imaged During Angiogram):__ Float
 
 __thal (Measure of Heart Tissue Defects):__ Categorical (3 = Normal, 6 = Fixed Defect, 7 = Reversible Defect
 
