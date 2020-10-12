@@ -1,5 +1,5 @@
 ---
-title: "Data Exploration and Analysis of Heart Disease Dataset"
+title: "Data Exploration and Analysis of Heart Disease Dataset And Prediction with Logistic Regression"
 date: 2020-01-28
 tags: [machine learning, data science]
 header:
@@ -7,7 +7,6 @@ header:
 excerpt: "Project Proposal"
 ---
 
-## Exploratory Data Analysis of Heart Disease Dataset And Prediction Using Logistic Regression
 
 Coronary artery disease is one of the most common causes of death for both men and women.  As people age, the incidence of coronary artery disease increases.  Thus, it is important to be able to predict the incidence of heart disease.
 
