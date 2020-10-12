@@ -1,21 +1,16 @@
 ---
 title: "Detection of Breast Cancer of Biopsy Specimens Using Machine Learning"
 date: 2020-10-02
-tags: [machine learning, data science]
 header:
   image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
 excerpt: "Logistic Regression, KNN, Random Forest"
 ---
 
-# Machine Learning and Breast Cancer Detection
-
-### Brandon May
-
 Breast cancer continues to be a significant culprit of morbidity and mortality, even today with our current medical advances.  The data that this dataset consists of was actually published in a medical journal article and data was collected at the University of Wisconsin (Wolberg, M.D. et al.¸1995). While this source is somewhat dated, my main goal with this project is to demonstrate that machine learning algorithms could be used to assist in cancer detection as adjunct to physician expertise.
 
 __Dataset Description:__
 
-The data is from the University of California - Irvine Machine Learning Repository and can be found here:  https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
+The data is from the University of California - Irvine Machine Learning Repository and can be found here:  [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
 
 This data was collected at the University of Wisconsin in 1995.  The file is in a csv format in which microscopic images of Fine Needle Aspirates (a type of biopsy) of suspicious breast tissue was digitized.  There are a total of 32 variables with 570 subjects.  They were examining suspicious masses in those without evidence of metastasis (distant spread of cancer to other parts of the body).
 
