@@ -14,7 +14,7 @@ This dataset is from the UCI database describing baseline demographic characteri
 
 __Dataset URL:__
 
-https://archive.ics.uci.edu/ml/datasets/heart+disease
+[UCI Heart Disease ML Repository](https://archive.ics.uci.edu/ml/datasets/heart+disease)
 
 
 __Dataset Contributors:__
@@ -1031,5 +1031,6 @@ Considering factors traditionally associated with having a higher probability of
 
 However, this does suggest that logistic regression and other types of machine learning algorithms may be useful in predicting heart disease.
 
+__To see more complete coding and analysis, please refer to my GitHub repository.__
 
 ```
