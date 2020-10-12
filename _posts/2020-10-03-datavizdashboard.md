@@ -1,7 +1,7 @@
 ---
 title: "The Story About Airline Safety - Part 1 - Dashboard"
 date: 2020-10-03
-tags: [Data Visualization, Dashboards]
+classes: wide
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
 excerpt: "Data Visualization"

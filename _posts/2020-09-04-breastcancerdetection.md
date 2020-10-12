@@ -1,6 +1,7 @@
 ---
 title: "Using Machine Learning to Detect Cancer on Biopsy Specimens"
 date: 2020-09-04
+classes: wide
 header:
   image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
 excerpt: "Project Proposal"

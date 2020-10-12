@@ -1,7 +1,7 @@
 ---
 title: "Using ML to Determine Infant Heart Rate Tracings - Python Portion (Part 2)"
 date: 2020-10-03
-tags: [Predictive Analytics, KNN, Random Forest, Decision Tree]
+classes: wide
 header:
   image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
 excerpt: "Predictive Analytics, KNN, Decision Tree, Random Forest"

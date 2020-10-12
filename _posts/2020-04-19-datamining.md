@@ -1,6 +1,7 @@
 ---
 title: "Echocardiograms and Survival Prediction After A Heart Attack"
 date: 2020-04-19
+classes: wide
 header:
   image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
 excerpt: "Logistic Regression, SVG, Random Forest Classifier"

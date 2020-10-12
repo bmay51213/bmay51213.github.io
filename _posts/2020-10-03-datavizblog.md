@@ -1,7 +1,7 @@
 ---
 title: "The Story About Airline Safety - Part 3 - Blog Post"
 date: 2020-10-03
-tags: [Data Visualization, Blog Post]
+classes: wide
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
 excerpt: "Data Visualization"

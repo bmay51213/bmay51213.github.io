@@ -1,6 +1,7 @@
 ---
 title: "Data Exploration and Analysis of Heart Disease Dataset And Prediction with Logistic Regression"
 date: 2020-01-28
+classes: wide
 header:
   image: "/images/heartdisease/493ss_thinkstock_rf_heart_illustration.jpg"
 excerpt: "Data Exploration and Analysis, Data Visualization, Logistic Regression"

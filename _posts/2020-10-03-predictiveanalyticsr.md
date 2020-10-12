@@ -1,7 +1,7 @@
 ---
 title: "Using ML to Determine Infant Heart Rate Tracings - R Portion (Part 1)"
 date: 2020-10-03
-tags: [Predictive Analytics, KNN, Random Forest, Decision Tree]
+classes: wide
 header:
   image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
 excerpt: "Predictive Analytics, Exploratory Data Analysis"

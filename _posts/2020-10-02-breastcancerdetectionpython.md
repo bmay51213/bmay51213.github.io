@@ -1,6 +1,7 @@
 ---
 title: "Detection of Breast Cancer of Biopsy Specimens Using Machine Learning"
 date: 2020-10-02
+classes: wide
 header:
   image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
 excerpt: "Logistic Regression, KNN, Random Forest"
