@@ -822,7 +822,6 @@ df.describe(include=['O'])
 </div>
 
 
-```python
 
 The majority of people in the study group did not have a pericardial effusion.  Those with pericardial effusions are higher cardiac risk so this is a favorable thing.
 
@@ -981,17 +980,6 @@ data analysis (correlation value of 0.95 or above).
 Several variables were compared via scatterplot to look for interesting relationships.
 
 
-```python
-#Setting Up Scatterplots for the Numerical Variables and Encoding Variables For Easier Use in Matplotlib
-age = df['age']
-lvdd = df['lvdd']
-epss = df['epss']
-fracshort = df['fractionalshortening']
-wmi = df['wallmotion-index']
-```
-
-
-```python
 #Scatterplot for EPSS and Left Ventricular Diastolic Dimension
 plt.rcParams['figure.figsize'] = (6,5)
 plt.scatter(epss, lvdd)
@@ -1124,10 +1112,6 @@ fvalue_selector.get_support()
     Original Number of Features: 6
     Reduced Number of Features: 4
 
-
-
-
-
     array([ True, False,  True,  True, False,  True])
 
 
@@ -1160,10 +1144,6 @@ selector.get_support()
 
     Optimal Number of Features: 1
 
-
-
-
-
     array([False, False, False, False, False,  True])
 
 
@@ -1190,17 +1170,13 @@ selector.get_support()
 
     Optimal Number of Features: 1
 
-
-
-
-
     array([False, False, False, False, False,  True])
 
 
 
 Likewise, using accuracy as our scoring metric with logistic regression, it appears that with this round of feature selection, only wall motion index should be included.  It does not appear that in this case that using negative mean squared error or accuracy would change the variables that were selected.
 
-The model was then fit using logistic regression using all variables as well as our feature selected variables.
+The model was then fit using logistic regression using all variables to begin.
 
 ```python
 #Using Stratified K Fold Cross Validation, We Will Run a Logistic Regression Model Using All Features
@@ -1296,11 +1272,9 @@ g = visualizer2.poof()
 ![png](/images/datamining/output_46_2.png)
 
 
+Then, the model was run using our feature selected variables.
 
 ```python
-#Running Logistic Regression Using Our Feature Selection Result (Age and Wall Motion Index)
-
-#Creating Standardizer
 standardizer = StandardScaler()
 
 #Creating Logistic Regression Object
@@ -1380,18 +1354,6 @@ g = visualizer2.poof()
 ![png](/images/datamining/output_47_2.png)
 
 
-
-```python
-#Setting Another Features Variable Dropping Pericardial Effusion Based on our Accuracy Metric
-features2 = df[['age','fractionalshortening', 'epss', 'lvdd', 'wallmotion-index']]
-
-#Setting Features Variable Keeping only Age and Wallmotion-Index
-features3 = df[['age', 'wallmotion-index']]
-
-#Setting Features Variable Keeping Everything but fractional shortening and epss
-features4 = df[['age', 'pericardialeffusion_1.0', 'lvdd', 'wallmotion-index']]
-```
-
 ### Random Forest Feature Selection and Model Fitting
 
 
@@ -1414,11 +1376,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 4
-
-
-
-
-
     array([ True, False, False,  True,  True,  True])
 
 
@@ -1441,17 +1398,13 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 3
-
-
-
-
-
     array([ True, False, False,  True, False,  True])
 
 
 
-Depending on which time the data is run, some of the Random Forest Classifier models recommend keeping all variables or excluding the pericardial effusion variable, but this changes from each iteration.  For the next steps, I will plan on evaluating the differences between Logistic Regression and Random Forest Classifiers for our target variable.
+Depending on which time the data is run, some of the Random Forest Classifier models recommend keeping all variables or excluding the pericardial effusion variable, but this changes from each iteration.
 
+The Random Forest Classifier was fit using all variables to begin.
 
 ```python
 #Using Stratified K Fold Cross Validation, We Will Run a Random Forest Classification Model Using All Features
@@ -1533,10 +1486,9 @@ g = visualizer2.poof()
 
 
 
-```python
-#Running our Random Forest Classifier Model Using The Feature Selection of All Features Minus Pericardial Effusion
+Then, the Random Forest Classifier was run using the feature selected variables.
 
-#Creating Standardizer
+```python
 standardizer = StandardScaler()
 
 #Creating Random Forest Regression Object
@@ -1636,11 +1588,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 3
-
-
-
-
-
     array([ True,  True, False, False, False,  True])
 
 
@@ -1664,22 +1611,16 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 3
-
-
-
-
-
     array([ True,  True, False, False, False,  True])
 
 
 
 Using Support Vector Machine, feature selection identified using age, pericardialeffusion_1.0, and, wallmotion-index for our model.
 
+First, the model was fit using all variables.
 
 ```python
-#Running SVM model using all variables with accuracy as scoring metric.
 
-#Setting Our SVM Model
 clf = SVC(kernel='linear')
 
 #Creating K Fold Cross Validation
@@ -1743,11 +1684,10 @@ g = visualizer1.poof()
 ![png](/images/datamining/output_59_1.png)
 
 
+Then, the SVM model was run using the feature selected variables.
 
 ```python
-#Running SVM model using all variables with accuracy as scoring metric with our feature selected variables.
 
-#Setting Our SVM Model
 clf = SVC(kernel='linear')
 
 #Creating K Fold Cross Validation
