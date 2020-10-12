@@ -7,9 +7,7 @@ header:
 excerpt: "Project Proposal"
 ---
 
-# Heart Disease Prediction Using Logistic Regression With Exploratory Data Analysis
-
-### Data Exploration and Analysis ###
+## Exploratory Data Analysis of Heart Disease Dataset And Prediction Using Logistic Regression
 
 Coronary artery disease is one of the most common causes of death for both men and women.  As people age, the incidence of coronary artery disease increases.  Thus, it is important to be able to predict the incidence of heart disease.
 
@@ -580,7 +578,6 @@ thinkplot.Show(title = 'PMF Of Cholesterol Values Separated By CAD Presence and 
 
 
 
-    <Figure size 576x432 with 0 Axes>
 
 
 Interestingly, when visualizing the distribution of cholesterol values and whether or not CAD was present or absent, there appears to be an association that there were higher cholesterol values with CAD confirmed as negative as opposed to positive.  This is counterintuitive as higher cholesterol levels are generally associated with development of coronary artery disease.
@@ -607,7 +604,6 @@ thinkplot.Show(title = 'PMF Of Blood Pressure Values Separated By CAD Presence a
 
 
 
-    <Figure size 576x432 with 0 Axes>
 
 
 The distribution for the systolic blood pressure values appear to be more or less the same between those diagnosed without CAD and those diagnosed without CAD.  There seems to be a significant proportion of individuals diagnosed with CAD at normal BPs (systolic BPs between 120 and 140).
@@ -634,7 +630,6 @@ thinkplot.Show(title = 'PMF Of Age Separated By CAD Presence and Absence'
 
 
 
-    <Figure size 576x432 with 0 Axes>
 
 
 Considering the variable for age, it appears that the older individuals in the dataset were more likely to NOT be diagnosed with CAD.  This is counterintuitive as the probability of developing CAD rises naturally with aging.
@@ -670,7 +665,6 @@ thinkplot.Show(title = 'CDF for Cholesterol', xlabel = "Cholesterol (mg/dL)", yl
 
 
 
-    <Figure size 576x432 with 0 Axes>
 
 
 For age, the CDF is essentially a straight line indicating a close to normal distribution.  The cholesterol variable, the middle line of the curve is steeper indicating a higher frequency of those values.  This suggests there were a larger proportion of elevated cholesterols as compared to lower cholesterols.
@@ -737,8 +731,6 @@ MakeNormalPlot2(chol)
 ![png](/images/heartdisease/output_30_2.png)
 
 
-
-    <Figure size 576x432 with 0 Axes>
 
 
 The three variables tested here using probability plots all appear to follow a mostly normal distribution indicated by their minimal deviations from a straight line.  At the extreme values however, there are more significant deviations.  Thus for middle range values, the extreme values in the tails of all three of the different variables may cause instability in our modeling algorithms.
@@ -1031,7 +1023,6 @@ viz.show()
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1c5d4ff01c0>
 
 
 
@@ -1041,7 +1032,5 @@ Considering factors traditionally associated with having a higher probability of
 
 However, this does suggest that logistic regression and other types of machine learning algorithms may be useful in predicting heart disease.
 
-
-```python
 
 ```
