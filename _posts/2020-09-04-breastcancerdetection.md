@@ -1,14 +1,11 @@
 ---
-title: "Using Machine Learning to Detect Cancer on Biopsy Specimens"
+title: "Using Machine Learning to Detect Cancer on Biopsy Specimens - Project Proposal"
 date: 2020-09-04
 classes: wide
 header:
   image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
 excerpt: "Project Proposal"
 ---
-
-# Machine Learning and Breast Cancer Detection
-
 ## Data Domain
 
 I come from a healthcare background, so I sought to use machine learning algorithms to aid in prediction for various healthcare diseases and diagnoses.  Breast cancer continues to be a significant culprit of morbidity and mortality, even today with our current medical advances.  The data that this dataset consists of was actually published in a medical journal article and data was collected at the University of Wisconsin (Wolberg, M.D. et al.¸1995). While this source is somewhat dated, my main goal with this project is to demonstrate that machine learning algorithms could be used to assist in cancer detection as adjunct to physician expertise.
@@ -21,9 +18,9 @@ According to the CDC, breast cancer is the second most common cause of death due
 
 The dataset that I will be examining comes from the University of California – Irvine Machine Learning Repository.  Many of these datasets have been made public for the use of machine learning algorithms to use machine learning algorithms for different types of data science problems.  
 
-The link can be found here and a detailed listing of the variables can be found here:
+The link to the dataset and a detailed description of the variables are below:
 
-[link](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
+[https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
 
 This data was collected at the University of Wisconsin in 1995.  The file is in a csv format in which microscopic images of Fine Needle Aspirates of suspicious breast tissue was digitized.  There are a total of 32 variables with 570 subjects.  They were examining suspicious masses in those without evidence of metastasis (distant spread of cancer to other parts of the body).  The target variable is categorical and is coded as M for malignant and B for benign.  There are no missing data in the CSV file.  There are case identifiers but other demographic information such as age, co-morbidities, and family history are not available.
 

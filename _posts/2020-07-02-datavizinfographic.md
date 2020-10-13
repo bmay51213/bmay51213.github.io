@@ -4,18 +4,17 @@ date: 2020-07-02
 classes: wide
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
-excerpt: "Data Visualization"
+excerpt: "Data Visualization, Infographic"
 ---
-
-### Data Visualization and Presentation
-
-#### Topic: Airline Safety
+This was a multi-part project broken down into different phases focused on certain types of visualizations.
 
 The goal of this project was to use different types of data visualizations to adequately tell the story based on a hypothetical scenario.  In this scenario, there has been consistent negative press after several high profile plane crashes.  The public and media are beginning to question whether airlines are as safe as they have been reported to be.  My job was to analyze the data and use different methods of data visualizations to describe the situation.
 
-Following is the sample infographic describing the situation and key metrics used to show that airlines appear to be safe when compared to other traditional forms of transportation.
+Following is the sample infographic to distribute to a wide audience that describes the situation and key metrics used to highlight the pertinent data and use the various different visualizations created to illustrate the data's conclusions.
 
-<embed src="https://bmay51213.github.io/AirlineSafetyInfographic.pdf" type="application/pdf" />
+![png](/images/dataviz/AirlineSafetyInfographic-1.png)
+
+
 
 References Cited:
 

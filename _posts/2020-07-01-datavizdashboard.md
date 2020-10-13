@@ -4,18 +4,18 @@ date: 2020-07-01
 classes: wide
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
-excerpt: "Data Visualization"
+excerpt: "Data Visualization, Dashboard, Tableau"
 ---
 
-### Data Visualization and Presentation
-
-#### Topic: Airline Safety
+This was a multi-part project broken down into different phases focused on certain types of visualizations.
 
 The goal of this project was to use different types of data visualizations to adequately tell the story based on a hypothetical scenario.  In this scenario, there has been consistent negative press after several high profile plane crashes.  The public and media are beginning to question whether airlines are as safe as they have been reported to be.  My job was to analyze the data and use different methods of data visualizations to describe the situation.
 
-Following is the sample dashboard describing the situation and key metrics used to show that airlines do appear to be mostly safe as compared to other traditional methods of travel.
+Part 1 of this project was to create a sample dashboard using Tableau to describe the situation and key metrics used to highlight the pertinent data, and visualizing the conclusions based on that data.
 
-<embed src="https://bmay51213.github.io/AirlineSafetyDashboard.pdf" type="application/pdf" />
+![png](/images/dataviz/AirlineSafetyDashboard-1.png)
+
+
 
 References Cited:
 

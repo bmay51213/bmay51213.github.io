@@ -12,7 +12,9 @@ This dataset is from the UCI database describing characteristics on an echocardi
 
 __Dataset URL:__
 
-[UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/echocardiogram)
+UCI Machine Learning Repository - Echocardiograms:
+
+[https://archive.ics.uci.edu/ml/datasets/echocardiogram](https://archive.ics.uci.edu/ml/datasets/echocardiogram)
 
 __Source Cited:__
 

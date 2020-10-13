@@ -14,8 +14,9 @@ This dataset is from the UCI database describing baseline demographic characteri
 
 __Dataset URL:__
 
-[UCI Heart Disease ML Repository](https://archive.ics.uci.edu/ml/datasets/heart+disease)
+UCI Machine Learning Repository - Heart Disease:
 
+[https://archive.ics.uci.edu/ml/datasets/heart+disease](https://archive.ics.uci.edu/ml/datasets/heart+disease)
 
 __Dataset Contributors:__
 

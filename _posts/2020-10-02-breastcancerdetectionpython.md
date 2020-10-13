@@ -11,7 +11,9 @@ Breast cancer continues to be a significant culprit of morbidity and mortality, 
 
 __Dataset Description:__
 
-The data is from the University of California - Irvine Machine Learning Repository and can be found here:  [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
+The data is from the University of California - Irvine Machine Learning Repository and can be found here:  
+
+[https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
 
 This data was collected at the University of Wisconsin in 1995.  The file is in a csv format in which microscopic images of Fine Needle Aspirates (a type of biopsy) of suspicious breast tissue was digitized.  There are a total of 32 variables with 570 subjects.  They were examining suspicious masses in those without evidence of metastasis (distant spread of cancer to other parts of the body).
 

@@ -4,18 +4,21 @@ date: 2020-07-03
 classes: wide
 header:
   image: "/images/GettyImages-1187621904-600x360.jpg"
-excerpt: "Data Visualization"
+excerpt: "Data Visualization, Blog Post"
 ---
-
-### Data Visualization and Presentation
-
-#### Topic: Airline Safety
+This was a multi-part project broken down into different phases focused on certain types of visualizations.
 
 The goal of this project was to use different types of data visualizations to adequately tell the story based on a hypothetical scenario.  In this scenario, there has been consistent negative press after several high profile plane crashes.  The public and media are beginning to question whether airlines are as safe as they have been reported to be.  My job was to analyze the data and use different methods of data visualizations to describe the situation.
 
-Following is the sample blog post describing the situation and key metrics used to show that airline safety is safe, yet complicated to distribute to the general public.
+Following is the sample blog post describing the situation and key metrics used to highlight the pertinent data and its conclusions.
 
-<embed src="https://bmay51213.github.io/AirlineSafetyBlogPost.pdf" type="application/pdf" />
+![png](/images/dataviz/AirlineSafetyBlogPost-1.png)
+![png](/images/dataviz/AirlineSafetyBlogPost-2.png)
+![png](/images/dataviz/AirlineSafetyBlogPost-3.png)
+![png](/images/dataviz/AirlineSafetyBlogPost-4.png)
+![png](/images/dataviz/AirlineSafetyBlogPost-5.png)
+
+
 
 References Cited:
 

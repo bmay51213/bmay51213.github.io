@@ -6,7 +6,6 @@ header:
   image: "/images/predictiveanalytics/Number1.jpg"
 excerpt: "Predictive Analytics, KNN, Decision Tree, Random Forest"
 ---
-
 __Background__
 
 Fetal heart rate monitoring as an indicator of fetal well-being can be inaccurate as predictors of a poor neonatal outcome and come with significant healthcare and medicolegal costs.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring from the UCI machine learning database to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.
