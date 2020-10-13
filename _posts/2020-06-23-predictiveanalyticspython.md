@@ -1,9 +1,9 @@
 ---
 title: "Using ML to Determine Infant Heart Rate Tracings - Python Portion (Part 2)"
-date: 2020-10-03
+date: 2020-06-23
 classes: wide
 header:
-  image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
+  image: "/images/predictiveanalytics/Number1.jpg"
 excerpt: "Predictive Analytics, KNN, Decision Tree, Random Forest"
 ---
 
@@ -11,7 +11,7 @@ __Background__
 
 Fetal heart rate monitoring as an indicator of fetal well-being can be inaccurate as predictors of a poor neonatal outcome and come with significant healthcare and medicolegal costs.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring from the UCI machine learning database to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.
 
-The data that I will primarily use is from the University of California – Irvine Machine Learning Repository.  The dataset can be found at the following web address: https://archive.ics.uci.edu/ml/datasets/Cardiotocography.
+The data that I will primarily use is from the University of California – Irvine Machine Learning Repository.  The dataset can be found at the following web address: [https://archive.ics.uci.edu/ml/datasets/Cardiotocography](https://archive.ics.uci.edu/ml/datasets/Cardiotocography).
 
 According to the website, there were over 2000 fetal heart tracings (cardiotocograms) and interpreted by three expert obstetricians.  Many of the measurements include the technical measurements include heart rate accelerations, decelerations, max heart rate, minimum heart rates, heart rate baseline and finally the target variable is whether the tracing was normal, suspect, or pathologic.
 

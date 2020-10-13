@@ -3,7 +3,7 @@ title: "Using ML to Determine Infant Heart Rate Tracings - R Portion (Part 1)"
 date: 2020-06-22
 classes: wide
 header:
-  image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
+  image: "/images/predictiveanalytics/Number1.jpg"
 excerpt: "Predictive Analytics, Exploratory Data Analysis"
 ---
 
@@ -248,6 +248,10 @@ corr
 corrplot(corr, method="circle")
 ```
 
-A correlation plot was created to look for high levels of correlation between the input variables and only the numerical variables were included.  There appeared to be high levels of correlation between the beginning and ending measurements variable in addition to high levels of correlation between expert and automated determination of fetal heart rate.  Finally, mode, mean, and median variables were all highly correlated with each other based on the histogram values.  These variables will need to be assessed using feature selection to see if simplification will increase predictive accuracy.
+A correlation plot was created to look for high levels of correlation between the input variables and only the numerical variables were included.  
+
+![png](/images/predictiveanalytics/000003 (1).png)
+
+There appeared to be high levels of correlation between the beginning and ending measurements variable in addition to high levels of correlation between expert and automated determination of fetal heart rate.  Finally, mode, mean, and median variables were all highly correlated with each other based on the histogram values.  These variables will need to be assessed using feature selection to see if simplification will increase predictive accuracy.
 
 Please continued to the next portion of the project using Python.
