@@ -9,13 +9,17 @@ excerpt: "Predictive Analytics, Exploratory Data Analysis"
 
 # Problem Background:
 
+This project is divided into two parts.  The first part is this R-based portion for exploratory data analysis.  The second part is a Python based portion in another post to utilize machine learning algorithms.
+
 Fetal heart rate monitoring as an indicator of fetal well-being can be inaccurate as predictors of a poor neonatal outcome and come with significant healthcare and medicolegal costs.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring from the UCI machine learning database to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.
 
 The data that I will primarily use is from the University of California – Irvine Machine Learning Repository.  The dataset can be found at the following web address: [https://archive.ics.uci.edu/ml/datasets/Cardiotocography](https://archive.ics.uci.edu/ml/datasets/Cardiotocography).
 
 According to the website, there were over 2000 fetal heart tracings (cardiotocograms) and interpreted by three expert obstetricians.  Many of the measurements include the technical measurements include heart rate accelerations, decelerations, max heart rate, minimum heart rates, heart rate baseline and finally the target variable is whether the tracing was normal, suspect, or pathologic.
 
-This project is divided into two parts.  The first part is this R-based portion for exploratory data analysis.  The second part is a Python based portion in another post to utilize machine learning algorithms.
+There were two different types of target variables included in this dataset.  There were 10 different categorical variables that when put together could be interpreted as suspect or not.  The other target variable was a three class categorical variable describing normal, suspect, or pathologic.
+
+The purpose of this portion is for data exploration and analysis and insight for further model fitting and prediction.
 
 ## Initial Variable Description of Dataset
 
@@ -91,7 +95,7 @@ __FS__ = Flat Sinusoidal Pattern (Pathologic State)
 
 __SUSP__ = Suspect Pattern
 
-__Class__ = 1 to 10 for Classes A to SUSP
+__Class__ = 1 to 10 for Classes A to SUSP (Target Based on the 10 Preceding Factors)
 
 __NSP__ = Fetal State Class Code (Normal = 1, Suspect = 2, Pathologic = 3)
 
@@ -116,7 +120,7 @@ str(df)
 
 Next, histograms and bar graphs were plotted to check the distributions of the variables.
 
-```{r graphs, echo=TRUE, warning=FALSE, message=FALSE}
+```r
 hist(df$LBE, main = "Histogram of Baseline Values (Expert)", xlab = "Baseline HR", ylab = "Counts")
 hist(df$LB, main = "Histogram of Baseline Values (Automated)", xlab = "Baseline HR", ylab = "Counts")
 hist(df$AC, main = "Histogram of Accelerations", xlab = "Accelerations", ylab = "Counts")
@@ -153,13 +157,47 @@ plot(df$NSP, main = "Distribution of Overall Classification", ylab = "Counts")
 
 ## Initial Analysis:
 
-Both baseline FHR by both expert and computerized measurements appeared normally distributed with an approximately normal range of FHR 110 - 160.  This is the expected normal range of a fetal heart rate during labor and delivery.  Any heart rates outside these ranges is abnormal and requires investigation and/or intervention.  Several of the variables appeared positively skewed meaning that there were a larger number of values at the lower end of the x values.  These variables were: Accelerations, Fetal Movement, Mean Time With Abnormal Short-Term Variability, % of time with abnormal long-term variability, mean time with abnormal long-term variability, Light Decelerations, Severe Decelerations, Prolonged Decelerations, and Number of Histogram Peaks and Zeros.
+Both baseline FHR by both expert and computerized measurements appeared normally distributed with an approximately normal range of FHR 110 - 160.  This is the expected normal range of a fetal heart rate during labor and delivery.  Any heart rates outside these ranges is abnormal and requires investigation and/or intervention.  There was not a significant difference between the two values.
 
-One finding that I think bears mentioning is that the variable for repeated decelerations were all 0's meaning there were no cases with repetitive decelerations, which could be concerning.  Further, the distribution of the target variable is going to require some balancing or penalties in the final model.  The vast majority of the records were read as normal.  A smaller minority were rated as suspect and the smallest proportion was pathological.  For practitioners, this is a good thing because this means that less pathologic conditions were identified which is beneficial for an infant's health.  However, for prediction, the algorithm will have to be fine tuned to weight the target classes appropriately to not always assume a tracing was normal.
+![png](/images/predictiveanalytics/000003.png)
+
+![png](/images/predictiveanalytics/000005.png)
+
+After visualizing the distribution of the target variable, the vast majority were interpreted as Normal (1), with the next most frequent being Suspect (2) or potentially abnormal, and the fewest being interpreted as Pathologic (3).  This can affect the choice of our success metrics after model fitting and prediction.
+
+![png](/images/predictiveanalytics/000041.png)
+
+As can be seen above, the vast majority of the records were read as normal.  However, for prediction, the algorithm will have to be fine-tuned to weigh the target classes appropriately.  If using accuracy solely as a metric, the algorithm would be more likely to be right if it always assumed that the tracing was normal.
+
+Several of the variables appeared positively skewed meaning that there were a larger number of values at the lower end of the x values.  These variables were: Accelerations, Fetal Movement, Mean Time With Abnormal Short-Term Variability, % of time with abnormal long-term variability, mean time with abnormal long-term variability, Light Decelerations, Severe Decelerations, Prolonged Decelerations, and Number of Histogram Peaks and Zeros.  Several are included below.
+
+![png](/images/predictiveanalytics/000007.png)
+
+![png](/images/predictiveanalytics/000009.png)
+
+![png](/images/predictiveanalytics/000011.png)
+
+![png](/images/predictiveanalytics/000013.png)
+
+![png](/images/predictiveanalytics/000017.png)
+
+One finding that I think bears mentioning is that the variable for repeated decelerations were all 0's meaning there were no cases with repetitive decelerations, which could be concerning.  
+
+Further, looking at some of the 10 point categorical variables, the vast majority of the tracings did not indicate that condition.  For example, there were significantly less acceleration/deceleration patterns indicative of stress, vagal stimulation, and a largely decelerative pattern.  Some of these could be indicative of fetal distress.
+
+![png](/images/predictiveanalytics/000035.png)
+
+![png](/images/predictiveanalytics/000037.png)
+
+![png](/images/predictiveanalytics/000039.png)
+
+A flat sinusoidal pattern is highly suspicious for fetal distress and hypoxia.  Likewise, very few of the tracings in the dataset had this concerning finding.
+
+![png](/images/predictiveanalytics/00003b.png)
 
 Next, we will plan on exploring some bivariate plots to analyze relationships.  One that I am most interested in is the relation between fetal heart rate and the target variable of normal, suspect, or pathologic.
 
-```{r bivariate, echo=TRUE, warning=FALSE, message=FALSE}
+```r
 ggplot(df, aes(as.factor(df$NSP), df$b)) + geom_boxplot() + xlab('Classification (1-Normal, 2- Suspect, 3-Pathologic)') + ylab('Starting Measurement Point') + ggtitle('Scatterplot of Tracing Classification and Beginning Measurement')
 ggplot(df, aes(as.factor(df$NSP), df$e)) + geom_boxplot() + xlab('Classification (1-Normal, 2- Suspect, 3-Pathologic)') + ylab('Ending Measurement Point') + ggtitle('Scatterplot of Tracing Classification and Ending Measurement')
 ggplot(df, aes(as.factor(df$NSP), df$LBE)) + geom_boxplot() + xlab('Classification (1-Normal, 2- Suspect, 3-Pathologic)') + ylab('Mean Fetal Heart Rate') + ggtitle('Scatterplot of Tracing Classification and Fetal Heart Rate (Expert)')
@@ -183,14 +221,25 @@ ggplot(df, aes(as.factor(df$NSP), df$Mode)) + geom_boxplot() + xlab('Classificat
 ggplot(df, aes(as.factor(df$NSP), df$Mean)) + geom_boxplot() + xlab('Classification (1-Normal, 2- Suspect, 3-Pathologic)') + ylab('Fetal Heart Rate Histogram Mean') + ggtitle('Scatterplot of Tracing Classification and Fetal Heart Rate Histogram Mean')
 ggplot(df, aes(as.factor(df$NSP), df$Median)) + geom_boxplot() + xlab('Classification (1-Normal, 2- Suspect, 3-Pathologic)') + ylab('Fetal Heart Rate Histogram Median') + ggtitle('Scatterplot of Tracing Classification and Fetal Heart Rate Histogram Median')
 ggplot(df, aes(as.factor(df$NSP), df$Variance)) + geom_boxplot() + xlab('Classification (1-Normal, 2- Suspect, 3-Pathologic)') + ylab('Fetal Heart Rate Histogram Variance') + ggtitle('Scatterplot of Tracing Classification and Fetal Heart Rate Histogram Variance')
-
 ```
+
+Looking at the relationship between the expert fetal heart rate determination and the classification of the fetal heart rate, there were outliers in the pathologic category that tended to be associated with higher values.  Further, in the suspect category, the fetal heart rates tended to have higher mean heart rates.
+
+![png](/images/predictiveanalytics/000035 (1).png)
 
 On exploratory analysis of the input variables to the target variable of NSP, there were several trends that are consistent with known associations of pathologic categories.  There was higher variance of values in the histograms of the fetal heart rates in the pathologic category.  There also tended to be higher amounts of time with percentage of time spent with abnormal short and long-term variability.  The number of uterine contractions/second were lower in the pathologic category.  The number of decelerations were higher in the pathologic category and FHR tended to be lower in the pathologic categories as well.  This validates the common findings that more pathologic findings are noted in fetal heart rate tracings with less variability, lower fetal heart rates, and more decelerations.
 
-The data was examined for high levels of correlation between the input variables to look for redundancy.  The categorical variables (almost all of which are the target variables) were excludede.
+![png](/images/predictiveanalytics/00005d.png)
 
-```{r correlation, echo=TRUE, message=FALSE, warning=FALSE}
+![png](/images/predictiveanalytics/000045.png)
+
+![png](/images/predictiveanalytics/00003b (1).png)
+
+![png](/images/predictiveanalytics/000043.png)
+
+The data was examined for high levels of correlation between the input variables to look for redundancy.  The categorical variables (almost all of which are the target variables) were excluded.
+
+```r
 library(corrplot)
 
 nums <- df %>% select(-A, -B, -C, -D, -E, -AD, -DE, -LD, -FS, -SUSP, -CLASS, -NSP, -Tendency, -DR)
@@ -200,3 +249,5 @@ corrplot(corr, method="circle")
 ```
 
 A correlation plot was created to look for high levels of correlation between the input variables and only the numerical variables were included.  There appeared to be high levels of correlation between the beginning and ending measurements variable in addition to high levels of correlation between expert and automated determination of fetal heart rate.  Finally, mode, mean, and median variables were all highly correlated with each other based on the histogram values.  These variables will need to be assessed using feature selection to see if simplification will increase predictive accuracy.
+
+Please continued to the next portion of the project using Python.
