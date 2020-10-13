@@ -1,5 +1,5 @@
 ---
-title: "Using Machine Learning to Detect Cancer on Biopsy Specimens - Project Proposal"
+title: "Detection of Breast Cancer of Biopsy Specimens Using Machine Learning - Project Proposal"
 date: 2020-09-04
 classes: wide
 header:
