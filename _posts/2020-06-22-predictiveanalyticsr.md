@@ -1,81 +1,112 @@
 ---
 title: "Using ML to Determine Infant Heart Rate Tracings - R Portion (Part 1)"
-date: 2020-10-03
+date: 2020-06-22
 classes: wide
 header:
   image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
 excerpt: "Predictive Analytics, Exploratory Data Analysis"
 ---
 
-## Predictive Analytics: Final Project
-
-# Background:
+# Problem Background:
 
 Fetal heart rate monitoring as an indicator of fetal well-being can be inaccurate as predictors of a poor neonatal outcome and come with significant healthcare and medicolegal costs.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring from the UCI machine learning database to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.
 
-The data that I will primarily use is from the University of California – Irvine Machine Learning Repository.  The dataset can be found at the following web address: https://archive.ics.uci.edu/ml/datasets/Cardiotocography.
+The data that I will primarily use is from the University of California – Irvine Machine Learning Repository.  The dataset can be found at the following web address: [https://archive.ics.uci.edu/ml/datasets/Cardiotocography](https://archive.ics.uci.edu/ml/datasets/Cardiotocography).
 
 According to the website, there were over 2000 fetal heart tracings (cardiotocograms) and interpreted by three expert obstetricians.  Many of the measurements include the technical measurements include heart rate accelerations, decelerations, max heart rate, minimum heart rates, heart rate baseline and finally the target variable is whether the tracing was normal, suspect, or pathologic.
 
-```{r loading packages, echo = TRUE, warning=FALSE, message=FALSE}
-library(ggplot2)
-library(readxl)
-library(tidyverse)
-
-toco <- read_excel("fetal monitoring.xls", sheet = 'Raw Data')
-```
+This project is divided into two parts.  The first part is this R-based portion for exploratory data analysis.  The second part is a Python based portion in another post to utilize machine learning algorithms.
 
 ## Initial Variable Description of Dataset
 
-FileName and SegFile = Personal Identifiers
-Date = Individual Date of Measurement
-b = Starting Point of Measurement
-e = Ending Point of Measurement
-LBE = Baseline value (By Medical Expert)
-LB = Fetal Heart Rate Baseline (beats/minute - Automated)
-AC = # Accelerations/second
-FM = # Fetal Movements/second
-UC = # Uterine Contractions/second
-DL = # Light Decelerations/second
-DS = # Severe Decelerations/second
-DP = # Prolonged Decelerations/second
-DR = # Repetitive Decelerations (All 0s)
-ASTV = % of time with abnormal short term variability
-MSTV = Mean Value of Short Term Variability
-ALTV = % of time with abnormal long term variability
-MLTV = Mean Value of Long Term Variability
-Width = Width of Fetal Heart Rate Histogram
-Min = Minimum of Fetal Heart Rate Histogram
-Max = Maximum of Fetal Heart Rate Histogram
-Nmax = # Histogram Peaks
-Nzeros = # Histogram Zeros
-Mode = Histogram Mode
-Mean = Histogram Mean
-Median = Histogram Median
-Variance = Histogram Variance
-Tendency = Histogram Tendency:  -1 = Left Asymmetric, 0 = Symmetric, 1 = Right Asymmetric
-A = Calm Sleep
-B = REM Sleep
-C = Calm Vigilance
-D = Active Vigilance
-AD = Accelerative/Decelerative Pattern (Stress Situation)
-DE = Decelerative Pattern (Vagal Stimulation)
-LD = Largely decelerative pattern
-FS = Flat Sinusoidal Pattern (Pathologic State)
-SUSP = Suspect Pattern
-Class = 1 to 10 for Classes A to SUSP
-NSP = Fetal State Class Code (Normal = 1, Suspect = 2, Pathologic = 3)
+__FileName and SegFile__ = Personal Identifiers
 
-We will drop the identifier and date columns as they are not needed and will also remove the four rows with NA at the end of the spreadsheet.  These data are not labelled and appear to be possibly summary information that will be accounted for with the individual variables and will be excluded from the analysis.
+__Date__ = Individual Date of Measurement
 
-```{r dropping identifiers, echo = TRUE, warning=FALSE, message=FALSE}
+__b__ = Starting Point of Measurement
+
+__e__ = Ending Point of Measurement
+
+__LBE__ = Baseline value (By Medical Expert)
+
+__LB__ = Fetal Heart Rate Baseline (beats/minute - Automated)
+
+__AC__ = # Accelerations/second
+
+__FM__ = # Fetal Movements/second
+
+__UC__ = # Uterine Contractions/second
+
+__DL__ = # Light Decelerations/second
+
+__DS__ = # Severe Decelerations/second
+
+__DP__ = # Prolonged Decelerations/second
+
+__DR__ = # Repetitive Decelerations (All 0s)
+
+__ASTV__ = % of time with abnormal short term variability
+
+__MSTV__ = Mean Value of Short Term Variability
+
+__ALTV__ = % of time with abnormal long term variability
+
+__MLTV__ = Mean Value of Long Term Variability
+
+__Width__ = Width of Fetal Heart Rate Histogram
+
+__Min__ = Minimum of Fetal Heart Rate Histogram
+
+__Max__ = Maximum of Fetal Heart Rate Histogram
+
+__Nmax__ = # Histogram Peaks
+
+__Nzeros__ = # Histogram Zeros
+
+__Mode__ = Histogram Mode
+
+__Mean__ = Histogram Mean
+
+__Median__ = Histogram Median
+
+__Variance__ = Histogram Variance
+
+__Tendency__ = Histogram Tendency:  -1 = Left Asymmetric, 0 = Symmetric, 1 = Right Asymmetric
+
+__A__ = Calm Sleep
+
+__B__ = REM Sleep
+
+__C__ = Calm Vigilance
+
+__D__ = Active Vigilance
+
+__AD__ = Accelerative/Decelerative Pattern (Stress Situation)
+
+__DE__ = Decelerative Pattern (Vagal Stimulation)
+
+__LD__ = Largely decelerative pattern
+
+__FS__ = Flat Sinusoidal Pattern (Pathologic State)
+
+__SUSP__ = Suspect Pattern
+
+__Class__ = 1 to 10 for Classes A to SUSP
+
+__NSP__ = Fetal State Class Code (Normal = 1, Suspect = 2, Pathologic = 3)
+
+At the end of the spreadsheet, there were four rows that had null values and we will remove those including the identifier and date columns as they are not needed.
+
+```r
 
 df <- toco %>% select(-FileName, -Date, -SegFile)
 df <- na.omit(df)
 summary(df)
 ```
 
-```{r coding categoricals, echo = TRUE, warning=FALSE, message=FALSE}
+The categorical variables (Tendency, A, B, C, D, AD, DE, LD, FS, SUSP, CLASS, NSP) were recoded in R to ensure they were being handled correctly for descriptive analysis.
+
+```r
 cols = (c("Tendency", "A", "B", "C", "D", "AD", "DE", "LD", "FS", "SUSP", "CLASS", "NSP"))
 
 df[cols] <- lapply(df[cols], factor)
