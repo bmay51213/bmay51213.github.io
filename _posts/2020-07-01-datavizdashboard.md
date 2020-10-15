@@ -13,7 +13,7 @@ The goal of this project was to use different types of data visualizations to ad
 
 Part 1 of this project was to create a sample dashboard using Tableau to describe the situation and key metrics used to highlight the pertinent data, and visualizing the conclusions based on that data.
 
-![png](/images/dataviz/AirlineSafetyDashboard-1.png)
+![png](/images/dataviz/AirlineSafetyDashboard-2.png)
 
 
 

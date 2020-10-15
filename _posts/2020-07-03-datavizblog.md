@@ -12,7 +12,7 @@ The goal of this project was to use different types of data visualizations to ad
 
 Following is the sample blog post describing the situation and key metrics used to highlight the pertinent data and its conclusions.
 
-![png](/images/dataviz/AirlineSafetyBlogPost-1.png)![png](/images/dataviz/AirlineSafetyBlogPost-2.png)![png](/images/dataviz/AirlineSafetyBlogPost-3.png)![png](/images/dataviz/AirlineSafetyBlogPost-4.png)![png](/images/dataviz/AirlineSafetyBlogPost-5.png)
+![png](/images/dataviz/Blog1.png)![png](/images/dataviz/Blog2.png)![png](/images/dataviz/Blog3.png)![png](/images/dataviz/Blog4.png)![png](/images/dataviz/Blog5.png)
 
 
 References Cited:
