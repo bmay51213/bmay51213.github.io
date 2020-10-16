@@ -12,7 +12,7 @@ The goal of this project was to use different types of data visualizations to ad
 
 Following is the sample infographic to distribute to a wide audience that describes the situation and key metrics used to highlight the pertinent data and use the various different visualizations created to illustrate the data's conclusions.  This infographic was created using Venngage.com.
 
-![png](/images/dataviz/AirlineSafetyInfographic.png)
+![png](/images/dataviz/Infographic.png)
 
 
 
