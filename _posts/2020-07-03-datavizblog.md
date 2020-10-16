@@ -28,19 +28,19 @@ Total fatalities from aircraft accidents for the five airlines specified above t
 Airline capacity also plays a role.  One way that airlines estimate capacity is through available seat kilometers/week.  The statistic is used to show the overall capacity of airlines and is obtained by multiplying the number of passenger seats booked by the overall distance those flights will be in use.1  If we compare the periods of 1985-1999 and 2000-2014 there is a trend towards an increase in fatal accidents as the available seat kilometers/week increases.  However, this trend was much stronger when comparing flights before the year 2000 and the relationship is much flatter when considering fatal accidents after the turn of the millennium.  This could suggest that airlines have seen a relative decrease in fatal accidents as airline capacity increases and that airlines have gotten safer as business and passenger volume has increased.
 
 
-![png](/images/dataviz/blog2.png)
+![png](/images/dataviz/Blog2.png)
 
 Some of the largest increases in the number of incidents have occurred in the Asian, Australian, and Gulf regions.  Qantas and Gulf Air have seen a 200-400% increase in incidents after the year 2000.  Southwest Airlines in the US actually saw the largest increase with a 700% increase in fatal accidents.  This does not necessarily translate to fatalities.  When looking at the number of accidents per flight by year, there is a trend towards an increase number of airline accidents worldwide with almost four times the number of accidents after the year 2000.  
 
-![png](/images/dataviz/blog3.png)
+![png](/images/dataviz/Blog3.png)
 
 Yet, when looking at the same time period with the number of fatal accidents/million flights, there is a considerable decrease after the year 2000 from a 1985 level of almost 3.5 fatal accidents/million flights down to 0.5 fatal accidents/million flights in the year 2018.3
 
-![png](/images/dataviz/blog4.png)
+![png](/images/dataviz/Blog4.png)
 
 The largest percentage increase in fatalities after the year 2000 were Malaysia and Singapore airlines with a 1250 to almost 1500% increase.  American had a 300% increase in fatalities as did Air France.  US Airways, Delta, and United all saw a percentage decrease in fatalities.  Once again, the specific airline crashes and the size of the airlines need to be considered in viewing these percentage increases as a high-profile large airplane crash will be reflected in a large percentage increase from one or a few incidents.3
 
-![png](/images/dataviz/blog5.png)
+![png](/images/dataviz/Blog5.png)
 
 The economic impact of airline travel must be considered as well.  In the year 1985, airline operating revenue was approximately 50 million dollars in the United States.  Compare this to the year 2014 in which the annual operating revenue is 160 million dollars.  This is 3 times the revenue approximately 20 years ago.  Current estimates from Airlines for America estimate that airlines produce 5% of the country’s total gross domestic product and supports over 10 million jobs in the United States.2
 So, what is the bottom line?  When one considers the number of flights on a daily basis worldwide (pre-COVID-19 pandemic), it is a rarity to hear of a major airline incident, accident, or an airline crash.  One airline crash while statistically unlikely can affect the numbers significantly given the low overall numbers of fatalities for airline related incidents worldwide.  Compared to auto traffic accidents, airline fatalities are an extremely small percentage of lives lost while driving.  Many people in the United States also fly rarely.  While there certainly are exceptions to specific airlines, in general, airlines still appear to be a reasonably safe way to travel and is a large percentage of our country’s economic well-being that should not be ignored.
