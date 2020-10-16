@@ -6,14 +6,26 @@ header:
   image: "/images/predictiveanalytics/Number1.jpg"
 excerpt: "Predictive Analytics, KNN, Decision Tree, Random Forest"
 ---
-__Background__
 
-Fetal heart rate monitoring as an indicator of fetal well-being can be inaccurate as predictors of a poor neonatal outcome and come with significant healthcare and medicolegal costs.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring from the UCI machine learning database to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.
+#Problem Background:
+
+This project is divided into two parts.  The first part was an R-based portion for exploratory data analysis.  This is the second part utilizing Python machine learning algorithms.
+
+Neonatal mortality rates have remained steady for the last several years and continue to be a concern in the United States and despite medical advances, there has not been much progress in affecting neonatal outcomes.  This trend is worrisome.  One way of ensuring fetal well-being is via external fetal cardiotocography which measures the heart rate of the infant.  Certain findings during labor are reassuring while others are indicative of possible fetal distress.  
+
+This project sought to determine an accurate and precise machine learning algorithm using data obtained from the UCI Machine Learning database and is composed of various measurements of the heart rate tracings to generate a prediction of normal, suspect, or pathologic findings.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.  The data was obtained using an automated system (SisPorto 2.0) to quantify these parameters.
 
 The data that I will primarily use is from the University of California – Irvine Machine Learning Repository.  The dataset can be found at the following web address: [https://archive.ics.uci.edu/ml/datasets/Cardiotocography](https://archive.ics.uci.edu/ml/datasets/Cardiotocography).
 
 According to the website, there were over 2000 fetal heart tracings (cardiotocograms) and interpreted by three expert obstetricians.  Many of the measurements include the technical measurements include heart rate accelerations, decelerations, max heart rate, minimum heart rates, heart rate baseline and finally the target variable is whether the tracing was normal, suspect, or pathologic.
 
+There were two different types of target variables included in this dataset.  There were 10 different categorical variables that when put together could be interpreted as suspect or not.  The other target variable was a three class categorical variable describing normal, suspect, or pathologic.
+
+The purpose of this portion is for model fitting and prediction of the data.
+
+#Data Cleaning:
+
+The data was loaded into Python and null values were removed.  Below is a description of the variables for review.
 
 ```python
 #Loading Our Dataset
@@ -32,9 +44,6 @@ df = df.drop(columns = "SegFile")
 #Viewing Dataframe
 df
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -539,123 +548,7 @@ df
 <p>2126 rows × 37 columns</p>
 </div>
 
-
-
-
-```python
-#Checking Datatypes
-df.dtypes
-```
-
-
-
-
-    b           float64
-    e           float64
-    LBE         float64
-    LB          float64
-    AC          float64
-    FM          float64
-    UC          float64
-    ASTV        float64
-    MSTV        float64
-    ALTV        float64
-    MLTV        float64
-    DL          float64
-    DS          float64
-    DP          float64
-    DR          float64
-    Width       float64
-    Min         float64
-    Max         float64
-    Nmax        float64
-    Nzeros      float64
-    Mode        float64
-    Mean        float64
-    Median      float64
-    Variance    float64
-    Tendency    float64
-    A           float64
-    B           float64
-    C           float64
-    D           float64
-    E           float64
-    AD          float64
-    DE          float64
-    LD          float64
-    FS          float64
-    SUSP        float64
-    CLASS       float64
-    NSP         float64
-    dtype: object
-
-
-
-
-```python
-#Re-coding Categorical Variables
-df['NSP'] = df['NSP'].astype('category')
-df['Tendency'] = df['Tendency'].astype('category')
-df['A'] = df['A'].astype('category')
-df['B'] = df['B'].astype('category')
-df['C'] = df['C'].astype('category')
-df['D'] = df['D'].astype('category')
-df['E'] = df['E'].astype('category')
-df['AD'] = df['AD'].astype('category')
-df['DE'] = df['DE'].astype('category')
-df['LD'] = df['LD'].astype('category')
-df['SUSP'] = df['SUSP'].astype('category')
-df['CLASS'] = df['CLASS'].astype('category')
-
-#Confirming were encoded correctly
-df.dtypes
-```
-
-
-
-
-    b            float64
-    e            float64
-    LBE          float64
-    LB           float64
-    AC           float64
-    FM           float64
-    UC           float64
-    ASTV         float64
-    MSTV         float64
-    ALTV         float64
-    MLTV         float64
-    DL           float64
-    DS           float64
-    DP           float64
-    DR           float64
-    Width        float64
-    Min          float64
-    Max          float64
-    Nmax         float64
-    Nzeros       float64
-    Mode         float64
-    Mean         float64
-    Median       float64
-    Variance     float64
-    Tendency    category
-    A           category
-    B           category
-    C           category
-    D           category
-    E           category
-    AD          category
-    DE          category
-    LD          category
-    FS           float64
-    SUSP        category
-    CLASS       category
-    NSP         category
-    dtype: object
-
-
-
-__Description of Variables__
+__Description of Variables:__
 
 FileName and SegFile = Personal Identifiers
 
@@ -732,6 +625,25 @@ SUSP = Suspect Pattern
 Class = 1 to 10 for Classes A to SUSP
 
 NSP = Fetal State Class Code (Normal = 1, Suspect = 2, Pathologic = 3)
+
+The datatypes were encoded to adequately consider the categorical variables in the dataset.
+
+```python
+#Re-coding Categorical Variables
+df['NSP'] = df['NSP'].astype('category')
+df['Tendency'] = df['Tendency'].astype('category')
+df['A'] = df['A'].astype('category')
+df['B'] = df['B'].astype('category')
+df['C'] = df['C'].astype('category')
+df['D'] = df['D'].astype('category')
+df['E'] = df['E'].astype('category')
+df['AD'] = df['AD'].astype('category')
+df['DE'] = df['DE'].astype('category')
+df['LD'] = df['LD'].astype('category')
+df['SUSP'] = df['SUSP'].astype('category')
+df['CLASS'] = df['CLASS'].astype('category')
+
+
 
 __In the R portion of this project, high levels of correlation were found between the b and e variables, the expert and automated determination of fetal heart rate, and finally mode, mean, and median variables were all highly correlated with one another.__
 

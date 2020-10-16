@@ -11,7 +11,9 @@ excerpt: "Predictive Analytics, Exploratory Data Analysis"
 
 This project is divided into two parts.  The first part is this R-based portion for exploratory data analysis.  The second part is a Python based portion in another post to utilize machine learning algorithms.
 
-Fetal heart rate monitoring as an indicator of fetal well-being can be inaccurate as predictors of a poor neonatal outcome and come with significant healthcare and medicolegal costs.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring from the UCI machine learning database to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.
+Neonatal mortality rates have remained steady for the last several years and continue to be a concern in the United States and despite medical advances, there has not been much progress in affecting neonatal outcomes.  This trend is worrisome.  One way of ensuring fetal well-being is via external fetal cardiotocography which measures the heart rate of the infant.  Certain findings during labor are reassuring while others are indicative of possible fetal distress.  
+
+This project sought to determine an accurate and precise machine learning algorithm using data obtained from the UCI Machine Learning database and is composed of various measurements of the heart rate tracings to generate a prediction of normal, suspect, or pathologic findings.  It is the goal of this project to use a database of specific technical characteristics of fetal heart rate monitoring to develop a predictive model using an automated system to better identify worrisome decreases in fetal heart rate.  The data was obtained using an automated system (SisPorto 2.0) to quantify these parameters.
 
 The data that I will primarily use is from the University of California – Irvine Machine Learning Repository.  The dataset can be found at the following web address: [https://archive.ics.uci.edu/ml/datasets/Cardiotocography](https://archive.ics.uci.edu/ml/datasets/Cardiotocography).
 
