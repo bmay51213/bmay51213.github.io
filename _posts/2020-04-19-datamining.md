@@ -889,7 +889,7 @@ for idx, ax in enumerate(axes):
     ax.tick_params(axis='both', labelsize = 15)
 plt.show()
 ```
-![png](images/datamining/output_20_1.png)
+![png](/images/datamining/output_20_1.png)
 
 Age at heart attack and fractional shortening appear to be normally distributed.  The variables of epss, lvdd, and wallmotionindex appear to be positively skewed.
 
@@ -931,14 +931,14 @@ plt.show()
 ```
 
 
-![png](images/datamining/output_24_0.png)
+![png](/images/datamining/output_24_0.png)
 
 
 
-![png](images/datamining/output_24_1.png)
+![png](/images/datamining/output_24_1.png)
 
 
-The numerical variables were analyzed for high levels of correlation (>0.90) and plotted using a correlation plot with the seaborn package.
+The numerical variables were analyzed for high levels of correlation (absolute values of >0.95) and plotted using a correlation plot with the seaborn package.
 
 
 ```python
@@ -958,7 +958,7 @@ plt.show()
 ```
 
 
-![png](images/datamining/output_26_0.png)
+![png](/images/datamining/output_26_0.png)
 
 
 Based on the above correlation plot, EPSS and LVDD appear to be positively correlated as do EPSS and wallmotion-index.  LVDD and wallmotion index appear to be positively correlated as well.  Age and fractional shortening appear to be slightly negatively correlated.
@@ -1044,7 +1044,7 @@ corr_matrix
 </div>
 
 Given these variables, none are significantly highly correlated that could prove problems in future
-data analysis (correlation value of 0.95 or above).
+data analysis (correlation absolute value of 0.95 or above).
 
 Scatterplots were completed using our predictor variables.
 
@@ -1069,7 +1069,7 @@ plt.show()
 ```
 
 
-![png](images/datamining/output_31_0.png)
+![png](/images/datamining/output_31_0.png)
 
 
 
@@ -1084,7 +1084,7 @@ plt.show()
 ```
 
 
-![png](images/datamining/output_32_0.png)
+![png](/images/datamining/output_32_0.png)
 
 
 
@@ -1099,7 +1099,7 @@ plt.show()
 ```
 
 
-![png](images/datamining/output_33_0.png)
+![png](/images/datamining/output_33_0.png)
 
 
 
@@ -1114,7 +1114,7 @@ plt.show()
 ```
 
 
-![png](images/datamining/output_34_0.png)
+![png](/images/datamining/output_34_0.png)
 
 
 There appeared to be a weak positive correlation between EPSS and LVDD as well as a weak negative correlation between LVDD and Fractional Shortening.
@@ -1148,7 +1148,7 @@ plt.show()
 ```
 
 
-![png](images/datamining/output_37_0.png)
+![png](/images/datamining/output_37_0.png)
 
 
 Looking at this stacked bar chart, for those who did not have a pericardial effusion, approximately 30% were alive and 70% were deceased.  For those who did have a pericardial effusion, approximately 50% survived and 50% died.  I suspect that there may be other variables influencing this.  Pericardial effusions are an uncommon entity and usually increase the risk of death so it is counter-intuitive that those without a pericardial effusion would be dead at 1 year.
@@ -1347,11 +1347,6 @@ fvalue_selector.get_support()
 
     Original Number of Features: 6
     Reduced Number of Features: 4
-
-
-
-
-
     array([ True, False,  True,  True, False,  True])
 
 
@@ -1384,11 +1379,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 1
-
-
-
-
-
     array([False, False, False, False, False,  True])
 
 
@@ -1414,11 +1404,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 1
-
-
-
-
-
     array([False, False, False, False, False,  True])
 
 
@@ -1511,15 +1496,15 @@ g = visualizer2.poof()
 ```
 
 
-![png](images/datamining/output_52_0.png)
+![png](/images/datamining/output_52_0.png)
 
 
 
-![png](images/datamining/output_52_1.png)
+![png](/images/datamining/output_52_1.png)
 
 
 
-![png](images/datamining/output_52_2.png)
+![png](/images/datamining/output_52_2.png)
 
 
 Here, the algorithm was better at predicting death than survival.  The ROC of both classes was 0.6 and the F1 scores were 0.462 for predicting survival and 0.720 for predicting death.  Next we'll run the algorithm using our feature selected variables.
@@ -1599,15 +1584,15 @@ g = visualizer2.poof()
 ```
 
 
-![png](images/datamining/output_54_0.png)
+![png](/images/datamining/output_54_0.png)
 
 
 
-![png](images/datamining/output_54_1.png)
+![png](/images/datamining/output_54_1.png)
 
 
 
-![png](images/datamining/output_54_2.png)
+![png](/images/datamining/output_54_2.png)
 
 
 Using our feature selected variables, the models performance improved to ROC of 0.83 for both classes.  Further the F1 score at predicting death was 0.8 and 0.615 at predicting survival.  The model still seemed to predict death more often than survival.
@@ -1636,11 +1621,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 6
-
-
-
-
-
     array([ True,  True,  True,  True,  True,  True])
 
 
@@ -1665,11 +1645,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 6
-
-
-
-
-
     array([ True,  True,  True,  True,  True,  True])
 
 
@@ -1745,15 +1720,15 @@ g = visualizer2.poof()
 ```
 
 
-![png](images/datamining/output_62_0.png)
+![png](/images/datamining/output_62_0.png)
 
 
 
-![png](images/datamining/output_62_1.png)
+![png](/images/datamining/output_62_1.png)
 
 
 
-![png](images/datamining/output_62_2.png)
+![png](/images/datamining/output_62_2.png)
 
 
 The Random Forest model was better at predicting death than survival like the logistic regression model.  However, the ROC values were worse at 0.65 both both classes.  The F1 score for predicting death was 0.714 while it was 0.2 (very low) for predicting survival.  Since there was not much of a difference between which scoring metric used, this model was only run once using all variables.
@@ -1784,11 +1759,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 3
-
-
-
-
-
     array([ True,  True, False, False, False,  True])
 
 
@@ -1814,11 +1784,6 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 3
-
-
-
-
-
     array([ True,  True, False, False, False,  True])
 
 
@@ -1892,15 +1857,15 @@ g = visualizer1.poof()
 ```
 
 
-![png](images/datamining/output_70_0.png)
+![png](/images/datamining/output_70_0.png)
 
 
 
-![png](images/datamining/output_70_1.png)
+![png](/images/datamining/output_70_1.png)
 
 
 
-![png](images/datamining/output_70_2.png)
+![png](/images/datamining/output_70_2.png)
 
 
 Using this method, the F1 score was 0.640 for predicting death and 0.308 for predicting survival.  The ROC was 0.59 for the binary decision.  This is similar to the Random Forest Algorithm results.
@@ -1973,15 +1938,15 @@ g = visualizer1.poof()
 ```
 
 
-![png](images/datamining/output_72_0.png)
+![png](/images/datamining/output_72_0.png)
 
 
 
-![png](images/datamining/output_72_1.png)
+![png](/images/datamining/output_72_1.png)
 
 
 
-![png](images/datamining/output_72_2.png)
+![png](/images/datamining/output_72_2.png)
 
 
 Using the feature selected variables, the ROC improved to 0.76 and the F1 score was 0.815 for predicting death and 0.545 for predicting survival.
@@ -1995,5 +1960,3 @@ I used three different methods, Logistic Regression, Random Forest Classificatio
 For further modeling, more data points would need to be contributed to fine tune the algorithms although the results to date are promising.
 
 __To view more specifics on the coding and project, please refer to my GitHub repository.__
-
-```
