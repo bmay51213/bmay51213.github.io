@@ -6,13 +6,9 @@ header:
   image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
 excerpt: "Logistic Regression, SVG, Random Forest Classifier"
 ---
-Coronary artery disease continues to be a significant cause of mortality.  The question remains is if higher risk patients for death could be identified and treated appropriately to avert mortality.
-
 This dataset is from the UCI database describing characteristics on an echocardiogram after someone sustained a heart attack (MI - myocardial infarction) and their survival after one year.  Echocardiograms, or more simply an ultrasound of the heart, have many different measurements and the purpose of this project was to see if certain measurements or characteristics were predictive of survival at 1 year post-MI.
 
 __Dataset URL:__
-
-UCI Machine Learning Repository - Echocardiograms:
 
 [https://archive.ics.uci.edu/ml/datasets/echocardiogram](https://archive.ics.uci.edu/ml/datasets/echocardiogram)
 
@@ -248,7 +244,6 @@ df
 <p>133 rows × 13 columns</p>
 </div>
 
-
 There are 133 data points and 13 variables including the target variable.
 
 ### Description of the Variables in the Dataframe ###
@@ -275,7 +270,8 @@ __Mult, Name, and Group:__ All are case identifiers and not pertinent to the Ana
 
 __Aliveat1:__  Categorical (Whether or Not Person Was Alive At One Year -- __Target__)
 
-The dataset was cleaned of the case identifiers.
+The case identifiers of this data will be dropped as well as three variables.  The survival and alive variables together created the values for the target variable so these are redundant.  Likewise, the wall motion index was derived from wall motion score so we will remove the wall motion score variables.
+
 
 ```python
 #Data Cleaning
@@ -441,6 +437,16 @@ df
 </div>
 
 
+```python
+#Searching for null values
+df.isnull().values.any()
+
+```
+
+
+
+
+    True
 
 There are null values in this dataset and will be removed for analysis.
 
@@ -450,8 +456,6 @@ There are null values in this dataset and will be removed for analysis.
 df.dropna(inplace=True)
 df
 ```
-
-
 
 
 <div>
@@ -598,7 +602,151 @@ df
 </div>
 
 
-The variables were recoded into Python to represent the appropriate categorical values.  Columns were also renamed for simplicity.
+The pertinent categorical variables were encoded in Python as categorical variables for further analysis and fitting to the machine learning algorithms.  Columns were also renamed for simplicity.
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>pericardialeffusion</th>
+      <th>fractionalshortening</th>
+      <th>epss</th>
+      <th>lvdd</th>
+      <th>wallmotion-index</th>
+      <th>aliveat1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>71</td>
+      <td>0</td>
+      <td>0.260</td>
+      <td>9.000</td>
+      <td>4.600</td>
+      <td>1.00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>72</td>
+      <td>0</td>
+      <td>0.380</td>
+      <td>6.000</td>
+      <td>4.100</td>
+      <td>1.70</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>55</td>
+      <td>0</td>
+      <td>0.260</td>
+      <td>4.000</td>
+      <td>3.420</td>
+      <td>1.00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>60</td>
+      <td>0</td>
+      <td>0.253</td>
+      <td>12.062</td>
+      <td>4.603</td>
+      <td>1.45</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>57</td>
+      <td>0</td>
+      <td>0.160</td>
+      <td>22.000</td>
+      <td>5.750</td>
+      <td>2.25</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>63</td>
+      <td>0</td>
+      <td>0.300</td>
+      <td>6.900</td>
+      <td>3.520</td>
+      <td>1.51</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>59</td>
+      <td>0</td>
+      <td>0.170</td>
+      <td>14.300</td>
+      <td>5.490</td>
+      <td>1.50</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>57</td>
+      <td>0</td>
+      <td>0.228</td>
+      <td>9.700</td>
+      <td>4.290</td>
+      <td>1.00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>78</td>
+      <td>0</td>
+      <td>0.230</td>
+      <td>40.000</td>
+      <td>6.230</td>
+      <td>1.40</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>62</td>
+      <td>0</td>
+      <td>0.260</td>
+      <td>7.600</td>
+      <td>4.420</td>
+      <td>1.00</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>62 rows × 7 columns</p>
+</div>
 
 ## Data Exploration and Analysis
 
@@ -639,15 +787,11 @@ df.describe()
       <th>epss</th>
       <th>lvdd</th>
       <th>wallmotion-index</th>
-      <th>pericardialeffusion_1.0</th>
-      <th>aliveat1_1.0</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
-      <td>62.000000</td>
-      <td>62.000000</td>
       <td>62.000000</td>
       <td>62.000000</td>
       <td>62.000000</td>
@@ -661,8 +805,6 @@ df.describe()
       <td>12.307387</td>
       <td>4.817129</td>
       <td>1.406403</td>
-      <td>0.177419</td>
-      <td>0.290323</td>
     </tr>
     <tr>
       <th>std</th>
@@ -671,8 +813,6 @@ df.describe()
       <td>7.305048</td>
       <td>0.774996</td>
       <td>0.445460</td>
-      <td>0.385142</td>
-      <td>0.457617</td>
     </tr>
     <tr>
       <th>min</th>
@@ -681,8 +821,6 @@ df.describe()
       <td>0.000000</td>
       <td>3.420000</td>
       <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
     </tr>
     <tr>
       <th>25%</th>
@@ -691,8 +829,6 @@ df.describe()
       <td>8.125000</td>
       <td>4.290000</td>
       <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
     </tr>
     <tr>
       <th>50%</th>
@@ -701,8 +837,6 @@ df.describe()
       <td>11.000000</td>
       <td>4.601500</td>
       <td>1.321500</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
     </tr>
     <tr>
       <th>75%</th>
@@ -711,8 +845,6 @@ df.describe()
       <td>15.900000</td>
       <td>5.422500</td>
       <td>1.625000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
     </tr>
     <tr>
       <th>max</th>
@@ -721,14 +853,10 @@ df.describe()
       <td>40.000000</td>
       <td>6.730000</td>
       <td>3.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
     </tr>
   </tbody>
 </table>
 </div>
-
-
 
 The youngest person in the analysis was 46 years old which is young for someone to sustain a heart attack.  The oldest was 86 years old and the average age was 64 years old.
 
@@ -761,12 +889,9 @@ for idx, ax in enumerate(axes):
     ax.tick_params(axis='both', labelsize = 15)
 plt.show()
 ```
+![png](images/datamining/output_20_1.png)
 
-
-![png](/images/datamining/output_18_1.png)
-
-
-Age at heart attack and fractional shortening appear to be normally distributed.  The variables of epss, lvdd, and wallmotionindex appear to be positively skewed.  
+Age at heart attack and fractional shortening appear to be normally distributed.  The variables of epss, lvdd, and wallmotionindex appear to be positively skewed.
 
 
 ```python
@@ -774,68 +899,43 @@ Age at heart attack and fractional shortening appear to be normally distributed.
 df.describe(include=['O'])
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pericardialeffusion</th>
-      <th>aliveat1</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>62.0</td>
-      <td>62.0</td>
-    </tr>
-    <tr>
-      <th>unique</th>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>top</th>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>freq</th>
-      <td>51.0</td>
-      <td>44.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 The majority of people in the study group did not have a pericardial effusion.  Those with pericardial effusions are higher cardiac risk so this is a favorable thing.
 
 The majority of people in the study were alive after their heart attack.
 
 
-![png](/images/datamining/output_22_0.png)
+```python
+#Setting Up Barcharts of Our Categorical Variables (Alive, Alive at 1 Year, and Pericardial Effusion Presence) using
+#Seaborn
+
+#Importing Seaborn
+import seaborn as sns
+
+#Plotting Survival at 1 Year with Seaborn and specifying parameters with matplotlib
+plt.rcParams['figure.figsize'] = (6,6)
+sns.countplot(x = 'aliveat1', data =df)
+plt.title('Alive At 1 Year')
+plt.xlabel(xlabel = None)
+plt.xticks([0,1], ['Deceased', 'Alive'])
+plt.ylabel('Counts')
+plt.show()
+
+
+#Plotting Presence of Pericardial Effusion with seaborna and specifying parameters with matplotlib
+sns.countplot(x = 'pericardialeffusion', data = df)
+plt.title('Presence of Pericardial Effusion')
+plt.xlabel(xlabel = None)
+plt.xticks([0,1], ['Absent', 'Present'])
+plt.ylabel('Counts')
+plt.show()
+```
+
+
+![png](images/datamining/output_24_0.png)
 
 
 
-![png](/images/datamining/output_22_1.png)
+![png](images/datamining/output_24_1.png)
 
 
 The numerical variables were analyzed for high levels of correlation (>0.90) and plotted using a correlation plot with the seaborn package.
@@ -858,7 +958,7 @@ plt.show()
 ```
 
 
-![png](/images/datamining/output_24_0.png)
+![png](images/datamining/output_26_0.png)
 
 
 Based on the above correlation plot, EPSS and LVDD appear to be positively correlated as do EPSS and wallmotion-index.  LVDD and wallmotion index appear to be positively correlated as well.  Age and fractional shortening appear to be slightly negatively correlated.
@@ -896,8 +996,6 @@ corr_matrix
       <th>epss</th>
       <th>lvdd</th>
       <th>wallmotion-index</th>
-      <th>pericardialeffusion_1.0</th>
-      <th>aliveat1_1.0</th>
     </tr>
   </thead>
   <tbody>
@@ -908,8 +1006,6 @@ corr_matrix
       <td>0.079404</td>
       <td>0.199105</td>
       <td>0.086844</td>
-      <td>0.021614</td>
-      <td>0.354324</td>
     </tr>
     <tr>
       <th>fractionalshortening</th>
@@ -918,8 +1014,6 @@ corr_matrix
       <td>-0.399324</td>
       <td>-0.369920</td>
       <td>-0.327916</td>
-      <td>-0.005207</td>
-      <td>-0.269395</td>
     </tr>
     <tr>
       <th>epss</th>
@@ -928,8 +1022,6 @@ corr_matrix
       <td>1.000000</td>
       <td>0.569668</td>
       <td>0.442790</td>
-      <td>-0.031571</td>
-      <td>0.271188</td>
     </tr>
     <tr>
       <th>lvdd</th>
@@ -938,8 +1030,6 @@ corr_matrix
       <td>0.569668</td>
       <td>1.000000</td>
       <td>0.339077</td>
-      <td>-0.029571</td>
-      <td>0.268640</td>
     </tr>
     <tr>
       <th>wallmotion-index</th>
@@ -948,41 +1038,27 @@ corr_matrix
       <td>0.442790</td>
       <td>0.339077</td>
       <td>1.000000</td>
-      <td>0.148064</td>
-      <td>0.445502</td>
-    </tr>
-    <tr>
-      <th>pericardialeffusion_1.0</th>
-      <td>0.021614</td>
-      <td>-0.005207</td>
-      <td>-0.031571</td>
-      <td>-0.029571</td>
-      <td>0.148064</td>
-      <td>1.000000</td>
-      <td>0.168025</td>
-    </tr>
-    <tr>
-      <th>aliveat1_1.0</th>
-      <td>0.354324</td>
-      <td>-0.269395</td>
-      <td>0.271188</td>
-      <td>0.268640</td>
-      <td>0.445502</td>
-      <td>0.168025</td>
-      <td>1.000000</td>
     </tr>
   </tbody>
 </table>
 </div>
 
-
-
 Given these variables, none are significantly highly correlated that could prove problems in future
 data analysis (correlation value of 0.95 or above).
 
-Several variables were compared via scatterplot to look for interesting relationships.
+Scatterplots were completed using our predictor variables.
+
+```python
+#Setting Up Scatterplots for the Numerical Variables and Encoding Variables For Easier Use in Matplotlib
+age = df['age']
+lvdd = df['lvdd']
+epss = df['epss']
+fracshort = df['fractionalshortening']
+wmi = df['wallmotion-index']
+```
 
 
+```python
 #Scatterplot for EPSS and Left Ventricular Diastolic Dimension
 plt.rcParams['figure.figsize'] = (6,5)
 plt.scatter(epss, lvdd)
@@ -993,7 +1069,7 @@ plt.show()
 ```
 
 
-![png](/images/datamining/output_29_0.png)
+![png](images/datamining/output_31_0.png)
 
 
 
@@ -1008,7 +1084,7 @@ plt.show()
 ```
 
 
-![png](/images/datamining/output_30_0.png)
+![png](images/datamining/output_32_0.png)
 
 
 
@@ -1023,7 +1099,7 @@ plt.show()
 ```
 
 
-![png](/images/datamining/output_31_0.png)
+![png](images/datamining/output_33_0.png)
 
 
 
@@ -1038,10 +1114,12 @@ plt.show()
 ```
 
 
-![png](/images/datamining/output_32_0.png)
+![png](images/datamining/output_34_0.png)
 
 
 There appeared to be a weak positive correlation between EPSS and LVDD as well as a weak negative correlation between LVDD and Fractional Shortening.
+
+Next step was to plot our two categorical variables as stacked bar charts on top of each other to look how the presence or absence of a pericardial effusion correlated with survival.
 
 
 ```python
@@ -1070,7 +1148,7 @@ plt.show()
 ```
 
 
-![png](/images/datamining/output_34_0.png)
+![png](images/datamining/output_37_0.png)
 
 
 Looking at this stacked bar chart, for those who did not have a pericardial effusion, approximately 30% were alive and 70% were deceased.  For those who did have a pericardial effusion, approximately 50% survived and 50% died.  I suspect that there may be other variables influencing this.  Pericardial effusions are an uncommon entity and usually increase the risk of death so it is counter-intuitive that those without a pericardial effusion would be dead at 1 year.
@@ -1079,7 +1157,162 @@ Looking at this stacked bar chart, for those who did not have a pericardial effu
 
 For eventual fitting of our machine learning algorithms, pandas was used to get dummy variables for the categorical values in the dataframe.
 
-Then, feature selection was performed to simplify variables for the machine learning algorithms.
+```python
+#Dimensionality Reduction
+
+#Getting Dummy Variables for Our Pericardial Effusion Variable and our Alive At 1 Variable
+df = pd.get_dummies(df, drop_first=True)
+df
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>fractionalshortening</th>
+      <th>epss</th>
+      <th>lvdd</th>
+      <th>wallmotion-index</th>
+      <th>pericardialeffusion_1.0</th>
+      <th>aliveat1_1.0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>71</td>
+      <td>0.260</td>
+      <td>9.000</td>
+      <td>4.600</td>
+      <td>1.00</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>72</td>
+      <td>0.380</td>
+      <td>6.000</td>
+      <td>4.100</td>
+      <td>1.70</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>55</td>
+      <td>0.260</td>
+      <td>4.000</td>
+      <td>3.420</td>
+      <td>1.00</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>60</td>
+      <td>0.253</td>
+      <td>12.062</td>
+      <td>4.603</td>
+      <td>1.45</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>57</td>
+      <td>0.160</td>
+      <td>22.000</td>
+      <td>5.750</td>
+      <td>2.25</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>63</td>
+      <td>0.300</td>
+      <td>6.900</td>
+      <td>3.520</td>
+      <td>1.51</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>59</td>
+      <td>0.170</td>
+      <td>14.300</td>
+      <td>5.490</td>
+      <td>1.50</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>57</td>
+      <td>0.228</td>
+      <td>9.700</td>
+      <td>4.290</td>
+      <td>1.00</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>78</td>
+      <td>0.230</td>
+      <td>40.000</td>
+      <td>6.230</td>
+      <td>1.40</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>62</td>
+      <td>0.260</td>
+      <td>7.600</td>
+      <td>4.420</td>
+      <td>1.00</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>62 rows × 7 columns</p>
+</div>
+
+
+
 
 ```python
 #Using Feature Selection to Eliminate Variables That Are Not Useful
@@ -1115,26 +1348,31 @@ fvalue_selector.get_support()
     Original Number of Features: 6
     Reduced Number of Features: 4
 
+
+
+
+
     array([ True, False,  True,  True, False,  True])
 
 
 
 Based on this Boolean, it kept the variables Age, Fractional Shortening, EPSS, and Wall-Motion Index using 75th Percentile and LVDD and Pericardial Effusion should be dropped.
 
+For fitting of our machine learning algorithms, performance will be compared between the models with all variables included and those using feature-selected variables.
+
 ### Logistic Regression Feature Selection and Model Fitting
+
+The first model will be using logistic regression and to use RFECV to recursively eliminate features of all variables including numerical and categoricals using negative mean squared error as the scoring metric to determine which features should be kept.
 
 
 ```python
-#Trying RFECV with Logistic Regression to Recursively Eliminate Features of All Variables Including Numerical and
-#Categorical Variables Using Neg Mean Squared Error as Scoring Metric
-
 #Importing Our Packages
 from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import RFECV
 import sklearn.linear_model as lm
 
 #Setting Our Regression and using logistic regression since this is a binary predictor
-regression = lm.LogisticRegression()
+regression = lm.LogisticRegression(random_state = 1)
 
 #Setting Our Selector for Stratified K Fold Cross validation of 10 and Using Neg Mean Squared Error
 selector = RFECV(estimator=regression, step=1, cv=StratifiedKFold(10), scoring='neg_mean_squared_error')
@@ -1146,6 +1384,10 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 1
+
+
+
+
 
     array([False, False, False, False, False,  True])
 
@@ -1159,7 +1401,7 @@ Using negative mean squared error as our scoring metric with logistic regression
 #Categorical Variables Using Accuracy as my scoring metric
 
 #Setting Our Regression and using logistic regression since this is a binary predictor
-regression = lm.LogisticRegression()
+regression = lm.LogisticRegression(random_state = 1)
 
 #Setting Our Selector for Stratified K Fold Cross validation of 10 and Using Neg Mean Squared Error
 selector = RFECV(estimator=regression, step=1, cv=StratifiedKFold(10), scoring='accuracy')
@@ -1173,13 +1415,18 @@ selector.get_support()
 
     Optimal Number of Features: 1
 
+
+
+
+
     array([False, False, False, False, False,  True])
 
 
 
 Likewise, using accuracy as our scoring metric with logistic regression, it appears that with this round of feature selection, only wall motion index should be included.  It does not appear that in this case that using negative mean squared error or accuracy would change the variables that were selected.
 
-The model was then fit using logistic regression using all variables to begin.
+Next we'll run Stratified K Fold CV using all features with logistic regression
+
 
 ```python
 #Using Stratified K Fold Cross Validation, We Will Run a Logistic Regression Model Using All Features
@@ -1264,20 +1511,24 @@ g = visualizer2.poof()
 ```
 
 
-![png](/images/datamining/output_46_0.png)
+![png](images/datamining/output_52_0.png)
 
 
 
-![png](/images/datamining/output_46_1.png)
+![png](images/datamining/output_52_1.png)
 
 
 
-![png](/images/datamining/output_46_2.png)
+![png](images/datamining/output_52_2.png)
 
 
-Then, the model was run using our feature selected variables.
+Here, the algorithm was better at predicting death than survival.  The ROC of both classes was 0.6 and the F1 scores were 0.462 for predicting survival and 0.720 for predicting death.  Next we'll run the algorithm using our feature selected variables.
+
 
 ```python
+#Running Logistic Regression Using Our Feature Selection Result (Age and Wall Motion Index)
+
+#Creating Standardizer
 standardizer = StandardScaler()
 
 #Creating Logistic Regression Object
@@ -1287,8 +1538,10 @@ logit = LogisticRegression()
 
 kf = StratifiedKFold(n_splits=10, shuffle=True, random_state = 1)
 
-#Doing Training/Test Split
+#Setting Features
+features3 = df[['age', 'wallmotion-index']]
 
+#Doing Training/Test Split
 features_train, features_test, target_train, target_test = train_test_split(features3, target, test_size=0.3, random_state = 1)
 
 #Fitting Standardizer
@@ -1346,18 +1599,22 @@ g = visualizer2.poof()
 ```
 
 
-![png](/images/datamining/output_47_0.png)
+![png](images/datamining/output_54_0.png)
 
 
 
-![png](/images/datamining/output_47_1.png)
+![png](images/datamining/output_54_1.png)
 
 
 
-![png](/images/datamining/output_47_2.png)
+![png](images/datamining/output_54_2.png)
 
+
+Using our feature selected variables, the models performance improved to ROC of 0.83 for both classes.  Further the F1 score at predicting death was 0.8 and 0.615 at predicting survival.  The model still seemed to predict death more often than survival.
 
 ### Random Forest Feature Selection and Model Fitting
+
+Using the same methodology as above, I then performed feature selection using a Random Forest Classifier with the plan to evaluate the models using all variables and then the feature selected variables.
 
 
 ```python
@@ -1367,7 +1624,7 @@ g = visualizer2.poof()
 from sklearn.ensemble import RandomForestClassifier
 
 #Setting Up Our Random Forest Classifier to Call in our RFECV Function
-rfc = RandomForestClassifier(n_jobs=-1)
+rfc = RandomForestClassifier(n_jobs=-1, random_state = 1)
 
 #Setting Our Selector for Stratified K Fold Cross validation of 10 and Using Neg Mean Squared Error
 selector = RFECV(estimator=rfc, step=1, cv=StratifiedKFold(10), scoring='neg_mean_squared_error')
@@ -1378,17 +1635,24 @@ print("Optimal Number of Features: %d" % selector.n_features_)
 selector.get_support()
 ```
 
-    Optimal Number of Features: 4
-    array([ True, False, False,  True,  True,  True])
+    Optimal Number of Features: 6
 
 
+
+
+
+    array([ True,  True,  True,  True,  True,  True])
+
+
+
+Using this negative mean squared error as scoring, it recommended keeping all variables.
 
 
 ```python
 #Using Random Forest Classifier as our Model with Accuracy as Scoring Metric
 
 #Setting Up Our Random Forest Classifier to Call in our RFECV Function
-rfc = RandomForestClassifier(n_jobs=-1)
+rfc = RandomForestClassifier(n_jobs=-1, random_state = 1)
 
 #Setting Our Selector for Stratified K Fold Cross validation of 10 and Using Accuracy
 selector = RFECV(estimator=rfc, step=1, cv=StratifiedKFold(10), scoring='accuracy')
@@ -1400,14 +1664,18 @@ print("Optimal Number of Features: %d" % selector.n_features_)
 selector.get_support()
 ```
 
-    Optimal Number of Features: 3
-    array([ True, False, False,  True, False,  True])
+    Optimal Number of Features: 6
 
 
 
-Depending on which time the data is run, some of the Random Forest Classifier models recommend keeping all variables or excluding the pericardial effusion variable, but this changes from each iteration.
 
-The Random Forest Classifier was fit using all variables to begin.
+
+    array([ True,  True,  True,  True,  True,  True])
+
+
+
+Based on this run, either using accuracy or negative mean squared error, it recommended keeping all variables in the model.
+
 
 ```python
 #Using Stratified K Fold Cross Validation, We Will Run a Random Forest Classification Model Using All Features
@@ -1477,97 +1745,22 @@ g = visualizer2.poof()
 ```
 
 
-![png](/images/datamining/output_53_0.png)
+![png](images/datamining/output_62_0.png)
 
 
 
-![png](/images/datamining/output_53_1.png)
+![png](images/datamining/output_62_1.png)
 
 
 
-![png](/images/datamining/output_53_2.png)
+![png](images/datamining/output_62_2.png)
 
 
+The Random Forest model was better at predicting death than survival like the logistic regression model.  However, the ROC values were worse at 0.65 both both classes.  The F1 score for predicting death was 0.714 while it was 0.2 (very low) for predicting survival.  Since there was not much of a difference between which scoring metric used, this model was only run once using all variables.
 
-Then, the Random Forest Classifier was run using the feature selected variables.
+### SVM Feature Selection
 
-```python
-standardizer = StandardScaler()
-
-#Creating Random Forest Regression Object
-rfc = RandomForestClassifier(random_state = 111, n_jobs = -1, class_weight = "balanced")
-
-#Creating K Fold Cross Validation
-kf = StratifiedKFold(n_splits=10, shuffle=True, random_state = 1)
-
-#Doing Training/Test Split
-features_train, features_test, target_train, target_test = train_test_split(features2, target, test_size=0.3, random_state = 1)
-
-#Fitting Standardizer
-standardizer.fit(features_train)
-
-#Applying to both training and test sets
-features_train_std = standardizer.transform(features_train)
-features_test_std = standardizer.transform(features_test)
-
-#Creating Pipeline
-pipeline = make_pipeline(standardizer, rfc)
-
-#Do K Fold Cross-Validation
-cv_results = cross_val_score(pipeline, features2, target, cv = kf, scoring = "accuracy", n_jobs = -1)
-
-#Confusion Matrix Visualizer
-classes = ['Not Survived', 'Survived']
-cm = ConfusionMatrix(rfc, classes = classes, percent = False)
-
-#Fitting the passed model
-cm.fit(features_train, target_train)
-
-#Create confusion matrix
-cm.score(features_test, target_test)
-
-#Change fontsize of labels in figure
-for label in cm.ax.texts:
-    label.set_size(20)
-
-#Checking model performance
-cm.poof()
-
-#Getting Precision, Recall, and F1 Score and ROC Curve and Setting size of figure and font size
-%matplotlib inline
-plt.rcParams['figure.figsize'] = (15,7)
-plt.rcParams['font.size'] = 20
-
-#Instantiate visualizer
-visualizer1 = ClassificationReport(rfc, classes = classes)
-
-#Fit training data to visualizer
-visualizer1.fit(features_train, target_train)
-
-#Evaluating model on the test data
-visualizer1.score(features_test, target_test)
-g = visualizer1.poof()
-
-#ROC and AUC and Instantiating the Visualizer
-visualizer2 = ROCAUC(rfc)
-visualizer2.fit(features_train, target_train)
-visualizer2.score(features_test, target_test)
-g = visualizer2.poof()
-```
-
-
-![png](/images/datamining/output_54_0.png)
-
-
-
-![png](/images/datamining/output_54_1.png)
-
-
-
-![png](/images/datamining/output_54_2.png)
-
-
-### SVM Feature Selection and Model Fitting
+Finally, using the same methodology as above, I then performed feature selection using SVM with the plan to evaluate the models using all variables and then the feature selected variables.
 
 
 ```python
@@ -1578,7 +1771,7 @@ g = visualizer2.poof()
 from sklearn.svm import SVC
 
 #Setting Up SVM model
-clf = SVC(kernel='linear')
+clf = SVC(kernel='linear', random_state = 1)
 
 #Setting Our Selector for Stratified K Fold Cross validation of 10 and Using Accuracy
 selector = RFECV(estimator=clf, step=1, cv=StratifiedKFold(10), scoring='accuracy')
@@ -1591,9 +1784,16 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 3
+
+
+
+
+
     array([ True,  True, False, False, False,  True])
 
 
+
+Given the results of this Boolean, it recommended keeping age, pericardial effusion, and wall motion index for our feature selected variables using accuracy as a metric.
 
 
 ```python
@@ -1601,7 +1801,7 @@ selector.get_support()
 #Categorical Variables using Negative Mean Squared Error as Scoring metric
 
 #Setting Up SVM model
-clf = SVC(kernel='linear')
+clf = SVC(kernel='linear', random_state = 1)
 
 #Setting Our Selector for Stratified K Fold Cross validation of 10 and Using Neg Mean Squared Error
 selector = RFECV(estimator=clf, step=1, cv=StratifiedKFold(10), scoring='neg_mean_squared_error')
@@ -1614,16 +1814,22 @@ selector.get_support()
 ```
 
     Optimal Number of Features: 3
+
+
+
+
+
     array([ True,  True, False, False, False,  True])
 
 
 
-Using Support Vector Machine, feature selection identified using age, pericardialeffusion_1.0, and, wallmotion-index for our model.
+Using Support Vector Machine, feature selection identified using age, pericardialeffusion_1.0, and, wallmotion-index for our model with negative mean squared error as the metric so there is no difference between the two.
 
-First, the model was fit using all variables.
 
 ```python
+#Running SVM model using all variables with accuracy as scoring metric.
 
+#Setting Our SVM Model
 clf = SVC(kernel='linear')
 
 #Creating K Fold Cross Validation
@@ -1677,24 +1883,39 @@ visualizer1.fit(features_train, target_train)
 #Evaluating model on the test data
 visualizer1.score(features_test, target_test)
 g = visualizer1.poof()
+
+#ROC and AUC: Instantiating the Visualizer
+visualizer1 = ROCAUC(clf, micro = False, macro = False, per_class = False)
+visualizer1.fit(features_train, target_train)
+visualizer1.score(features_test, target_test)
+g = visualizer1.poof()
 ```
 
 
-![png](/images/datamining/output_59_0.png)
+![png](images/datamining/output_70_0.png)
 
 
 
-![png](/images/datamining/output_59_1.png)
+![png](images/datamining/output_70_1.png)
 
 
-Then, the SVM model was run using the feature selected variables.
+
+![png](images/datamining/output_70_2.png)
+
+
+Using this method, the F1 score was 0.640 for predicting death and 0.308 for predicting survival.  The ROC was 0.59 for the binary decision.  This is similar to the Random Forest Algorithm results.
+
 
 ```python
+#Running SVM model using all variables with accuracy as scoring metric with our feature selected variables.
 
+#Setting Our SVM Model
 clf = SVC(kernel='linear')
 
 #Creating K Fold Cross Validation
 kf = StratifiedKFold(n_splits=10, shuffle=True, random_state = 1)
+
+features4 = df[['age', 'pericardialeffusion_1.0', 'wallmotion-index']]
 
 #Doing Training/Test Split
 features_train, features_test, target_train, target_test = train_test_split(features4, target, test_size=0.3, random_state = 1)
@@ -1743,20 +1964,36 @@ visualizer1.fit(features_train, target_train)
 #Evaluating model on the test data
 visualizer1.score(features_test, target_test)
 g = visualizer1.poof()
+
+#ROC and AUC: Instantiating the Visualizer
+visualizer1 = ROCAUC(clf, micro = False, macro = False, per_class = False)
+visualizer1.fit(features_train, target_train)
+visualizer1.score(features_test, target_test)
+g = visualizer1.poof()
 ```
 
 
-![png](/images/datamining/output_60_0.png)
+![png](images/datamining/output_72_0.png)
 
 
 
-![png](/images/datamining/output_60_1.png)
+![png](images/datamining/output_72_1.png)
 
 
-One limitation of this dataset is the small sample size after we removed the null values.  Another limitation of the dataset is that the deceased proportion of individuals was nearly two times those who survived in the dataset which will skew the results.  The models tend to be better here at predicting not survived vs. survived. This is likely explained by the fact that our dataset had 2 times the amount of people deceased vs. survived so there was a smaller amount of data to help predict the survived categories.__
 
-__I used three different methods, Logistic Regression, Random Forest Classification, and Support Vector Machine Classification.  The best performing model was Logistic Regression followed closely by Support Vector Machines.  The Random Forest models performed the worst.  Feature selection clearly improved the results of all of the models based on their Precision, Recall, and F1 scores.
+![png](images/datamining/output_72_2.png)
 
-__To view more specific coding and visualizations, please refer to my GitHub Repository.__
+
+Using the feature selected variables, the ROC improved to 0.76 and the F1 score was 0.815 for predicting death and 0.545 for predicting survival.
+
+Overall, the best performing model overall appeared to the logistic regression model.
+
+One limitation of this dataset is the small sample size after we removed the null values.  Another limitation of the dataset is that the deceased proportion of individuals was nearly two times those who survived in the dataset which will skew the results.  The models tend to be better here at predicting not survived vs. survived. This is likely explained by the fact that our dataset had 2 times the amount of people deceased vs. survived so there was a smaller amount of data to help predict the survived categories.
+
+I used three different methods, Logistic Regression, Random Forest Classification, and Support Vector Machine Classification.  The best performing model was Logistic Regression followed closely by Support Vector Machines.  The Random Forest models performed the worst.  Feature selection clearly improved the results of all of the models based on their Precision, Recall, and F1 scores.
+
+For further modeling, more data points would need to be contributed to fine tune the algorithms although the results to date are promising.
+
+__To view more specifics on the coding and project, please refer to my GitHub repository.__
 
 ```

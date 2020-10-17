@@ -1415,7 +1415,7 @@ The results of this were quite interesting as well.  Concavepoints_worst, concav
 
 This would seem to suggest that radius_mean and concavepoints_worst/mean all seem to be important whichever model you are using and perhaps could be a focus of future projects.
 
-_verall, the Logistic Regression model seems to be the best option of the three models tested.  Due to the imbalanced target class, accuracy alone is not a good measure of performance since in an unbalanced class, the algorithm by chance could be more likely to guess a certain outcome because it knows that that is the most likely answer.
+Overall, the Logistic Regression model seems to be the best option of the three models tested.  Due to the imbalanced target class, accuracy alone is not a good measure of performance since in an unbalanced class, the algorithm by chance could be more likely to guess a certain outcome because it knows that that is the most likely answer.
 
 The F1 scores for the Logistic Regression model were the highest of the 3 models tested.  This model also minimized the number of false negatives or missed cancer diagnoses.
 
