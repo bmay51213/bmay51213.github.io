@@ -731,7 +731,7 @@ df.describe(include=['category'])
 
 Based on the categorical variables, more patients were alive, male, non-smokers, non-diabetic, non-anemic, and with normal blood pressure.
 
-To eliminate redundnt variables, a correlation analysis was performed to identify correlations with an absolute value of >0.95.
+To eliminate redundant variables, a correlation analysis was performed to identify correlations with an absolute value of >0.95.
 
 ```python
 #Searching for High Correlations
