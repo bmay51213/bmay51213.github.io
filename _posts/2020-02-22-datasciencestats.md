@@ -3,7 +3,7 @@ title: "Statistical Analysis of Worldwide Suicide Rates and Demographics"
 date: 2020-02-22
 classes: wide
 header:
-  image: "/images/stats/worldwide.jpg"
+  image: "/images/stats/connected-world.png"
 excerpt: "KNN, Data Visualization, Data Exploration and Analysis"
 ---
 
