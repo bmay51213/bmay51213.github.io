@@ -38,67 +38,11 @@ Basic R packages were loaded and data was read into a dataframe.
 
 The dataset was analyzed using R and general descriptive statistics computed.  As above, the countries of interest were United States, United Kingdom, France, Germany, and South Africa.  The dataset was initially analyzed by suicide rates by age bracket, sex, year, population, suicide rate, total country GDP, and GDP per Capita.
 
-```r
-suicideData1 <- fread("Suicide_Dataset.csv")
-as.numeric(gsub(",","",suicideData1$total_gdp))
-suicideData2 <- suicideData1 %>% dplyr::select(-"HDI for year") %>% dplyr::select(-"generation") %>% dplyr::select(-"country-year") %>% filter(country %in% c("United States", "United Kingdom", "France", "Germany", "South Africa")) %>% rename(total_gdp = `gdp_for_year ($)`) %>% rename(gdp_per_capita = `gdp_per_capita ($)`) %>% rename(suicide_rate = `suicides/100k pop`)
-suicideData2$total_gdp <- as.numeric(gsub(",","",suicideData2$total_gdp))
-summary(suicideData2)
-
-suicidedata <- suicideData2 %>% dplyr::select(-`suicides_no`, -`population`)
-suicidedata$total_gdp <- as.numeric(gsub(",","",suicidedata$total_gdp))
-
-usonly <- suicideData2 %>% filter(country == "United States")
-df <-head(usonly)
-```
-
 ![png](/images/stats/output1.png)
 
 The years in the dataset range from 1985 to 2015.  Each year is broken down into both male and female genders.  The total number of suicides average was 1086 suicides with a mean suicide rate of 12.573.  The mean GDP per Capita was $30268.
 
 The data was then subset for ages 25-34 age range and split up with a male only dataframe and a female only dataframe for the five countries of interest.
-
-```r
-countrymale <- suicidedata %>% dplyr::select(country, year, sex, age, suicide_rate, total_gdp, gdp_per_capita) %>% filter(country %in% c("United States", "United Kingdom", "Germany", "France", "South Africa"), age == "25-34 years", sex == "male")
-countrymalesuiciderate <- countrymale$suicide_rate
-countrymalegdpcapita <- countrymale$gdp_per_capita
-countrymalevar <-countrymale$country
-
-countryfemale <- suicidedata %>% dplyr::select(country, year, sex, age, suicide_rate, total_gdp, gdp_per_capita) %>% filter(country %in% c("United States", "United Kingdom", "Germany", "France", "South Africa"), age == "25-34 years", sex == "female")
-countryfemalesuiciderate <- countryfemale$suicide_rate
-countryfemalegdpcapita <- countryfemale$gdp_per_capita
-countryfemalevar <- countryfemale$country
-
-usdata <- suicidedata %>% filter(country == "United States", age == "25-34 years")
-usyear <- usdata$year
-ussuiciderate <- usdata$suicide_rate
-usgdpcapita <- usdata$gdp_per_capita
-ustotgdp <- usdata$total_gdp
-
-ukdata <- suicidedata %>% filter(country == "United Kingdom", age == "25-34 years")
-ukyear <- ukdata$year
-uksuiciderate <- ukdata$suicide_rate
-ukgdpcapita <- ukdata$gdp_per_capita
-uktotgdp <- ukdata$total_gdp
-
-germanydata <- suicidedata %>% filter(country == "Germany", age == "25-34 years")
-germanyyear <- germanydata$year
-germanysuiciderate <- germanydata$suicide_rate
-germanygdpcapita <- germanydata$gdp_per_capita
-germanytotgdp <- germanydata$total_gdp
-
-francedata <- suicidedata %>% filter(country == "France", age == "25-34 years")
-franceyear <- francedata$year
-francesuiciderate <- francedata$suicide_rate
-francegdpcapita <- francedata$gdp_per_capita
-francetotgdp <- francedata$total_gdp
-
-safdata <- suicidedata %>% filter(country == "South Africa", age == "25-34 years")
-safyear <- safdata$year
-safsuiciderate <- safdata$suicide_rate
-safgdpcapita <- safdata$gdp_per_capita
-saftotgdp <- safdata$total_gdp
-```
 
 For initial analysis, the data was separated into five different datasets based on our countries of interest.  Histograms of suicide rate separated by gender were plotted for our five different countries are shown below.
 
@@ -123,7 +67,7 @@ There appears to be a significant contrast between male and female suicide rates
 
 Since our histograms appear non-normally distributed based on our histograms and color-coded for gender and have a small sample size since our data is a summary based on year and country, kendall correlation will be used to determine correlations between suicide rate and GDP per capita and country total GDP.  While the GDP and GDP per capita may be very similar, I sought to analyze the relationship between GDP as an indicator of country wealth as opposed to the GDP per individual person.
 
-Of these values computed, the only statistically significant correlations are between france suicide rate and gdp per capita, germany suicide rate and gdp per capita, and between france and germany's suicide rate and total gdp.  These correlations are negative indicating that as GDP decreases (whether that be per capita or total), suicide rate tends to increase.  The highest R^2 values of the correlation between the five countries appears to be France with R^2 of 0.1342 between suicide rate and GDP per capita and with an R^2 of 0.1359 between suicide rate and total GDP.
+Of these values computed, the only statistically significant correlations are between France's suicide rate and gdp per capita, Germany's suicide rate and gdp per capita, and between france and germany's suicide rate and total gdp.  These correlations are negative indicating that as GDP decreases (whether that be per capita or total), suicide rate tends to increase.  The highest R^2 values of the correlation between the five countries appears to be France with R^2 of 0.1342 between suicide rate and GDP per capita and with an R^2 of 0.1359 between suicide rate and total GDP.
 
 Interestingly enough, the South Africa correlations between suicide rate and GDP/GDP per capita shows that as GDP per capita and Total GDP increase, the suicide rate increases.
 
@@ -147,7 +91,7 @@ ggplot(safdata, aes(x = year, y = suicide_rate, col = sex)) + geom_line() + geom
 
 #### GDP Per Capita and Suicide Rates Separated By Country and Gender
 
-Next GDP per Capita and suicide rates were plotted by gender and separated by the five different countries.
+Next, GDP per Capita and suicide rates were plotted by gender and separated by the five different countries.
 
 ```r
 ggplot(usdata, aes(x = gdp_per_capita, y = suicide_rate, col = sex)) + geom_line() + geom_point() + ggtitle("Plot of Suicide Rate Predicted By GDP Per Capita For US") + xlab("GDP Per Capita ($)") + ylab("Suicide Rate per 100,000 People")
@@ -175,7 +119,7 @@ ggplot(countryfemale, aes(x = year, y = suicide_rate, col = country)) + geom_lin
 ![png](/images/stats/000003 (4).png)![png](/images/stats/000005 (4).png)
 
 
-For the male gender looking at suicide rates between the five different countries, this graph makes it clearer that suicide rates France, UK, and Germany have have a net downward trend with the France suicide rate decreasing the most.  The US suicide rate initially declined and then has increased over recent years.  The UK suicide rate for males increased in the 2000s and then has settled down to its suicide rate similar to what it was in the 1980s.  The South Africa suicide rate for males also appears to be more or less stable.  The US most recently has the highest current suicide rate followed by France, Germany, UK, and then South Africa.  
+For the male gender looking at suicide rates between the five different countries, this graph makes it clearer that suicide rates France, UK, and Germany have a net downward trend with the France suicide rate decreasing the most.  The US suicide rate initially declined and then has increased over recent years.  The UK suicide rate for males increased in the 2000s and then has settled down to its suicide rate similar to what it was in the 1980s.  The South Africa suicide rate for males also appears to be more or less stable.  The US most recently has the highest current suicide rate followed by France, Germany, UK, and then South Africa.  
 
 
 For the female gender looking at suicide rates between the five different countries, this graph once again makes it clearer that suicide rates for females have a downward trend for France and Germany.  The South Africa and UK suicide rates appears approximately stable.  However, of more concern is the rise in suicide rates in females in the US.  Once again though, relatively speaking, the female suicide rates for all five countries are lower than the male suicide rate.  While looking at South Africa though, the difference is quite small (on the order of 1-2 people per 100,000).
@@ -188,6 +132,8 @@ Since most of these graphs appear to show a linear relationship so we will start
 Since the relationships on the above graphs appear linear, I started off with linear regression analyses and multiple regression and then checked for outliers and influential cases.
 
 Using these models outlier and influential cases were examined.  There were no statistically significant relationships between GDP and suicide rate for the US, UK, Germany, or South Africa.  However, when adding in gender to our models, there was a statistically significant correlation between these variables with a high R^2 value.  Furthermore, using a 95% confidence interval, none of the values crossed zero which is reassuring.  The residual standard errors decreased for all five countries when added to the models. ANOVA between both models for each country showed that adding gender to the models significantly improved the fit of the model as compared to just GDP per capita.
+
+__Note: Full regression analysis information is in the GitHub repository under the R Markdown project documents.__
 
 #### Outlier Assessment and Influential Cases
 
@@ -202,68 +148,6 @@ However, the plots seemed to suggest that for our five different models, they vi
 When the data was segmented into both male and female genders and compared across all five countries, the models illustrated a statistically significant relationship between country, gender, and GDP as predictors of the suicide rate.  All of the residual standard errors are lower when adding in all of the other countries with the highest R^2 value being for the male dataset with a value of 0.913 compared with the R^2 of the female dataset with a value of 0.845.
 
 #### Segmenting the Data Into Age Ranges for Each Country and gender
-
-```r
-usdata1<- suicidedata %>% filter(country == "United States", sex == "male")
-ussuiciderate1 <- usdata1$suicide_rate
-
-
-ukdata1<- suicidedata %>% filter(country == "United Kingdom", sex == "male")
-uksuiciderate1 <- ukdata1$suicide_rate
-
-
-francedata1<- suicidedata %>% filter(country == "France", sex == "male")
-francesuiciderate1 <- francedata1$suicide_rate
-
-
-germanydata1<- suicidedata %>% filter(country == "Germany", sex == "male")
-germanysuiciderate1 <- germanydata1$suicide_rate
-
-
-safdata1<- suicidedata %>% filter(country == "South Africa", sex == "male")
-safsuiciderate1 <- safdata1$suicide_rate
-
-
-usdata2<- suicidedata %>% filter(country == "United States", sex == "female")
-ussuiciderate2 <- usdata2$suicide_rate
-
-
-ukdata2<- suicidedata %>% filter(country == "United Kingdom", sex == "female")
-uksuiciderate2 <- ukdata2$suicide_rate
-
-
-francedata2<- suicidedata %>% filter(country == "France", sex == "female")
-francesuiciderate2 <- francedata2$suicide_rate
-
-
-germanydata2<- suicidedata %>% filter(country == "Germany", sex == "female")
-germanysuiciderate2 <- germanydata2$suicide_rate
-
-
-safdata2<- suicidedata %>% filter(country == "South Africa", sex == "female")
-safsuiciderate2 <- safdata2$suicide_rate
-
-
-ggplot(usdata1, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Male US Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(ukdata1, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Male United Kingdom Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(francedata1, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() +  ggtitle("Plot of Male France Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(germanydata1, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Male Germany Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(safdata1, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() +  ggtitle("Plot of Male South Africa Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(usdata2, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Female US Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(ukdata2, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Female United Kingdom Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(francedata2, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Female France Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(germanydata2, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Female Germany Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-
-ggplot(safdata2, aes(x = year, y = suicide_rate, col = age)) + geom_line() + geom_point() + ggtitle("Plot of Female South Africa Suicide Rate by Year and Age") + xlab("Year") + ylab("Suicide Rate per 100,000 People")
-```
 
 ![png](/images/stats/000003 (5).png)![png](/images/stats/000005 (5).png)![png](/images/stats/000007 (5).png)![png](/images/stats/000009 (5).png)![png](/images/stats/000015 (5).png)![png](/images/stats/00000d (5).png)![png](/images/stats/00000f (5).png)![png](/images/stats/000011 (5).png)![png](/images/stats/000013 (5).png)![png](/images/stats/000015 (5).png)
 
@@ -387,3 +271,5 @@ The data here based on these limited variables in this collated dataset appear t
 There are so many different factors that play into a country’s suicide rate based on a variety of different factors including socioeconomics, gender, health status, mental health status, etc.  There may be problems with multicollinearity and confounding factors between all of these variables.  A way to improve this project and analysis would be to look at each specific country looking at specific demographic risk factors, potentially even demographic factors regarding the people who have committed suicide.  Correlating these data together may be helpful.  These data are merely summaries and I believe are meant to draw further insight into other avenues to pursue for future analysis.
 
 Suicide affects us on a personal, national, and international scale.  Deriving further insight from the summary data collected in this analysis can hopefully identify trends and other variables that may influence suicide as an outcome.  It is my hope that someday we can use these data to develop predictive models and accuracy to identify those that are at highest risk of suicide to intervene before it is too late.
+
+__For full code of the project, please refer to my GitHub repository under Applied Data Science.__

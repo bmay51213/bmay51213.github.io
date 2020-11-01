@@ -10,7 +10,7 @@ excerpt: "Logistic Regression, SVM, KNN, Random Forest, XGBoost"
 
 Cardiovascular disease is still an important cause of morbidity and mortality worldwide.  Heart failure, which is an inability for the heart to pump blood efficiency can easily be fatal and diagnosis can be challenging.  While traditional machine learning has not been extensively used in clinical medicine outside of academic research environments, there are many different applications of this.  
 
-Heart failure can be particularly devastating and caused by a wide variety of different clinical entities and many times, the cause is unknown.  Certain therapies have been shown to improve outcomes in heart failure but is there a way to better detect mortality from heart failure to perhaps increase monitoring and intensify management of heart failure patients?  This is the goal of this machine learning project.
+Heart failure can be particularly devastating and caused by a wide variety of different clinical entities and many times, the cause is unknown.  Certain therapies have been shown to improve outcomes in heart failure but is there a way to better detect mortality from heart failure to perhaps increase monitoring and intensify management of heart failure patients?  
 
 __Dataset Description:__
 
@@ -29,248 +29,7 @@ Chicco, D., & Jurman, G. (2020). Machine learning can predict survival of patien
 
 # Data Cleaning, Exploration, and Analysis
 
-The data was loaded into Python and cleaned for further exploratory data analysis.
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>TIME</th>
-      <th>Event</th>
-      <th>Gender</th>
-      <th>Smoking</th>
-      <th>Diabetes</th>
-      <th>BP</th>
-      <th>Anaemia</th>
-      <th>Age</th>
-      <th>Ejection.Fraction</th>
-      <th>Sodium</th>
-      <th>Creatinine</th>
-      <th>Pletelets</th>
-      <th>CPK</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>97</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>43.0</td>
-      <td>50</td>
-      <td>135</td>
-      <td>1.30</td>
-      <td>237000.00</td>
-      <td>358</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>180</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>73.0</td>
-      <td>30</td>
-      <td>142</td>
-      <td>1.18</td>
-      <td>160000.00</td>
-      <td>231</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>31</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>70.0</td>
-      <td>20</td>
-      <td>134</td>
-      <td>1.83</td>
-      <td>263358.03</td>
-      <td>582</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>87</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>65.0</td>
-      <td>25</td>
-      <td>141</td>
-      <td>1.10</td>
-      <td>298000.00</td>
-      <td>305</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>113</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>64.0</td>
-      <td>60</td>
-      <td>137</td>
-      <td>1.00</td>
-      <td>242000.00</td>
-      <td>1610</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>294</th>
-      <td>250</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>45.0</td>
-      <td>55</td>
-      <td>132</td>
-      <td>1.00</td>
-      <td>543000.00</td>
-      <td>582</td>
-    </tr>
-    <tr>
-      <th>295</th>
-      <td>244</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>51.0</td>
-      <td>40</td>
-      <td>134</td>
-      <td>0.90</td>
-      <td>221000.00</td>
-      <td>582</td>
-    </tr>
-    <tr>
-      <th>296</th>
-      <td>14</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>45.0</td>
-      <td>14</td>
-      <td>127</td>
-      <td>0.80</td>
-      <td>166000.00</td>
-      <td>582</td>
-    </tr>
-    <tr>
-      <th>297</th>
-      <td>80</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>60.0</td>
-      <td>45</td>
-      <td>133</td>
-      <td>1.00</td>
-      <td>297000.00</td>
-      <td>897</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>16</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>65.0</td>
-      <td>25</td>
-      <td>137</td>
-      <td>1.30</td>
-      <td>276000.00</td>
-      <td>52</td>
-    </tr>
-  </tbody>
-</table>
-<p>299 rows × 13 columns</p>
-</div>
-
-
-
-
-```python
-df.isnull().values.any()
-```
-
-
-
-
-    False
-
-There are no missing values in the dataset.
-
-Some of the data columns were misspelled and they were renamed and recoded for simplicity.
-
-```python
-#Renaming Columns for Simplicity
-
-df = df.rename(columns={"TIME": "Time", "Anaemia": "Anemia", "Ejection.Fraction": "EF", "Pletelets": "Platelets"})
-df
-```
-
-
-
+The data was loaded into Python and cleaned for further exploratory data analysis.  Columns were renamed and Python was queried for any null values, of which there were none.
 
 <div>
 <style scoped>
@@ -487,8 +246,6 @@ df
 <p>299 rows × 13 columns</p>
 </div>
 
-
-
 ### Description of the Variables
 
 The variables and data types are listed below.  The variables were coded into Python to account for categorical values.
@@ -520,11 +277,6 @@ __Platelets:__ Float (mg/dL)
 __CPK:__ Integer
 
 A descriptive analysis was performed on the numerical variables as well as the target variable.
-
-```python
-print('Description of Numerical Categories')
-df.describe()
-```
 
     Description of Numerical Categories
 
@@ -650,11 +402,6 @@ The numerical variables have some interesting descriptive statistics.  The lowes
 Looking at the means, the mean follow-up time was 130 days, age 60, EF of 38%, sodium of 136, creatinine of 1.39 (slightly elevated), 263K platelets (which is normal), and CPK of 481.
 
 
-```python
-print('Description of Categorical Variables')
-df.describe(include=['category'])
-```
-
     Description of Categorical Variables
 
 
@@ -731,16 +478,7 @@ df.describe(include=['category'])
 
 Based on the categorical variables, more patients were alive, male, non-smokers, non-diabetic, non-anemic, and with normal blood pressure.
 
-To eliminate redundant variables, a correlation analysis was performed to identify correlations with an absolute value of >0.95.
-
-```python
-#Searching for High Correlations
-corr_matrix = df.corr()
-corr_matrix
-```
-
-
-
+To eliminate redundant variables, a correlation analysis and a correlation plot was generated to identify correlations with an absolute value of >0.95.
 
 <div>
 <style scoped>
@@ -845,34 +583,12 @@ corr_matrix
 </div>
 
 
-
-
-```python
-#Displaying Heat Map
-plt.rcParams['figure.figsize'] = (5,5)
-
-#Importing Seaborn
-import seaborn as sns
-
-sns.heatmap(corr_matrix)
-plt.show()
-```
-
-
 ![png](/images/heartfailure/output_15_0.png)
 
 
 Based on the numerical values as well as the correlation map, there do not appear to be any highly correlated variables.
 
 The distribution of the variables was then visualized after splitting up the numerical and categorical data.
-
-```python
-#Creating Dataset with Categorical Only and Numerical Only
-
-df_cat = df.drop(columns=['Time', 'Age', 'EF', 'Sodium', 'Creatinine', 'Platelets', 'CPK'])
-df_num = df.drop(columns=['Event', 'Gender', 'Smoking', 'Diabetes', 'BP', 'Anemia'])
-```
-
 
 ```python
 #Visualizing Numerical Data
@@ -1263,47 +979,7 @@ print('Classification Report:\n', classification_report(test, predictions), '\n'
        macro avg       0.64      0.63      0.63        60
     weighted avg       0.69      0.70      0.69        60
 
-
-
-
-
-```python
-#Hyperparameter Tuning for KNN Using GridSearch CV
-
-param_dist = {"leaf_size": list(range(1,50)),
-             "n_neighbors": list(range(1,30)),
-             "p": [1,2]}
-
-#Using GridSearch Object
-clf = GridSearchCV(knn, param_dist, cv=10, n_jobs = -1)
-best_model = clf.fit(features_standardized, target)
-
-print('Best Leaf Size:', best_model.best_estimator_.get_params()['leaf_size'])
-print('Best p:', best_model.best_estimator_.get_params()['p'])
-print('Best n_neighbors:', best_model.best_estimator_.get_params()['n_neighbors'])
-print('Best Metric:', best_model.best_estimator_.get_params()['metric'])
-print('Best Weights:', best_model.best_estimator_.get_params()['weights'])
-```
-
-    Best Leaf Size: 1
-    Best p: 2
-    Best n_neighbors: 5
-    Best Metric: minkowski
-    Best Weights: uniform
-
-
-
-```python
-#Running New Tuned Model and Evaluating Metrics
-knn_best = KNeighborsClassifier(n_neighbors = 5, p = 1, leaf_size = 1, metric = "minkowski", weights= "uniform", n_jobs = -1)
-knn_best.fit(features_train, target_train)
-target_pred = knn_best.predict(features_test)
-test = np.array(target_test).argmax(axis=1)
-predictions = np.array(target_pred).argmax(axis=1)
-print("Confusion Matrix:\n", confusion_matrix(test, predictions),'\n')
-print("Classification Report:\n", classification_report(test, predictions))
-
-```
+The optimized hyperparameters for KNN were a leaf size of 1, p of 2, n_neighbors of 5, and using uniform weights and the Minkowski metric.  The model was re-run with the tuned model.
 
     Confusion Matrix:
      [[36  5]
@@ -1435,7 +1111,7 @@ viz.show()
 
 ![png](/images/heartfailure/output_41_0.png)
 
-This model performed quite well.  It had only 4 false negatives and an F1 score of 0.70 for predicting death, and 0.884 for predicting survival.  The ROC was 0.90 for both classes.
+This model performed quite well.  It had only 5 false negatives and an F1 score of 0.645 for predicting death, and 0.876 for predicting survival.  The ROC was 0.91 for both classes.
 
 It is interesting that in this model, the ensemble method put a high weight on follow-up time.  Creatinine, EF, CPK, Age, Platelets, and Sodium levels were all highly important.  Gender was less important in this model.  This result is interesting in that EF is directly tied to prognosis in heart failure patients and sodium level can be indicative of fluid balance.  Abnormal sodium levels can indicate worsening heart failure symptoms, so this makes medical sense.
 
@@ -1491,11 +1167,11 @@ viz.show()
 
 ![png](/images/heartfailure/output_45_0.png)
 
-This model also performed quite well.  There were only 4 false negatives.  The F1 score for predicting death was 0.769 and predicting survival was 0.889.  The ROC was 0.92.  Feature importance showed a similar result to the Random Forest method showing that time of follow-up, creatinine, EF, female gender, age, and sodium level were all important among several others.
+This model also performed quite well.  There were only 7 false negatives.  The F1 score for predicting death was 0.683 and predicting survival was 0.835.  The ROC was 0.88.  Feature importance showed a similar result to the Random Forest method showing that time of follow-up, creatinine, EF, female gender, age, and sodium level were all important among several others.
 
 ## Conclusions
 
-Heart failure is a very deadly disease.  Even 20 years ago, this diagnosis would be a death sentence.  There have been significant pharmacologic advancements in recent years which have improved survival.  Those with heart failure can have hospital admissions for fluid overload, trouble breathing, and even other cardiac events.  However, heart failure survival is still dependent upon the severity of the symptoms and other objective measurements as well as early diagnosis and treatment (Colucci, 2019).  Therefore, it is timely that we may be able to utilize machine learning algorithms to help better predict death.  Perhaps if we can predict a higher risk of death based on severity of various lab measurements and other risk factors, there could be an intensification of therapy and/or aggressive follow-up and monitoring to ensure adequate care and prolonged symptom-free survival.
+Heart failure is a very deadly disease.  Even 20 years ago, this diagnosis would be a death sentence.  There have been significant pharmacologic advancements in recent years which have improved survival.  Those with heart failure can have hospital admissions for fluid overload, trouble breathing, and even other cardiac events.  However, heart failure survival is still dependent upon the severity of the symptoms and other objective measurements as well as early diagnosis and treatment.  Therefore, it is timely that we may be able to utilize machine learning algorithms to help better predict death.  Perhaps if we can predict a higher risk of death based on severity of various lab measurements and other risk factors, there could be an intensification of therapy and/or aggressive follow-up and monitoring to ensure adequate care and prolonged symptom-free survival.
 
 It is not a significant surprise that the Random Forest and XG Boost models performed the best based on ROC and F1 scores.  The Random Forest managed to edge out the XG Boost performance by a small margin.  Since both of these are ensemble methods, they have multiple algorithms that are being evaluated and the prediction is then confirmed using a majority vote option.  Which model to use is somewhat arbitrary given their largely similar results.
 
@@ -1504,3 +1180,5 @@ In this population of patients, there were significantly more people alive than 
 Finally, it is fascinating that the machine learning algorithms all seemed to agree on certain variables that relatively more important to the prediction.  The majority of them noted age, creatinine, CPK, and female gender to have more predictive power.  The ensemble methods picked up on more of the traditional variables of sodium, ejection fraction, among others.  Many of these variables are already medically validated as related to heart failure prognosis.  The machine learning algorithms, at least based on this dataset, agreed with these factors.  These factors do differ slightly based on the different algorithms used but many of the algorithms picked out similar important variables.
 
 This dataset is smaller and has a small number of patients.  This is partly due to the low numbers of heart failure overall.  This is a limitation on the predictive power.  Much larger datasets would be necessary among a large patient demographic to apply to the general population.  This does continue to show that machine learning can aid healthcare workers and providers in clinical management.
+
+__For full code of the project, please refer to my GitHub repository under Applied Data Science.__
