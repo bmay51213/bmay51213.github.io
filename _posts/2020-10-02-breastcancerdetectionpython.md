@@ -1,5 +1,5 @@
 ---
-title: "Detection of Breast Cancer of Biopsy Specimens Using Machine Learning"
+title: "Detection of Breast Cancer In Biopsy Specimens Using Machine Learning"
 date: 2020-10-02
 classes: wide
 header:
@@ -19,7 +19,9 @@ Therefore, the question remains, can machine learning help us predict malignant 
 
 __Dataset Description:__
 
-The data is from the University of California - Irvine Machine Learning Repository and can be found here:  [https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
+The data is from the University of California - Irvine Machine Learning Repository and can be found here:  
+
+[https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
 
 This data was collected at the University of Wisconsin in 1995.  The file is in a csv format in which microscopic images of Fine Needle Aspirates (a type of biopsy) of suspicious breast tissue was digitized.  There are a total of 32 variables with 570 subjects.  They were examining suspicious masses in those without evidence of metastasis (distant spread of cancer to other parts of the body).
 
@@ -27,24 +29,7 @@ After data cleaning, exploration, and analysis, the data will be fit and predict
 
 # Data Cleaning, Exploration, and Analysis
 
-
-```python
-#Loading Basic Packages
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-#Silencing Warnings
-import warnings
-warnings.filterwarnings('ignore')
-
-#Importing Dataset and Viewing It
-df = pd.read_csv('breast_cancer.csv')
-df
-```
-
-
-
+The dataframe is included below:
 
 <div>
 <style scoped>
@@ -358,25 +343,6 @@ df
 </div>
 
 
-
-
-```python
-#Checking for Missing Values
-df.isnull().values.any()
-```
-
-
-
-
-    False
-
-
-The target variable is categorical and is coded as M for malignant and B for benign.  There are no missing data in the CSV file.  There are case identifiers but other demographic information such as age, co-morbidities, and family history are not available.  All of the variables were coded correctly into Python.
-
-The variables examined include measurements of digitized images on both cell size and shape.  These were already identified as either benign or malignant.  The data aims to determine if these specific characteristics can be used to predict whether a tumor was malignant or benign.
-
-The case identifiers and time variables were dropped from the dataset and descriptive analysis was performed.
-
 ### Description of the Variables
 
 __Id:__ Number signifying unique samples (Integer)
@@ -444,17 +410,11 @@ __Symmetry_worst:__ Worst measurement of cell symmetry (Float)
 __Fractal_dimension_worst:__ Worst measurement of fractal dimension (Float)
 
 
-```python
-#Describing Dataset
-print('Dataset Descriptive Statistics for Numerical Variables')
-df.describe()
-```
+The target variable is categorical and is coded as M for malignant and B for benign.  There are no missing data in the CSV file.  There are case identifiers but other demographic information such as age, co-morbidities, and family history are not available.  All of the variables were coded correctly into Python.
 
-    Dataset Descriptive Statistics for Numerical Variables
+The variables examined include measurements of digitized images on both cell size and shape.  These were already identified as either benign or malignant.  The data aims to determine if these specific characteristics can be used to predict whether a tumor was malignant or benign.
 
-
-
-
+The case identifiers and time variables were dropped from the dataset and descriptive analysis was performed of the numeric values.
 
 <div>
 <style scoped>
@@ -695,20 +655,7 @@ df.describe()
 <p>8 rows × 30 columns</p>
 </div>
 
-
-
-
-```python
-#Dataset Description for Categorical Variable
-print('Dataset Descriptive Statistics for Categorical Variable')
-df.describe(include=['O'])
-```
-
-    Dataset Descriptive Statistics for Categorical Variable
-
-
-
-
+Descriptive statistics of the categorical variables were calculated.
 
 <div>
 <style scoped>
@@ -752,9 +699,7 @@ df.describe(include=['O'])
 </table>
 </div>
 
-
-
-The most common value was benign diagnoses of the categorical target variable.  Next step is to eliminate highly correlated variables from the dataset.
+The most common value was benign diagnoses of the categorical target variable.  Highly correlated variables were then identified.
 
 
 ```python
@@ -888,152 +833,7 @@ Our target variable has approximately 150 more benign samples than malignant sam
 
 While these values are skewed which could affect the model, the outliers could also be possibly correlated with more malignant disease.  I will not transform these skewed values to be as accurate as possible.
 
-
-```python
-#Comparing Target Variable with our Explanatory Variables
-
-#Setting Parameters
-categories = df.diagnosis
-
-sns.swarmplot(categories, df.radius_mean)
-plt.title('Diagnosis vs. Mean Radius')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.texture_mean)
-plt.title('Diagnosis vs. Mean Texture')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.smoothness_mean)
-plt.title('Diagnosis vs. Mean Smoothness')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.compactness_mean)
-plt.title('Diagnosis vs. Mean Compactness')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.concavity_mean)
-plt.title('Diagnosis vs. Mean Concavity')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.concavepoints_mean)
-plt.title('Diagnosis vs. Mean Concave Points')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.symmetry_mean)
-plt.title('Diagnosis vs. Mean Symmetry')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.fractal_dimension_mean)
-plt.title('Diagnosis vs. Mean Fractal Dimension')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.radius_se)
-plt.title('Diagnosis vs. Radius S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.texture_se)
-plt.title('Diagnosis vs. Texture S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.smoothness_se)
-plt.title('Diagnosis vs. Smoothness S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.compactness_se)
-plt.title('Diagnosis vs. Compactness S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.concavity_se)
-plt.title('Diagnosis vs. Concavity S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.concavepoints_se)
-plt.title('Diagnosis vs. Concave Points S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.symmetry_se)
-plt.title('Diagnosis vs. Symmetry S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.fractal_dimension_se)
-plt.title('Diagnosis vs. Fractal Dimension S.E.')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.texture_worst)
-plt.title('Diagnosis vs. Worst Texture')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.smoothness_worst)
-plt.title('Diagnosis vs. Worst Smoothness')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.compactness_worst)
-plt.title('Diagnosis vs. Worst Compactness')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.concavity_worst)
-plt.title('Diagnosis vs. Worst Concavity')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.concavepoints_worst)
-plt.title('Diagnosis vs. Worst Concave Points')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.symmetry_worst)
-plt.title('Diagnosis vs. Worst Symmetry')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-
-sns.swarmplot(categories, df.fractal_dimension_worst)
-plt.title('Diagnosis vs. Worst Fractal Dimension')
-plt.xlabel(xlabel = None)
-plt.ylabel(ylabel = None)
-plt.show()
-```
-
+Using swarm plots, the numeric variables were compared with the target diagnosis of benign or malignant.
 
 ![png](/images/breastcancer/output_25_0.png)
 
@@ -1049,90 +849,31 @@ plt.show()
 
 ![png](/images/breastcancer/output_25_3.png)
 
-
-
-![png](/images/breastcancer/output_25_4.png)
-
-
-
-![png](/images/breastcancer/output_25_5.png)
-
-
-
-![png](/images/breastcancer/output_25_6.png)
-
-
-
-![png](/images/breastcancer/output_25_7.png)
-
-
-
-![png](/images/breastcancer/output_25_8.png)
-
-
-
-![png](/images/breastcancer/output_25_9.png)
-
-
-
-![png](/images/breastcancer/output_25_10.png)
-
-
+In general, the mean values for many of the predictor variables tended to be higher with malignant diagnoses versus benign diagnoses.
 
 ![png](/images/breastcancer/output_25_11.png)
 
 
-
-![png](/images/breastcancer/output_25_12.png)
-
-
-
-![png](/images/breastcancer/output_25_13.png)
-
-
-
 ![png](/images/breastcancer/output_25_14.png)
 
-
-
-![png](/images/breastcancer/output_25_15.png)
-
-
+The standard error values for the predictors tended to be equivalent between the malignant and benign diagnoses.
 
 ![png](/images/breastcancer/output_25_16.png)
-
-
-
-![png](/images/breastcancer/output_25_17.png)
-
 
 
 ![png](/images/breastcancer/output_25_18.png)
 
 
-
 ![png](/images/breastcancer/output_25_19.png)
-
 
 
 ![png](/images/breastcancer/output_25_20.png)
 
-
-
-![png](/images/breastcancer/output_25_21.png)
-
-
-
-![png](/images/breastcancer/output_25_22.png)
-
-
-Looking at the comparisons of our predictor variables vs. their diagnosis of malignant or benign, there are several interesting factors.  While there were some outliers, I still will keep these in the datasets for now.  In general, the malignant tumors seemed to have higher worst symmetry scores, worst concave points, worst concavity, worst compactness, and texture worst values.
-
-In general, the mean values for many of the predictor variables tended to be higher with malignant diagnoses versus benign diagnoses.  Further, the worst values for the predictor variables also tended to be higher with malignant diagnoses versus benign diagnoses.  The standard error values for the predictors tended to be equivalent between the malignant and benign diagnoses.
+The malignant tumors seemed to have higher worst texture, compactness, concavity, and concave points.
 
 ## Machine Learning Fitting and Prediction
 
-In general, the goal of these machine learning algorithms wouuld be to eliminate false negatives as much as possible.  For example, we would not want our models to predict a benign diagnosis when a cancer was present.  This would be devastating.  While false positives (predicting cancer when it is benign) would be quite distressing, it would not be fatal as a missed cancer diagnosis was.  The algorithms will be judged on this ability as well as Precision, Recall, and F1 scores.
+In general, the goal of these machine learning algorithms wouuld be to eliminate false negatives as much as possible.  For example, we would not want our models to predict a benign diagnosis when a cancer was present.  This would be devastating.  While false positives (predicting cancer when it is benign) would be quite distressing, it would not be fatal as a missed cancer diagnosis would be.  The algorithms will be judged on this ability as well as Precision, Recall, and F1 scores.
 
 ### Logistic Regression
 
@@ -1215,6 +956,7 @@ It is not surprising that the radius mean and standard error values were highly 
 
 ### K Nearest Neighbors
 
+First the data was fit on the KNN model and then the hyperparameters were optimized.
 
 ```python
 #Running KNN To Predict Malignant or Benign
@@ -1264,31 +1006,7 @@ print("Classification Report:\n", classification_report(test, predictions))
     weighted avg       0.91      0.91      0.91       114
 
 
-
-
-```python
-#Hyperparameter Tuning for KNN Using GridSearch CV
-
-#Creating Hyperparameter Grid
-param_dist1 = {"leaf_size": list(range(1,50)),
-              "n_neighbors": list(range(1,30)),
-              "p": [1,2]}
-
-#Creating New KNN Object
-knn_2 = KNeighborsClassifier()
-
-#Using GridSearch Object
-clf = GridSearchCV(knn_2, param_dist1, cv=10, n_jobs = -1)
-
-#Fitting Model
-best_model = clf.fit(features_standardized, target)
-
-print('Best Leaf Size:', best_model.best_estimator_.get_params()['leaf_size'])
-print('Best p:', best_model.best_estimator_.get_params()['p'])
-print('Best n_neighbors:', best_model.best_estimator_.get_params()['n_neighbors'])
-print('Best Metric:', best_model.best_estimator_.get_params()['metric'])
-print('Best Weights:', best_model.best_estimator_.get_params()['weights'])#Runin
-```
+Using the following hyperparameters, the KNN model was re-run.
 
     Best Leaf Size: 1
     Best p: 1
@@ -1296,33 +1014,6 @@ print('Best Weights:', best_model.best_estimator_.get_params()['weights'])#Runin
     Best Metric: minkowski
     Best Weights: uniform
 
-
-
-```python
-#Rerunning KNN Using Our Tuned Parameters
-
-#Creating Standardizer
-standardizer = StandardScaler()
-
-#Standardizing Features
-features_standardized = standardizer.fit_transform(features)
-
-#Train/Teset 80/20 Split
-features_train, features_test, target_train, target_test = train_test_split(features_standardized, target, test_size = 0.2, random_state = 1)
-
-#Creating KNN Object With K of 3 Before Hyperparameter Tuning
-knn = KNeighborsClassifier(n_neighbors = 7, p = 1, leaf_size = 1, metric = "minkowski", weights = "uniform", n_jobs = -1)
-
-#Fitting Classifier on Training Data
-knn.fit(features_train, target_train)
-
-#Creating Confusion Matrix/Classification Report
-target_pred = knn.predict(features_test)
-test = np.array(target_test).argmax(axis=1)
-predictions = np.array(target_pred).argmax(axis=1)
-print("Confusion Matrix:\n", confusion_matrix(test, predictions),'\n')
-print("Classification Report:\n", classification_report(test, predictions))
-```
 
     Confusion Matrix:
      [[70  2]
@@ -1342,7 +1033,7 @@ print("Classification Report:\n", classification_report(test, predictions))
 
 Feature importance was not done on the KNN model since it is not directly applicable to this algorithm.  However, this model performed worse than the logistic regression model with F1-scores of 0.94 for benign lesions and 0.89 for malignant lesions.  There were also 7 false negatives, which is much higher than the Logistic Regression model.
 
-### Random Forest Algorithm
+### Random Forest Classifier
 
 
 ```python
@@ -1421,8 +1112,6 @@ The F1 scores for the Logistic Regression model were the highest of the 3 models
 
 Limitations of this dataset include older data as well as limited data points.  Further projects would require thousands, perhaps millions of more current data points.  Healthcare demographics as well as cancer diagnosis and treatment standards of care change rapidly so current data is paramount.
 
-This project demonstrates that machine learning could be potentially useful as an adjunct to standard patient care.  The goal is not to replace doctors; on the contrary, doctors are required to be on the forefront treating patients and are still experts in the field.  However, the goal should be to use machine learning models as an adjunct to flag potentially high-risk findings that should be further investigated before disregarding.  This could be something as simple as the model indicating that there are several highly suspicious features of malignancy and have a physician review for final diagnosis to either concur or dispute that result.  Outcome improvement is paramount; a healthcare system must strive to deliver the best quality care as possible.  This is a basic tenet of treating patients and this project suggests that machine learning could potentially help healthcare workers improve outcomes and make patient’s lives better.
+This project demonstrates that machine learning could be potentially useful as an adjunct to standard patient care.  The goal should be to use machine learning models as an adjunct to flag potentially high-risk findings that should be further investigated before disregarding.  This could be something as simple as the model indicating that there are several highly suspicious features of malignancy and have a physician review for final diagnosis to either concur or dispute that result.  Outcome improvement is paramount; a healthcare system must strive to deliver the best quality care as possible.  This is a basic tenet of treating patients and this project suggests that machine learning could be beneficial.
 
 __For full code of the project, please refer to my GitHub repository under Applied Data Science.__
-
-```

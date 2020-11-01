@@ -7,8 +7,6 @@ header:
 excerpt: "Predictive Analytics, KNN, Decision Tree, Random Forest"
 ---
 
-#Problem Background:
-
 This project is divided into two parts.  The first part was an R-based portion for exploratory data analysis.  This is the second part utilizing Python machine learning algorithms.
 
 Neonatal mortality rates have remained steady for the last several years and continue to be a concern in the United States and despite medical advances, there has not been much progress in affecting neonatal outcomes.  This trend is worrisome.  One way of ensuring fetal well-being is via external fetal cardiotocography which measures the heart rate of the infant.  Certain findings during labor are reassuring while others are indicative of possible fetal distress.  
@@ -23,27 +21,9 @@ There were two different types of target variables included in this dataset.  Th
 
 The purpose of this portion is for model fitting and prediction of the data.
 
-#Data Cleaning:
+# Data Cleaning:
 
 The data was loaded into Python and null values were removed.  Below is a description of the variables for review.
-
-```python
-#Loading Our Dataset
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-#Loading Dataset
-df = pd.read_excel("Fetal Monitoring.xls", sheet_name = "Raw Data").dropna()
-
-#Dropping Identifiers
-df = df.drop(columns = "FileName")
-df = df.drop(columns = "Date")
-df = df.drop(columns = "SegFile")
-
-#Viewing Dataframe
-df
-```
 
 <div>
 <style scoped>
@@ -628,33 +608,15 @@ NSP = Fetal State Class Code (Normal = 1, Suspect = 2, Pathologic = 3)
 
 The datatypes were encoded to adequately consider the categorical variables in the dataset.
 
-```python
-#Re-coding Categorical Variables
-df['NSP'] = df['NSP'].astype('category')
-df['Tendency'] = df['Tendency'].astype('category')
-df['A'] = df['A'].astype('category')
-df['B'] = df['B'].astype('category')
-df['C'] = df['C'].astype('category')
-df['D'] = df['D'].astype('category')
-df['E'] = df['E'].astype('category')
-df['AD'] = df['AD'].astype('category')
-df['DE'] = df['DE'].astype('category')
-df['LD'] = df['LD'].astype('category')
-df['SUSP'] = df['SUSP'].astype('category')
-df['CLASS'] = df['CLASS'].astype('category')
+In the R portion of this project, high levels of correlation were found between the b and e variables, the expert and automated determination of fetal heart rate, and finally mode, mean, and median variables were all highly correlated with one another.
 
+In this dataset, there is a 10 label multi-class target as well as the 3 label multi-class target variable.  I will be using the 3 label multi-class target variable for my target.__
 
+The target variables is NSP which classifies the FHR as Normal, Suspect, or Pathologic.
 
-__In the R portion of this project, high levels of correlation were found between the b and e variables, the expert and automated determination of fetal heart rate, and finally mode, mean, and median variables were all highly correlated with one another.__
+However, I will first include the 10 label target variables as predictors to see if this increases model performance after hyperparameter tuning and then I will do this without the 10 class variables to see if the performance is better or worse.
 
-__In this dataset, there is a 10 label multi-class target as well as the 3 label multi-class target variable.  I will be using the 3 label multi-class target variable for my target.__  
-
-__The target variables is NSP which classifies the FHR as Normal, Suspect, or Pathologic.__
-
-__However, I will first include the 10 label target variables as predictors to see if this increases model performance after hyperparameter tuning and then I will do this without the 10 class variables to see if the performance is better or worse.__
-
-__I plan on checking K Nearest Neighbors, Decision Tree, and Random Forest algorithms to determine the best model.__
-
+I plan on checking K Nearest Neighbors, Decision Tree, and Random Forest algorithms to determine the best model.
 
 ```python
 #Checking Features for High Correlations With Correlation >
@@ -669,33 +631,9 @@ to_drop = [column for column in upper.columns if any(upper[column] >0.90)]
 to_drop
 ```
 
-
-
-
     ['e', 'LB', 'Median']
 
-
-
-
-```python
-#Dropping Columns with High Correlations >0.90
-#I will actually drop LBE since this is the expert determined variable.  We want to test the applicability of the SIS Porto system so we will
-#keep the LB (automated) one.
-
-#Dropping 'LB' from our Dataframe
-df = df.drop(columns = 'LBE')
-df = df.drop(columns = 'e')
-df = df.drop(columns = 'Median')
-```
-
-
-```python
-pd.set_option('display.max_columns', 500)
-df
-```
-
-
-
+The e, LB, and Median variables were all highly correlated and droped from the dataframe.
 
 <div>
 <style scoped>
@@ -1161,11 +1099,15 @@ df
     </tr>
   </tbody>
 </table>
-<p>2126 rows × 34 columns</p>
+
 </div>
 
 
+# Predictive Model Training and Fitting
 
+## KNN
+
+First, the KNN model was trained and evaluated.
 
 ```python
 #Setting Up Features and Target Variables
@@ -1229,6 +1171,7 @@ print(classification_report(test0, predictions0))
 
 
 
+The hyperparameters were then optimized and tuned for best accuracy.
 
 ```python
 #Hyperparameter Tuning for KNN Using Grid Search CV
@@ -1261,42 +1204,10 @@ print('Best Weights:', best_model.best_estimator_.get_params()['weights'])
     Best Weights: uniform
 
 
+The best leaf size was 1, p was 1, n_neighbors of 3, using minkowski metrics, and uniform weights.
 
-```python
-#Checking Best KNN Model Using Leaf Size of 1, P of 1, and Best Neighbors of 3, Uniform Weights
+The model was re-run using the hyperparameters and classification report was obtained.
 
-#Setting Up Features and Target Variables
-target = df['NSP']
-features = df.loc[:, df.columns != 'NSP']
-
-#Getting Dummy Variables for our categorical variables
-target = pd.get_dummies(target)
-features = pd.get_dummies(features)
-
-#Create Standardizer
-standardizer = StandardScaler()
-
-#Standardize Features
-features_standardized = standardizer.fit_transform(features)
-
-#Train/Test 80/20 Split
-features_train, features_test, target_train, target_test = train_test_split(features_standardized, target, test_size = 0.2, random_state = 1)
-
-#Creating Classifier with K of 3
-knn = KNeighborsClassifier(n_neighbors = 3, n_jobs = -1, p = 1, leaf_size = 1, weights = "uniform", metric = "minkowski")
-
-#Fitting Classifier on Trianing Data
-knn.fit(features_train, target_train)
-
-#Printing Classification Report
-target_pred = knn.predict(features_test)
-test0 = np.array(target_test).argmax(axis = 1)
-predictions0 = np.array(target_pred).argmax(axis = 1)
-print(confusion_matrix(test0, predictions0))
-
-#Printing Classification Report
-print(classification_report(test0, predictions0))
-```
 
     [[326   0   0]
      [  2  66   0]
@@ -1312,7 +1223,9 @@ print(classification_report(test0, predictions0))
     weighted avg       0.99      0.99      0.99       426
 
 
+## Decision Tree classification
 
+The data was then trained and fit using a Decision Tree classifier.
 
 ```python
 #Fitting Data On Decision Tree Algorithm
@@ -1363,36 +1276,7 @@ print(classification_report(test1, predictions1))
     weighted avg       0.99      0.99      0.99       426
 
 
-
-
-```python
-#Hyperparameter Tuning for Decision Tree
-
-#Creating Hyperparameter Grid
-param_dist = {"max_depth": [3, None],
-             "criterion": ["gini", "entropy"]}
-
-tree_cv = RandomizedSearchCV(dt, param_dist, cv = 10)
-
-tree_cv.fit(features_train1, target_train1)
-
-print("Tuned Decision Tree Parameters: {}".format(tree_cv.best_estimator_))
-print("Best Score is {}".format(tree_cv.best_score_))
-```
-
-    C:\Users\blmay\Anaconda3\lib\site-packages\sklearn\model_selection\_search.py:266: UserWarning: The total space of parameters 4 is smaller than n_iter=10. Running 4 iterations. For exhaustive searches, use GridSearchCV.
-      % (grid_size, self.n_iter, grid_size), UserWarning)
-
-
-    Tuned Decision Tree Parameters: DecisionTreeClassifier(class_weight=None, criterion='entropy', max_depth=None,
-                           max_features=None, max_leaf_nodes=None,
-                           min_impurity_decrease=0.0, min_impurity_split=None,
-                           min_samples_leaf=1, min_samples_split=2,
-                           min_weight_fraction_leaf=0.0, presort=False,
-                           random_state=1, splitter='best')
-    Best Score is 0.9847058823529412
-
-
+The hyperparameters were optimized for best accuracy and the model was re-run using these parameters.
 
 ```python
 #Fitting New DT Algorithm on Tuned Hyperparameters
@@ -1440,8 +1324,12 @@ print(classification_report(test1, predictions1))
 
 
 
+## Random Forest Classifier
+
+Finally, the data was trained and evaluated based on a Random Forest Classifier.
 
 ```python
+
 #Fitting Data on Random Forest Algorithm
 
 #Importing Packages
@@ -1493,127 +1381,7 @@ print(classification_report(test2, predictions2))
     weighted avg       0.99      0.99      0.99       426
 
 
-
-
-```python
-#Hyperparameter Tuning for Random Forest Algorithm
-
-#Number of tress in Random Forest
-n_estimators = [int(x) for x in np.linspace(start = 100, stop = 2000, num = 10)]
-
-#Number of Features to Consider At Each Split
-max_features = ['auto', 'sqrt']
-
-#Maximum Number of Levels in Tree
-max_depth = [int(x) for x in np.linspace(10, 110, num = 11)]
-max_depth.append(None)
-
-#Minimum Number of Samples Required At Each Leaf
-min_samples_split = [2,5,10]
-
-#Minimum Number of Samles Required at Each Leaf Node
-min_samples_leaf = [1,2,4]
-
-#Method of Selecting Samples for Training Each Tree
-bootstrap = [True, False]
-
-#Create Random Grid
-random_grid = {'n_estimators': n_estimators,
-              'max_features': max_features,
-              'max_depth': max_depth,
-              'min_samples_split': min_samples_split,
-              'min_samples_leaf': min_samples_leaf,
-              'bootstrap': bootstrap}
-
-#Using Random Grid to Search for Best Hyperparameters
-
-rf_random1 = RandomForestClassifier()
-
-rf_random2 = RandomizedSearchCV(estimator = rf_random1, param_distributions = random_grid, n_iter = 100, cv = 10, verbose = 2, random_state = 1, n_jobs = -1)
-
-#Fitting the Model
-rf_random2.fit(features, target)
-```
-
-    Fitting 10 folds for each of 100 candidates, totalling 1000 fits
-
-
-    [Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-    [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    5.3s
-    [Parallel(n_jobs=-1)]: Done 138 tasks      | elapsed:   31.4s
-    [Parallel(n_jobs=-1)]: Done 341 tasks      | elapsed:  1.5min
-    [Parallel(n_jobs=-1)]: Done 624 tasks      | elapsed:  2.8min
-    [Parallel(n_jobs=-1)]: Done 1000 out of 1000 | elapsed:  4.6min finished
-
-
-
-
-
-    RandomizedSearchCV(cv=10, error_score='raise-deprecating',
-                       estimator=RandomForestClassifier(bootstrap=True,
-                                                        class_weight=None,
-                                                        criterion='gini',
-                                                        max_depth=None,
-                                                        max_features='auto',
-                                                        max_leaf_nodes=None,
-                                                        min_impurity_decrease=0.0,
-                                                        min_impurity_split=None,
-                                                        min_samples_leaf=1,
-                                                        min_samples_split=2,
-                                                        min_weight_fraction_leaf=0.0,
-                                                        n_estimators='warn',
-                                                        n_jobs=None,
-                                                        oob_s...
-                       iid='warn', n_iter=100, n_jobs=-1,
-                       param_distributions={'bootstrap': [True, False],
-                                            'max_depth': [10, 20, 30, 40, 50, 60,
-                                                          70, 80, 90, 100, 110,
-                                                          None],
-                                            'max_features': ['auto', 'sqrt'],
-                                            'min_samples_leaf': [1, 2, 4],
-                                            'min_samples_split': [2, 5, 10],
-                                            'n_estimators': [100, 311, 522, 733,
-                                                             944, 1155, 1366, 1577,
-                                                             1788, 2000]},
-                       pre_dispatch='2*n_jobs', random_state=1, refit=True,
-                       return_train_score=False, scoring=None, verbose=2)
-
-
-
-
-```python
-#Running New RFC with New Hyperparameters
-
-#Setting Up Features and Target Variables
-target = df['NSP']
-features = df.loc[:, df.columns != 'NSP']
-
-#Train/Test Splitting with 80/20 Split
-features_train2, features_test2, target_train2, target_test2 = train_test_split(features, target, test_size = 0.2, random_state = 1)
-
-#Creating RFC Model
-model = RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
-                       max_depth=None, max_features='auto', max_leaf_nodes=None,
-                       min_impurity_decrease=0.0, min_impurity_split=None,
-                       min_samples_leaf=1, min_samples_split=2,
-                       min_weight_fraction_leaf=0.0, n_estimators=100,
-                       n_jobs=None, oob_score=False, random_state=1, verbose=0,
-                       warm_start=False)
-
-#Fitting Training Data
-model.fit(features_train2, target_train2)
-
-#Checking Predictions
-rf_predictions = model.predict(features_test2)
-
-#Generating Confusion Matrix
-test2 = np.array(target_test2)
-predictions2 = np.array(rf_predictions)
-print(confusion_matrix(test2, predictions2))
-
-#Classification Report
-print(classification_report(test2, predictions2))
-```
+The hyperparameters were once again tuned for best accuracy and the model was re-run.
 
     [[326   0   0]
      [  2  66   0]
@@ -1629,46 +1397,13 @@ print(classification_report(test2, predictions2))
     weighted avg       0.99      0.99      0.99       426
 
 
+## Removing 10-Class Predictor Using KNN, Decision Tree, and Random Forest Classifiers
 
+The three algorithms were then evaluated with the 10-point categorical predictors removed to see if this hindered or helped accuracy.
 
-```python
-#Running KNN With Our Other Target Variables Eliminated A, B, C, D, E, AD, DE, LD, FS, SUSP, CLASS
-df = df.drop(columns = ['A', 'B', 'C', 'D', 'E', 'AD', 'DE', 'LD', 'FS', 'SUSP', 'CLASS'])
-```
+## KNN Results
 
-
-```python
-#Setting New Features and Target and Checking KNN
-target_new = df['NSP']
-features_new = df.loc[:, df.columns != 'NSP']
-
-#Getting Dummy Variables for our categorical variables
-target_new = pd.get_dummies(target_new)
-features_new = pd.get_dummies(features_new)
-
-#Create Standardizer
-standardizer = StandardScaler()
-
-#Standardize Features
-features_standardized = standardizer.fit_transform(features_new)
-
-#Train/Test 80/20 Split
-features_train, features_test, target_train, target_test = train_test_split(features_standardized, target_new, test_size = 0.2, random_state = 1)
-
-#Creating Classifier
-knn = KNeighborsClassifier(n_neighbors = 3, leaf_size = 1, p = 1, n_jobs = -1)
-
-#Fitting Classifier on Trianing Data
-knn.fit(features_train, target_train)
-
-target_pred = knn.predict(features_test)
-test0 = np.array(target_test).argmax(axis = 1)
-predictions0 = np.array(target_pred).argmax(axis = 1)
-print(confusion_matrix(test0, predictions0))
-
-#Printing Classification Report for KNN
-print(classification_report(test0, predictions0))
-```
+__Before Hyperparameter Tuning:__
 
     [[319   6   1]
      [ 23  40   5]
@@ -1683,75 +1418,7 @@ print(classification_report(test0, predictions0))
        macro avg       0.81      0.72      0.76       426
     weighted avg       0.88      0.89      0.88       426
 
-
-
-
-```python
-#Hyperparameter Tuning for KNN Using Grid Search CV With the 10 Predictors Removed
-
-#Creating Hyperparameter Grid
-param_dist1 = {"leaf_size": list(range(1,50)),
-              "n_neighbors": list(range(1,30)),
-              "p": [1,2]}
-
-#Create New KNN Object
-knn_2 = KNeighborsClassifier()
-
-#Use Gridsearch
-clf = GridSearchCV(knn_2, param_dist1, cv=10, n_jobs=-1)
-
-#Fit Model
-best_model = clf.fit(features_standardized, target)
-
-print('Best Leaf Size:', best_model.best_estimator_.get_params()['leaf_size'])
-print('Best p:', best_model.best_estimator_.get_params()['p'])
-print('Best n_neighbors:', best_model.best_estimator_.get_params()['n_neighbors'])
-print('Best Metric:', best_model.best_estimator_.get_params()['metric'])
-print('Best Weights:', best_model.best_estimator_.get_params()['weights'])
-```
-
-    Best Leaf Size: 1
-    Best p: 2
-    Best n_neighbors: 20
-    Best Metric: minkowski
-    Best Weights: uniform
-
-
-
-```python
-#Doing KNN Using Hyperparameters Found Above
-
-#Setting New Features and Target and Checking KNN
-target_new = df['NSP']
-features_new = df.loc[:, df.columns != 'NSP']
-
-#Getting Dummy Variables for our categorical variables
-target_new = pd.get_dummies(target_new)
-features_new = pd.get_dummies(features_new)
-
-#Create Standardizer
-standardizer = StandardScaler()
-
-#Standardize Features
-features_standardized = standardizer.fit_transform(features_new)
-
-#Train/Test 80/20 Split
-features_train, features_test, target_train, target_test = train_test_split(features_standardized, target_new, test_size = 0.2, random_state = 1)
-
-#Creating Classifier
-knn = KNeighborsClassifier(n_neighbors = 20, leaf_size = 1, p = 2, metric = "minkowski", weights = "uniform", n_jobs = -1)
-
-#Fitting Classifier on Trianing Data
-knn.fit(features_train, target_train)
-
-target_pred = knn.predict(features_test)
-test0 = np.array(target_test).argmax(axis = 1)
-predictions0 = np.array(target_pred).argmax(axis = 1)
-print(confusion_matrix(test0, predictions0))
-
-#Printing Classification Report for KNN
-print(classification_report(test0, predictions0))
-```
+__After Hyper-Parameter Tuning:__
 
     [[321   5   0]
      [ 32  35   1]
@@ -1768,38 +1435,11 @@ print(classification_report(test0, predictions0))
 
 
 
-__Based on the results here, the model actually performed worse by the F1-score, even when using hyperparameter tuning, when removing the other 10-class predictors to be used as prediction for our target variable__
+Based on the results here, the model actually performed worse by the F1-score, even when using hyperparameter tuning, when removing the other 10-class predictors to be used as prediction for our target variable
 
+## Decision Tree Classifier
 
-```python
-#Fitting Data On Decision Tree Algorithm
-
-#Setting Up Features and Target Variables
-target_new_1 = df['NSP']
-features_new_1 = df.loc[:, df.columns != 'NSP']
-
-#Getting Dummy Variables for our categorical variables
-target_new = pd.get_dummies(target_new_1)
-features_new = pd.get_dummies(features_new_1)
-
-#Train/Test Splitting with 80/20 Split
-features_train11, features_test11, target_train11, target_test11 = train_test_split(features_new_1, target_new_1, test_size = 0.2, random_state = 1)
-
-#Instantiating Decision Tree Classifier
-dt = DecisionTreeClassifier()
-dt.fit(features_train11, target_train11)
-
-#Setting Target Prediction Variable Based on Features Test
-target_pred1 = dt.predict(features_test11)
-
-#Generating Confusion Matrix
-test11 = np.array(target_test11)
-predictions11 = np.array(target_pred1)
-print(confusion_matrix(test11, predictions11))
-
-#Classification Report for Decision Tree
-print(classification_report(test11, predictions11))
-```
+__Before Hyperparameter Tuning:__
 
     [[308  17   1]
      [ 16  46   6]
@@ -1814,72 +1454,7 @@ print(classification_report(test11, predictions11))
        macro avg       0.82      0.84      0.83       426
     weighted avg       0.90      0.90      0.90       426
 
-
-
-
-```python
-#Hyperparameter Tuning Using New Dataset
-
-#Creating Hyperparameter Grid
-param_dist = {"max_depth": [3, None],
-             "criterion": ["gini", "entropy"]}
-
-tree_cv = RandomizedSearchCV(dt, param_dist, cv = 10)
-
-tree_cv.fit(features_train11, target_train11)
-
-print("Tuned Decision Tree Parameters: {}".format(tree_cv.best_estimator_))
-print("Best Score is {}".format(tree_cv.best_score_))
-```
-
-    C:\Users\blmay\Anaconda3\lib\site-packages\sklearn\model_selection\_search.py:266: UserWarning: The total space of parameters 4 is smaller than n_iter=10. Running 4 iterations. For exhaustive searches, use GridSearchCV.
-      % (grid_size, self.n_iter, grid_size), UserWarning)
-
-
-    Tuned Decision Tree Parameters: DecisionTreeClassifier(class_weight=None, criterion='entropy', max_depth=None,
-                           max_features=None, max_leaf_nodes=None,
-                           min_impurity_decrease=0.0, min_impurity_split=None,
-                           min_samples_leaf=1, min_samples_split=2,
-                           min_weight_fraction_leaf=0.0, presort=False,
-                           random_state=None, splitter='best')
-    Best Score is 0.9335294117647058
-
-
-
-```python
-#Fitting Data On Decision Tree Algorithm With Hyperparameters Specified
-
-#Setting Up Features and Target Variables
-target_new_1 = df['NSP']
-features_new_1 = df.loc[:, df.columns != 'NSP']
-
-#Getting Dummy Variables for our categorical variables
-target_new = pd.get_dummies(target_new_1)
-features_new = pd.get_dummies(features_new_1)
-
-#Train/Test Splitting with 80/20 Split
-features_train11, features_test11, target_train11, target_test11 = train_test_split(features_new_1, target_new_1, test_size = 0.2, random_state = 1)
-
-#Instantiating Decision Tree Classifier
-dt = DecisionTreeClassifier(class_weight=None, criterion='entropy', max_depth=None,
-                       max_features=None, max_leaf_nodes=None,
-                       min_impurity_decrease=0.0, min_impurity_split=None,
-                       min_samples_leaf=1, min_samples_split=2,
-                       min_weight_fraction_leaf=0.0, presort=False,
-                       random_state=None, splitter='best')
-dt.fit(features_train11, target_train11)
-
-#Setting Target Prediction Variable Based on Features Test
-target_pred1 = dt.predict(features_test11)
-
-#Generating Confusion Matrix
-test11 = np.array(target_test11)
-predictions11 = np.array(target_pred1)
-print(confusion_matrix(test11, predictions11))
-
-#Classification Report for Decision Tree
-print(classification_report(test11, predictions11))
-```
+__Before Hyperparameter Tuning:__
 
     [[314  10   2]
      [ 16  47   5]
@@ -1896,40 +1471,11 @@ print(classification_report(test11, predictions11))
 
 
 
-__Based on removing the 10 point classifier as predictors, the Decision Tree did perform worse though with the hyperparameter tuning that was used before, the model had fairly positive results except for the Suspect class with a lower F1 score as compared to Normal and Pathologic categories__
+Based on removing the 10 point classifier as predictors, the Decision Tree did perform worse though with the hyperparameter tuning that was used before, the model had fairly positive results except for the Suspect class with a lower F1 score as compared to Normal and Pathologic categories
 
+## Random Forest Classifiers
 
-```python
-#Running Random Forest Algorithm on New Dataset
-
-#Setting Up Features and Target Variables
-target_new_2 = df['NSP']
-features_new_2 = df.loc[:, df.columns != 'NSP']
-
-#Getting Dummy Variables for our categorical variables
-target_new_2 = pd.get_dummies(target_new_2)
-features_new_2 = pd.get_dummies(features_new_2)
-
-#Train/Test Splitting with 80/20 Split
-features_train22, features_test22, target_train22, target_test22 = train_test_split(features_new_2, target_new_2, test_size = 0.2, random_state = 1)
-
-#Creating RFC Model
-rf = RandomForestClassifier()
-
-#Fitting Training Data
-rf.fit(features_train22, target_train22)
-
-#Checking Predictions
-rf_predictions1 = rf.predict(features_test22)
-
-#Generating Confusion Matrix
-test22 = np.array(target_test22)
-predictions22 = np.array(rf_predictions1)
-print(confusion_matrix(test22.argmax(axis=1), predictions22.argmax(axis=1)))
-
-#Classification Report
-print(classification_report(test22, predictions22))
-```
+__Before Hyperparameter Tuning:__
 
     [[325   0   1]
      [ 20  45   3]
@@ -1946,141 +1492,8 @@ print(classification_report(test22, predictions22))
      samples avg       0.92      0.92      0.92       426
 
 
+__After Hyperparameter Tuning:__
 
-    C:\Users\blmay\Anaconda3\lib\site-packages\sklearn\ensemble\forest.py:245: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-      "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-    C:\Users\blmay\Anaconda3\lib\site-packages\sklearn\metrics\classification.py:1437: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels.
-      'precision', 'predicted', average, warn_for)
-
-
-
-```python
-#Hyperparameter Tuning for Random Forest Algorithm with the New Dataset
-
-#Number of tress in Random Forest
-n_estimators = [int(x) for x in np.linspace(start = 100, stop = 2000, num = 10)]
-
-#Number of Features to Consider At Each Split
-max_features = ['auto', 'sqrt']
-
-#Maximum Number of Levels in Tree
-max_depth = [int(x) for x in np.linspace(10, 110, num = 11)]
-max_depth.append(None)
-
-#Minimum Number of Samples Required At Each Leaf
-min_samples_split = [2,5,10]
-
-#Minimum Number of Samles Required at Each Leaf Node
-min_samples_leaf = [1,2,4]
-
-#Method of Selecting Samples for Training Each Tree
-bootstrap = [True, False]
-
-#Create Random Grid
-random_grid = {'n_estimators': n_estimators,
-              'max_features': max_features,
-              'max_depth': max_depth,
-              'min_samples_split': min_samples_split,
-              'min_samples_leaf': min_samples_leaf,
-              'bootstrap': bootstrap}
-
-#Using Random Grid to Search for Best Hyperparameters
-
-rf_random1 = RandomForestClassifier()
-
-rf_random2 = RandomizedSearchCV(estimator = rf_random1, param_distributions = random_grid, n_iter = 100, cv = 10, verbose = 2, random_state = 1, n_jobs = -1)
-
-#Fitting the Model
-rf_random2.fit(features_train22, target_train22)
-```
-
-    Fitting 10 folds for each of 100 candidates, totalling 1000 fits
-
-
-    [Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-    [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    6.4s
-    [Parallel(n_jobs=-1)]: Done 138 tasks      | elapsed:   39.3s
-    [Parallel(n_jobs=-1)]: Done 341 tasks      | elapsed:  1.8min
-    [Parallel(n_jobs=-1)]: Done 624 tasks      | elapsed:  3.4min
-    [Parallel(n_jobs=-1)]: Done 1000 out of 1000 | elapsed:  5.5min finished
-
-
-
-
-
-    RandomizedSearchCV(cv=10, error_score='raise-deprecating',
-                       estimator=RandomForestClassifier(bootstrap=True,
-                                                        class_weight=None,
-                                                        criterion='gini',
-                                                        max_depth=None,
-                                                        max_features='auto',
-                                                        max_leaf_nodes=None,
-                                                        min_impurity_decrease=0.0,
-                                                        min_impurity_split=None,
-                                                        min_samples_leaf=1,
-                                                        min_samples_split=2,
-                                                        min_weight_fraction_leaf=0.0,
-                                                        n_estimators='warn',
-                                                        n_jobs=None,
-                                                        oob_s...
-                       iid='warn', n_iter=100, n_jobs=-1,
-                       param_distributions={'bootstrap': [True, False],
-                                            'max_depth': [10, 20, 30, 40, 50, 60,
-                                                          70, 80, 90, 100, 110,
-                                                          None],
-                                            'max_features': ['auto', 'sqrt'],
-                                            'min_samples_leaf': [1, 2, 4],
-                                            'min_samples_split': [2, 5, 10],
-                                            'n_estimators': [100, 311, 522, 733,
-                                                             944, 1155, 1366, 1577,
-                                                             1788, 2000]},
-                       pre_dispatch='2*n_jobs', random_state=1, refit=True,
-                       return_train_score=False, scoring=None, verbose=2)
-
-
-
-
-```python
-#Running Random Forest Algorithm on New Dataset with Tuned Hyperparameters
-
-#Setting Up Features and Target Variables
-target_new_2 = df['NSP']
-features_new_2 = df.loc[:, df.columns != 'NSP']
-
-#Getting Dummy Variables for our categorical variables
-target_new_2 = pd.get_dummies(target_new_2)
-features_new_2 = pd.get_dummies(features_new_2)
-
-#Train/Test Splitting with 80/20 Split
-features_train22, features_test22, target_train22, target_test22 = train_test_split(features_new_2, target_new_2, test_size = 0.2, random_state = 1)
-
-#Creating RFC Model
-rf = RandomForestClassifier(bootstrap=True, class_weight='balanced',
-                                                    criterion='gini',
-                                                    max_depth=None,
-                                                    max_features='auto',
-                                                    max_leaf_nodes=None,
-                                                    min_impurity_decrease=0.0,
-                                                    min_impurity_split=None,
-                                                    min_samples_leaf=1,
-                                                    min_samples_split=2,
-                                                    min_weight_fraction_leaf=0.0,
-                                                    n_estimators=100,
-                                                    n_jobs = -1)
-#Fitting Training Data
-rf.fit(features_train22, target_train22)
-
-#Checking Predictions
-rf_predictions1 = rf.predict(features_test22)
-
-#Generating Confusion Matrix
-test22 = np.array(target_test22)
-predictions22 = np.array(rf_predictions1)
-print(confusion_matrix(test22.argmax(axis=1), predictions22.argmax(axis=1)))
-
-#Classification Report
-print(classification_report(test22, predictions22))
-```
 
     [[324   2   0]
      [ 23  42   3]
@@ -2097,16 +1510,10 @@ print(classification_report(test22, predictions22))
      samples avg       0.92      0.92      0.92       426
 
 
+In this case as well, the Random Forest model did perform worse without the 10 classifier system that was in the model before.
 
-    C:\Users\blmay\Anaconda3\lib\site-packages\sklearn\metrics\classification.py:1437: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels.
-      'precision', 'predicted', average, warn_for)
+Using the results above, both the Random Forest and KNN models performed similarly after hyperparameter tuning and removing the extraneous variables of e, LBE, and Median.  Further the 10 point classification variables used as predictors actually improved the F1, Precision, and Recall scores so those variables should be kept in the model.  One possible explanation is that some of the information in the 10 point classifier could help the algorithm point to a suspect or pathologic pattern and provides more information for the algorithm to make a judgment.
 
+Further model deployment would entail a much larger study population in addition to expert Obstetrician oversight to compare the computerized algorithms determination with known clinical experience.  However, this does indicate that machine learning algorithms could assist clinicians in determining potentially suspect or pathologic patterns.
 
-__In this case as well, the Random Forest model did perform worse without the 10 classifier system that was in the model before.__
-
-__Using the results above, both the Random Forest and KNN models performed similarly after hyperparameter tuning and removing the extraneous variables of e, LBE, and Median.  Further the 10 point classification variables used as predictors actually improved the F1, Precision, and Recall scores so those variables should be kept in the model.__
-
-
-```python
-
-```
+__To view more specifics on the coding and project, please refer to the GitHub repository.__

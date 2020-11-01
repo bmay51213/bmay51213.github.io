@@ -9,7 +9,7 @@ excerpt: "Predictive Analytics, Exploratory Data Analysis"
 
 # Problem Background:
 
-This project is divided into two parts.  The first part is this R-based portion for exploratory data analysis.  The second part is a Python based portion in another post to utilize machine learning algorithms.
+This project is divided into two parts.  The first part is an R-based portion for exploratory data analysis.  The second part is a Python based portion in another post to utilize machine learning algorithms.
 
 Neonatal mortality rates have remained steady for the last several years and continue to be a concern in the United States and despite medical advances, there has not been much progress in affecting neonatal outcomes.  This trend is worrisome.  One way of ensuring fetal well-being is via external fetal cardiotocography which measures the heart rate of the infant.  Certain findings during labor are reassuring while others are indicative of possible fetal distress.  
 
@@ -103,22 +103,7 @@ __NSP__ = Fetal State Class Code (Normal = 1, Suspect = 2, Pathologic = 3)
 
 At the end of the spreadsheet, there were four rows that had null values and we will remove those including the identifier and date columns as they are not needed.
 
-```r
-
-df <- toco %>% select(-FileName, -Date, -SegFile)
-df <- na.omit(df)
-summary(df)
-```
-
 The categorical variables (Tendency, A, B, C, D, AD, DE, LD, FS, SUSP, CLASS, NSP) were recoded in R to ensure they were being handled correctly for descriptive analysis.
-
-```r
-cols = (c("Tendency", "A", "B", "C", "D", "AD", "DE", "LD", "FS", "SUSP", "CLASS", "NSP"))
-
-df[cols] <- lapply(df[cols], factor)
-df$E <- as.factor(df$E)
-str(df)
-```
 
 Next, histograms and bar graphs were plotted to check the distributions of the variables.
 
@@ -171,7 +156,7 @@ After visualizing the distribution of the target variable, the vast majority wer
 
 As can be seen above, the vast majority of the records were read as normal.  However, for prediction, the algorithm will have to be fine-tuned to weigh the target classes appropriately.  If using accuracy solely as a metric, the algorithm would be more likely to be right if it always assumed that the tracing was normal.
 
-Several of the variables appeared positively skewed meaning that there were a larger number of values at the lower end of the x values.  These variables were: Accelerations, Fetal Movement, Mean Time With Abnormal Short-Term Variability, % of time with abnormal long-term variability, mean time with abnormal long-term variability, Light Decelerations, Severe Decelerations, Prolonged Decelerations, and Number of Histogram Peaks and Zeros.  Several are included below.
+Several of the variables appeared positively skewed including the Accelerations, Fetal Movement, Mean Time With Abnormal Short-Term Variability, % of time with abnormal long-term variability, mean time with abnormal long-term variability, Light Decelerations, Severe Decelerations, Prolonged Decelerations, and Number of Histogram Peaks and Zeros variables.  Several are included below.
 
 ![png](/images/predictiveanalytics/000007.png)
 
@@ -197,7 +182,7 @@ A flat sinusoidal pattern is highly suspicious for fetal distress and hypoxia.  
 
 ![png](/images/predictiveanalytics/00003b.png)
 
-Next, we will plan on exploring some bivariate plots to analyze relationships.  One that I am most interested in is the relation between fetal heart rate and the target variable of normal, suspect, or pathologic.
+Next, bivariate plots were used to analyze relationships.  One that I am most interested in is the relation between fetal heart rate and the target variable of normal, suspect, or pathologic.
 
 ```r
 ggplot(df, aes(as.factor(df$NSP), df$b)) + geom_boxplot() + xlab('Classification (1-Normal, 2- Suspect, 3-Pathologic)') + ylab('Starting Measurement Point') + ggtitle('Scatterplot of Tracing Classification and Beginning Measurement')
@@ -239,7 +224,7 @@ On exploratory analysis of the input variables to the target variable of NSP, th
 
 ![png](/images/predictiveanalytics/000043.png)
 
-The data was examined for high levels of correlation between the input variables to look for redundancy.  The categorical variables (almost all of which are the target variables) were excluded.
+The data was examined for high levels of correlation between the input variables to look for redundancy using a correlation plot.  The categorical variables (almost all of which are the target variables) were excluded.
 
 ```r
 library(corrplot)
@@ -250,10 +235,8 @@ corr
 corrplot(corr, method="circle")
 ```
 
-A correlation plot was created to look for high levels of correlation between the input variables and only the numerical variables were included.  
-
 ![png](/images/predictiveanalytics/000003 (1).png)
 
 There appeared to be high levels of correlation between the beginning and ending measurements variable in addition to high levels of correlation between expert and automated determination of fetal heart rate.  Finally, mode, mean, and median variables were all highly correlated with each other based on the histogram values.  These variables will need to be assessed using feature selection to see if simplification will increase predictive accuracy.
 
-Please continued to the next portion of the project using Python.
+__This project is completed in the similarly named Python based project.__

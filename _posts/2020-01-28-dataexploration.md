@@ -10,7 +10,7 @@ excerpt: "Data Exploration and Analysis, Data Visualization, Logistic Regression
 
 Coronary artery disease is one of the most common causes of death for both men and women.  As people age, the incidence of coronary artery disease increases.  Thus, it is important to be able to predict the incidence of heart disease.
 
-This dataset is from the UCI database describing baseline demographic characteristics and heart-related testing data.  The goal was to predict with the variables supplied whether or not heart disease was identified clinically.
+This dataset is from the UCI Machine Learning Repository describing baseline demographic characteristics and heart-related testing data.  The goal was to predict with the variables supplied whether or not heart disease was identified clinically.
 
 __Dataset URL:__
 
@@ -330,7 +330,7 @@ The oldest person in the dataset was 77 and the youngest was 29 years of age wit
 
 The max systolic resting blood pressure on arrival to the hospital was 200 (this is quite high) and the lowest was 94 (on the lower end of normal).  Average systolic BP was 131 which is considered normal.
 
-Max cholesterol reading was 564 (exceedingly high) and the lowest was 71, very low.  Of note, a low total cholesterol around 70 or less can be associated with excess mortality.  The mean cholesterol was 246 which is on the higher end.  Most authorities recommend total cholesterol to be 200 or less.
+Max cholesterol reading was 564, an extremely high value, and the lowest was 71, which is very low.  The mean cholesterol was 246 and most authorities recommend total cholesterol to be 200 or less.
 
 The oldpeak variable is a measure by how much the ST segment became depressed during a stress test.  This is indicative of ischemia or vulnerable heart tissue to a heart attack and the higher the number the worse it is.  In this case, there was 4 mm ST depresion (exceedingly high and worrisome) and the lowest was 0.  The mean value was 1 indicating many people did have some ST Depression.
 
@@ -425,7 +425,7 @@ df.describe(include=['category'])
 
 ### Descriptive Analysis of Categorical Variables
 
-The most common values were males, fasting blood sugars <120, EKG showing ST/T abnormalities.  Most of the participants did not have exercise induced angina or chest pain on stress testing.  Further, the most common value for the target variable was confirmed heart disease.
+The most common values were males, fasting blood sugars <120, with their EKG showing ST/T abnormalities.  Most of the participants did not have exercise induced angina or chest pain on stress testing.  Further, the most common value for the target variable was confirmed heart disease.
 
 ### Visualization of Both Numeric and Categorical Variable Distributions
 
@@ -453,7 +453,7 @@ plt.show()
 ![png](/images/heartdisease/output_16_2.png)
 
 
-Age, Max HR achieved during exercise (thalach) appeared to be negatively skewed with a higher proportion of higher values.  Resting Systolic BP, Cholesterol, ST depression during exercise were more positively skewed.
+Age, Max HR achieved during exercise (thalach) appeared to be negatively skewed.  Resting Systolic BP, Cholesterol, ST depression during exercise were more positively skewed.
 
 
 ```python
@@ -845,7 +845,7 @@ upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(np.boo
 to_drop = [column for column in upper.columns if any (upper[column] > 0.95)]
 ```
 
-There are no highly correlated variables with correlation value > 0.95.
+There are no highly correlated variables with absolute value of correlation > 0.95.
 
 
 ```python
@@ -1033,5 +1033,3 @@ Considering factors traditionally associated with having a higher probability of
 However, this does suggest that logistic regression and other types of machine learning algorithms may be useful in predicting heart disease.
 
 __To see more complete coding and analysis, please refer to my GitHub repository.__
-
-```

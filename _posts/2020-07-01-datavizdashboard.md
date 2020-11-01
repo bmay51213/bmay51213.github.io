@@ -11,7 +11,7 @@ This was a multi-part project broken down into different phases focused on certa
 
 The goal of this project was to use different types of data visualizations to adequately tell the story based on a hypothetical scenario.  In this scenario, there has been consistent negative press after several high profile plane crashes.  The public and media are beginning to question whether airlines are as safe as they have been reported to be.  My job was to analyze the data and use different methods of data visualizations to describe the situation.
 
-Part 1 of this project was to create a sample dashboard using Tableau to describe the situation and key metrics used to highlight the pertinent data, and visualizing the conclusions based on that data.
+Part 1 of this project was to create a sample dashboard using Tableau to describe the situation and key metrics used to highlight the pertinent data and conclusions from that information.
 
 ![png](/images/dataviz/AirlineSafetyDashboard-2.png)
 
