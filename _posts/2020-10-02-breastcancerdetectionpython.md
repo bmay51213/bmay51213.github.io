@@ -3,9 +3,10 @@ title: "Detection of Breast Cancer In Biopsy Specimens Using Machine Learning"
 date: 2020-10-02
 classes: wide
 header:
-  image: "/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png"
 excerpt: "Logistic Regression, KNN, Random Forest"
 ---
+
+![png](/images/breastcancer/1_yjsLGG-U9km84AvWLLmK8A.png)
 
 Breast cancer continues to be a significant culprit of morbidity and mortality, even today with our current medical advances.  The data that this dataset consists of was actually published in a medical journal article and data was collected at the University of Wisconsin (Wolberg, M.D. et al.¸1995). While this source is somewhat dated, my main goal with this project is to demonstrate that machine learning algorithms could be used to assist in cancer detection as adjunct to physician expertise.
 

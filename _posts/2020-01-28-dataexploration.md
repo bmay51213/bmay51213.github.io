@@ -3,10 +3,12 @@ title: "Data Exploration and Analysis of Heart Disease Dataset And Prediction wi
 date: 2020-01-28
 classes: wide
 header:
-  image: "/images/heartdisease/493ss_thinkstock_rf_heart_illustration.jpg"
 excerpt: "Data Exploration and Analysis, Data Visualization, Logistic Regression"
 ---
 
+![png](/images/heartdisease/493ss_thinkstock_rf_heart_illustration.jpg)
+
+## Background:
 
 Coronary artery disease is one of the most common causes of death for both men and women.  As people age, the incidence of coronary artery disease increases.  Thus, it is important to be able to predict the incidence of heart disease.
 

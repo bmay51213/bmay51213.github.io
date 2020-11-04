@@ -3,9 +3,10 @@ title: "The Story About Airline Safety - Part 1 - Dashboard"
 date: 2020-07-01
 classes: wide
 header:
-  image: "/images/GettyImages-1187621904-600x360.jpg"
 excerpt: "Data Visualization, Dashboard, Tableau"
 ---
+
+![png](/images/GettyImages-1187621904-600x360.jpg)
 
 This was a multi-part project broken down into different phases focused on certain types of visualizations.
 

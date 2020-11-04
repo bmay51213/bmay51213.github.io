@@ -3,9 +3,12 @@ title: "Heart Failure Survival Prediction Using Machine Learning"
 date: 2020-10-23
 classes: wide
 header:
-  image: "/images/heartfailure/Picture1.png"
+
 excerpt: "Logistic Regression, SVM, KNN, Random Forest, XGBoost"
 ---
+
+![png](/images/heartfailure/Picture1.png)
+
 ### Project Background:
 
 Cardiovascular disease is still an important cause of morbidity and mortality worldwide.  Heart failure, which is an inability for the heart to pump blood efficiency can easily be fatal and diagnosis can be challenging.  While traditional machine learning has not been extensively used in clinical medicine outside of academic research environments, there are many different applications of this.  

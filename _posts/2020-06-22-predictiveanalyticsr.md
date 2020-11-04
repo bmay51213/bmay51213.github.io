@@ -3,9 +3,10 @@ title: "Using ML to Determine Infant Heart Rate Tracings - R Portion (Part 1)"
 date: 2020-06-22
 classes: wide
 header:
-  image: "/images/predictiveanalytics/Number1.jpg"
 excerpt: "Predictive Analytics, Exploratory Data Analysis"
 ---
+
+![png](/images/predictiveanalytics/Number1.jpg)
 
 # Problem Background:
 

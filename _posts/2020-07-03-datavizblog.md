@@ -3,9 +3,11 @@ title: "The Story About Airline Safety - Part 3 - Blog Post"
 date: 2020-07-03
 classes: wide
 header:
-  image: "/images/GettyImages-1187621904-600x360.jpg"
 excerpt: "Data Visualization, Blog Post"
 ---
+
+![png](/images/GettyImages-1187621904-600x360.jpg)
+
 This was a multi-part project broken down into different phases focused on certain types of visualizations.
 
 The goal of this project was to use different types of data visualizations to adequately tell the story based on a hypothetical scenario.  In this scenario, there has been consistent negative press after several high profile plane crashes.  The public and media are beginning to question whether airlines are as safe as they have been reported to be.  My job was to analyze the data and use different methods of data visualizations to describe the situation.

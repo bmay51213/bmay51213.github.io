@@ -3,9 +3,12 @@ title: "Using ML to Determine Infant Heart Rate Tracings - Python Portion (Part 
 date: 2020-06-23
 classes: wide
 header:
-  image: "/images/predictiveanalytics/Number1.jpg"
 excerpt: "Predictive Analytics, KNN, Decision Tree, Random Forest"
 ---
+
+![png](/images/predictiveanalytics/Number1.jpg)
+
+# Background:
 
 This project is divided into two parts.  The first part was an R-based portion for exploratory data analysis.  This is the second part utilizing Python machine learning algorithms.
 

@@ -3,9 +3,13 @@ title: "Echocardiograms and Survival Prediction After A Heart Attack"
 date: 2020-04-19
 classes: wide
 header:
-  image: "/images/datamining/a-screen-showing-an-echocardiogram.jpg"
 excerpt: "Logistic Regression, SVG, Random Forest Classifier"
 ---
+
+![png](/images/datamining/a-screen-showing-an-echocardiogram.jpg)
+
+## Background:
+
 This dataset is from the UCI database describing characteristics on an echocardiogram after someone sustained a heart attack or MI and their survival after one year.  Echocardiograms, or more simply an ultrasound of the heart, have many different measurements and the purpose of this project was to see if certain measurements or characteristics were predictive of survival at 1 year post-MI.
 
 __Dataset URL:__
