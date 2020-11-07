@@ -35,7 +35,7 @@ Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [http://archive.ic
 
 Note this dataset is completed using the dependencies from ThinkStats2.
 
-To begin with, data was imported using Pandas into a Dataframe.
+The CSV file was imported into a Pandas DataFrame in Jupyter notebook.
 
 <div>
 <style scoped>
@@ -161,6 +161,7 @@ To begin with, data was imported using Pandas into a Dataframe.
 </table>
 </div>
 
+There are 303 different data points as well as 14 separate variables, which includes the target variable.
 
 ### Description of Dataset and Variables: ###
 
@@ -193,9 +194,6 @@ __thal (Measure of Heart Tissue Defects):__ Categorical (3 = Normal, 6 = Fixed D
 __Target:__ Categorical (CAD Presence/Absence) 0 is Absent, 1 is Present - Target Variable
 
 
-There are 303 different data points as well as 14 separate variables, which includes the target variable.
-
-
 ```python
 #Searching for Null Values
 df.isnull().values.any()
@@ -208,7 +206,7 @@ df.isnull().values.any()
 
 
 
-__There are no null values in this dataset.__
+There were no null values in this dataset.
 
 The respective categories were recoded into their proper categorical sub-types and descriptive analysis was performed on the numerical and categorical variables.
 

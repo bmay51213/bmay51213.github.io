@@ -147,7 +147,7 @@ However, the plots seemed to suggest that for our five different models, they vi
 
 When the data was segmented into both male and female genders and compared across all five countries, the models illustrated a statistically significant relationship between country, gender, and GDP as predictors of the suicide rate.  All of the residual standard errors are lower when adding in all of the other countries with the highest R^2 value being for the male dataset with a value of 0.913 compared with the R^2 of the female dataset with a value of 0.845.
 
-#### Segmenting the Data Into Age Ranges for Each Country and gender
+#### Segmenting the Data Into Age Ranges for Each Country and Gender
 
 ![png](/images/stats/000003 (5).png)![png](/images/stats/000005 (5).png)![png](/images/stats/000007 (5).png)![png](/images/stats/000009 (5).png)![png](/images/stats/000015 (5).png)![png](/images/stats/00000d (5).png)![png](/images/stats/00000f (5).png)![png](/images/stats/000011 (5).png)![png](/images/stats/000013 (5).png)![png](/images/stats/000015 (5).png)
 
@@ -260,11 +260,11 @@ These data were collated together using multiple different sources so there coul
 
 A note of caution based on South Africa's data.  First, it does not have reporting as early as some of the countries.  Germany is the same way.  Furthermore, the suicide rates in South Africa are within a very small range between 0 and 1.5 per 100,000 people so the values we get and the changes we see proportionally may not be as large as some of the other countries.
 
-The differences between these graphs present future opportunities for study.  For both men and women, why are Germany and France's suicide rates highest in the 75+ age range category?  Are there possibly cultural or country specific circumstances that could correlate with this finding? why in France, Germany, and the US are 75+ male suicide rates the highest while in the UK it is 35-54 years old?
+The differences between these graphs present future opportunities for study.  For both men and women, why are Germany and France's suicide rates highest in the 75+ age range category?  Are there possibly cultural or country specific circumstances that could correlate with this finding? Why in France, Germany, and the US are 75+ male suicide rates the highest while in the UK it is 35-54 years old?
 
 Why does the female suicide rate at pretty much all age ranges seem to be increasing in the US while male suicide rates appear to have levelled out for most age ranges?
 
-Some of the more interesting information I collected was that male suicide rates for the five countries in question all appear higher than women suicide rates.  This could be due to the fact that in general, males are more likely to successfully commit suicide as opposed to females.  Even more concerning that out of the five countries, the male and female suicide rate is the highest.  Some of the European’s countries including France and Germany had the highest suicide rate in the highest age ranges.  Could this be due to health or economic related factors? For females, the age 35-54 age range seems to have the highest suicide rates for the US and UK while it is 75+ age range for France and Germany.  There is significant variability in the South Africa data where it can be hard to make firm conclusions.  The dataset for France and Germany also seemed to show a net downward trend in suicide rate as years have passed indicating that there may be something further to look into there about any potential legislative or healthcare related changes that could account for this.
+Some of the more interesting information I collected was that male suicide rates for the five countries in question all appear higher than women suicide rates.  This could be due to the fact that in general, males are more likely to successfully commit suicide as opposed to females.  Even more concerning that out of the five countries, the US male and female suicide rate is the highest.  Some of the European’s countries including France and Germany had the highest suicide rate in the highest age ranges.  Could this be due to health or economic related factors? For females, the age 35-54 age range seems to have the highest suicide rates for the US and UK while it is 75+ age range for France and Germany.  There is significant variability in the South Africa data where it can be hard to make firm conclusions.  The dataset for France and Germany also seemed to show a net downward trend in suicide rate as years have passed indicating that there may be something further to look into there about any potential legislative or healthcare related changes that could account for this.
 
 The data here based on these limited variables in this collated dataset appear to violate some of our basic assumptions so generalizing trends or opinions outside of this dataset should be treated with caution.  Using K Nearest Neighbors, we saw that based on different variables, our predictive accuracy is unacceptably low in all circumstances.
 
@@ -272,4 +272,4 @@ There are so many different factors that play into a country’s suicide rate ba
 
 Suicide affects us on a personal, national, and international scale.  Deriving further insight from the summary data collected in this analysis can hopefully identify trends and other variables that may influence suicide as an outcome.  It is my hope that someday we can use these data to develop predictive models and accuracy to identify those that are at highest risk of suicide to intervene before it is too late.
 
-__For full code of the project, please refer to my GitHub repository under Applied Data Science.__
+__For full code of the project, please refer to my GitHub repository under Data Science Statistics.__
