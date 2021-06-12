@@ -14,7 +14,7 @@ __Problem Background:__
 
 It is no secret that our healthcare is cumbersome, overpriced, and our outcomes are unsatisfactory when compared to other peer countries.  In a data-driven world, with the vast amounts of personal health information and data available in electronic health records, the sky is the limit.  Could machine learning algorithms be used to improve diagnosis, save lives, and prevent suffering?  
 
-Breast cancer is the second most common cause of death due to cancer in women.  Using mammograms, women are screened for breast cancer.  Suspicious areas identified radiologically are then biopsied using a wide variety of techniques.  One method is using a fine needle aspirate in which cells from the area in question are extracted and examined under the microscope.  Even with expert analysis, diagnosis of these areas can be challenging.
+Breast cancer is the second most common cause of death due to cancer in women.  Using mammograms, women are screened for breast cancer.  Suspicious areas identified radiologically are then biopsied using a wide variety of techniques.  One method is using a fine needle aspirate in which cells from the area in question are extracted and examined under the microscope.  Even with expert analysis, accurate diagnosis can be challenging.
 
 Therefore, the question remains, can machine learning help us predict malignant tumors as an adjunct to physician expertise?
 
@@ -728,6 +728,8 @@ Given the high rates of correlation of the above variables, we will drop them fr
 
 There were several outliers identified using the interquartile range.  There were various categories where the outliers were identified with a wide variety of variables.  The most common variable where it was noted was compactness.  The majority of these outliers were mostly identified as malignant though there were some benign diagnoses with outliers in the compactness variables.
 
+__Note:  Given the large number of variables, the plots below may be better visualized in the GitHub repository Jupyter notebook.__
+
 ```python
 #Visualizing Outliers Using Boxplots
 
@@ -874,7 +876,7 @@ The malignant tumors seemed to have higher worst texture, compactness, concavity
 
 ## Machine Learning Fitting and Prediction
 
-In general, the goal of these machine learning algorithms wouuld be to eliminate false negatives as much as possible.  For example, we would not want our models to predict a benign diagnosis when a cancer was present.  This would be devastating.  While false positives (predicting cancer when it is benign) would be quite distressing, it would not be fatal as a missed cancer diagnosis would be.  The algorithms will be judged on this ability as well as Precision, Recall, and F1 scores.
+In general, the goal of these machine learning algorithms would be to eliminate false negatives as much as possible.  For example, we would not want our models to predict a benign diagnosis when a cancer was present.  While false positives (predicting cancer when it is benign) would be quite distressing, it would not be as potentially devastating as a missed cancer diagnosis.  The algorithms will be judged on this ability as well as Precision, Recall, and F1 scores.
 
 ### Logistic Regression
 
@@ -953,7 +955,7 @@ viz.show()
 
 Looking at the relative feature importance using the logistic regression model, radius_se, radius_mean, concavepoints_mean, texture/concavepoints/symmetry worst and concavity_mean/worst all had fairly high relative importances based on their coefficients.
 
-It is not surprising that the radius mean and standard error values were highly important in the model since cell size is proportional to malignant cells (generally).  It is also interesting that there were a lot of variables with worst values that were highly important.  This could suggest that the values that are the most abnormal could be associated with predicting malignant or benign lesions.
+It is not surprising that the radius mean and standard error values were highly important in the model since cell size can be proportional to malignant cells.  It is also interesting that there were a lot of variables with worst values that were highly important.  This could suggest that the values that are the most abnormal could be associated with predicting malignant or benign lesions.
 
 ### K Nearest Neighbors
 
@@ -1113,6 +1115,6 @@ The F1 scores for the Logistic Regression model were the highest of the 3 models
 
 Limitations of this dataset include older data as well as limited data points.  Further projects would require thousands, perhaps millions of more current data points.  Healthcare demographics as well as cancer diagnosis and treatment standards of care change rapidly so current data is paramount.
 
-This project demonstrates that machine learning could be potentially useful as an adjunct to standard patient care.  The goal should be to use machine learning models as an adjunct to flag potentially high-risk findings that should be further investigated before disregarding.  This could be something as simple as the model indicating that there are several highly suspicious features of malignancy and have a physician review for final diagnosis to either concur or dispute that result.  Outcome improvement is paramount; a healthcare system must strive to deliver the best quality care as possible.  This is a basic tenet of treating patients and this project suggests that machine learning could be beneficial.
+This project demonstrates that machine learning could be potentially useful as an adjunct to standard patient care.  The goal should be to use machine learning models as an adjunct to flag potentially high-risk findings that should be further investigated before disregarding.  This could be something as simple as the model indicating that there are several highly suspicious features of malignancy and have a physician review for final diagnosis to either concur or dispute that result.
 
 __For full code of the project, please refer to my GitHub repository under Applied Data Science.__

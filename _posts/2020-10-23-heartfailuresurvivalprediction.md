@@ -11,9 +11,9 @@ excerpt: "Logistic Regression, SVM, KNN, Random Forest, XGBoost"
 
 ### Project Background:
 
-Cardiovascular disease is still an important cause of morbidity and mortality worldwide.  Heart failure, which is an inability for the heart to pump blood efficiency can easily be fatal and diagnosis can be challenging.  While traditional machine learning has not been extensively used in clinical medicine outside of academic research environments, there are many different applications of this.  
+Cardiovascular disease is still an important cause of morbidity and mortality worldwide.  Heart failure, which is an inability for the heart to pump blood efficiency, can be fatal and diagnosis challenging.  While traditional machine learning has not been extensively used in clinical medicine outside of academic research environments, there are many different applications of this.  
 
-Heart failure can be particularly devastating and caused by a wide variety of different clinical entities and many times, the cause is unknown.  Certain therapies have been shown to improve outcomes in heart failure but is there a way to better detect mortality from heart failure to perhaps increase monitoring and intensify management of heart failure patients?  
+Heart failure can be particularly devastating and caused by a wide variety of different clinical entities. Many times, the cause is unknown.  Certain therapies have been shown to improve outcomes in heart failure, but is there a way to better detect mortality from heart failure to perhaps increase monitoring and improve management of heart failure patients?  
 
 __Dataset Description:__
 
@@ -23,7 +23,7 @@ The dataset can be found at the following URL:
 
 [https://plos.figshare.com/articles/Survival_analysis_of_heart_failure_patients_A_case_study/5227684/1](https://plos.figshare.com/articles/Survival_analysis_of_heart_failure_patients_A_case_study/5227684/1)
 
-The target variable in the dataset is classified as Event with 1 signifying death in the study.  All subjects in this study were diagnosed with heart failure.  There were otherwise 12 other features to use in the prediction of death including age, gender, smoking status, diabetes, anemia, ejection fraction, sodium level, creatinine, CPK, and platelets.
+The target variable in the dataset is classified as Event with a value of 1 signifying death in the study.  All subjects in this study were diagnosed with heart failure.  There were otherwise 12 other features to use in the prediction of death including age, gender, smoking status, diabetes, anemia, ejection fraction, sodium level, creatinine, CPK, and platelets.
 
 __Reference Cited:__
 
@@ -400,7 +400,7 @@ A descriptive analysis was performed on the numerical variables as well as the t
 </div>
 
 
-The numerical variables have some interesting descriptive statistics.  The lowest age was 40 and the oldest person was 95.  The lowest ejection fraction was 14% and the maximum was 80%.  There was a significantly low sodium value of 113 and a high level of 148.  For reference, normal sodium levels are between 135-145.  The highest creatinine was 9.4 which is exceedingly high approaching renal failure range.  Likewise, the lowest platelets of 25K and the highest were 850000.  CPK, a muscle enzyme, had minimums of 23K with maximum of 7800K.
+The numerical variables have some interesting descriptive statistics.  The lowest age was 40 and the oldest person was 95.  The lowest ejection fraction was 14% and the maximum was 80%.  There was a significantly low sodium value of 113 and a high level of 148.  For reference, normal sodium levels are between 135-145.  The highest creatinine was 9.4 which is exceedingly high.  Likewise, the lowest platelet value was 25K and the highest was 850000.  CPK, a muscle enzyme, had minimums of 23K with maximum of 7800K.
 
 Looking at the means, the mean follow-up time was 130 days, age 60, EF of 38%, sodium of 136, creatinine of 1.39 (slightly elevated), 263K platelets (which is normal), and CPK of 481.
 
@@ -662,7 +662,7 @@ plt.ylabel('Counts')
 plt.show()
 ```
 
-There were almost two times as many alive participants as dead participants in the study.  The majority of the participants were males, non-smokers, non-diabetic, without high blood pressure, and not anemic.
+There were almost two times as many alive participants as dead participants in the study.  The majority of the participants were males, non-smokers, non-diabetic, without high blood pressure, and were not anemic.
 
 ![png](/images/heartfailure/output_20_0.png)
 
@@ -843,7 +843,7 @@ plt.show()
 ![png](/images/heartfailure/output_23_6.png)
 
 
-There are several interesting findings when plotting survival vs our different numerical variables.  Unsurprisingly, those who had longer follow-up in days were more likely to be alive.  There was a trend that the older individuals were more likely to not have survived.  It is subtle, but there appears to be an association between lower EF and survival and this is logical however, looking at the distributions, there was not a significant difference between the two.  Likewise, there did not seem to be a significant difference between sodium level and survival.  The higher the level of creatinine above 2, the more likely they were to be dead.  These creatinine levels are exceedingly high and the higher the creatinine, the higher the likelihood of kidney failure which explains this trend.  There did not seem to be a significant difference between survival and the platelet/CPK levels.
+There are several interesting findings when plotting survival vs our different numerical variables.  Unsurprisingly, those who had longer follow-up in days were more likely to be alive.  There was a trend that the older individuals were more likely to not have survived.  There appears to be an association between lower EF and survival and this is logical.  However, looking at the distributions, there was not a significant difference between the two.  Likewise, there did not seem to be a significant difference between sodium level and survival.  The higher the level of creatinine above 2, the more likely they were not to survive.  These creatinine levels are exceedingly high and the higher the creatinine, the higher the likelihood of kidney failure which explains this trend.  There did not seem to be a significant difference between survival and the platelet/CPK levels.
 
 ## Machine Learning Algorithms
 
@@ -940,7 +940,7 @@ viz.show()
 ![png](/images/heartfailure/output_28_0.png)
 
 
-The logistic regression model performed reasonably well with an F1 score of 0.615 of predicting death and 0.815 of predicting death.  There were 8 false negatives in this model.  The ROC was 0.81 for both class predictions.  After checking feature importance based on the logistic regression model, age, creatinine, CPK levels, and female gender were some of the most important features based on relative coefficients.
+The logistic regression model performed reasonably well with an F1 score of 0.615 of predicting death and 0.815 of predicting death.  There were 9 false negatives in this model.  The ROC was 0.81 for both class predictions.  After checking feature importance based on the logistic regression model, age, creatinine, CPK levels, and female gender were some of the most important features based on relative coefficients.
 
 ### KNN
 
@@ -982,7 +982,7 @@ print('Classification Report:\n', classification_report(test, predictions), '\n'
        macro avg       0.64      0.63      0.63        60
     weighted avg       0.69      0.70      0.69        60
 
-The optimized hyperparameters for KNN were a leaf size of 1, p of 2, n_neighbors of 5, and using uniform weights and the Minkowski metric.  The model was re-run with the tuned model.
+The optimized hyperparameters for KNN were a leaf size of 1, p of 2, n_neighbors of 5, uniform weights, and the Minkowski metric.  The model was re-run with the tuned model.
 
     Confusion Matrix:
      [[36  5]
@@ -1000,7 +1000,7 @@ The optimized hyperparameters for KNN were a leaf size of 1, p of 2, n_neighbors
 
 
 
-Using the tuned hyperparameters, interestingly, this model had better success at predicting death than survival.  However, there were 13 false negatives which we would want to avoid.  The F1 scores are not as high as the logistic regression model unfortunately.
+Interestingly, using hyperparameter tuning this model had better success at predicting death than survival.  However, there were 13 false negatives which we would want to avoid.  The F1 scores are not as high as the logistic regression model unfortunately.
 
 ### Support Vector Machine Classifier
 
@@ -1174,14 +1174,16 @@ This model also performed quite well.  There were only 7 false negatives.  The F
 
 ## Conclusions
 
-Heart failure is a very deadly disease.  Even 20 years ago, this diagnosis would be a death sentence.  There have been significant pharmacologic advancements in recent years which have improved survival.  Those with heart failure can have hospital admissions for fluid overload, trouble breathing, and even other cardiac events.  However, heart failure survival is still dependent upon the severity of the symptoms and other objective measurements as well as early diagnosis and treatment.  Therefore, it is timely that we may be able to utilize machine learning algorithms to help better predict death.  Perhaps if we can predict a higher risk of death based on severity of various lab measurements and other risk factors, there could be an intensification of therapy and/or aggressive follow-up and monitoring to ensure adequate care and prolonged symptom-free survival.
+Heart failure is a very deadly disease.  There have been significant pharmacologic advancements in recent years which have improved survival.  Those with heart failure can have hospital admissions for fluid overload, trouble breathing, and other cardiac events.  However, heart failure survival is still dependent upon the severity of the symptoms and other objective measurements as well as early diagnosis and treatment.  Therefore, it is timely that we may be able to utilize machine learning algorithms to help better predict death.  Perhaps if we can predict a higher risk of death based on severity of various lab measurements and other risk factors, there could be an intensification of therapy and/or aggressive follow-up and monitoring to ensure adequate care and prolonged symptom-free survival.
 
 It is not a significant surprise that the Random Forest and XG Boost models performed the best based on ROC and F1 scores.  The Random Forest managed to edge out the XG Boost performance by a small margin.  Since both of these are ensemble methods, they have multiple algorithms that are being evaluated and the prediction is then confirmed using a majority vote option.  Which model to use is somewhat arbitrary given their largely similar results.
 
-In this population of patients, there were significantly more people alive than dead at the end of the study period.  This explains why many of the models predicted more to be alive than dead on a relative basis.  The ensemble methods performed the best at this showing the power of these algorithm to be able to predict the harder class (death).  This is the point of this project; we want to primarily identify those at high risk of mortality to either perform some sort of intervention or close monitoring.  However, predicting survival can also be beneficial in that if a patient were to be predicted to survive by certain criteria, you could ensure certain factors about their health are optimized and be reassured.
+In this population of patients, there were significantly more people alive than dead at the end of the study period.  This explains why many of the models predicted more to be alive than dead on a relative basis.  The ensemble methods performed the best at this showing the power of these algorithm to be able to predict the harder class (death).  
 
-Finally, it is fascinating that the machine learning algorithms all seemed to agree on certain variables that relatively more important to the prediction.  The majority of them noted age, creatinine, CPK, and female gender to have more predictive power.  The ensemble methods picked up on more of the traditional variables of sodium, ejection fraction, among others.  Many of these variables are already medically validated as related to heart failure prognosis.  The machine learning algorithms, at least based on this dataset, agreed with these factors.  These factors do differ slightly based on the different algorithms used but many of the algorithms picked out similar important variables.
+This is the point of this project; we want to primarily identify those at high risk of mortality to either perform some sort of intervention or close monitoring.  However, predicting survival can also be beneficial in that if a patient were to be predicted to survive by certain criteria, you could ensure certain factors about their health are optimized and be reassured.
 
-This dataset is smaller and has a small number of patients.  This is partly due to the low numbers of heart failure overall.  This is a limitation on the predictive power.  Much larger datasets would be necessary among a large patient demographic to apply to the general population.  This does continue to show that machine learning can aid healthcare workers and providers in clinical management.
+Finally, it is fascinating that the machine learning algorithms all seemed to agree on certain variables that were relatively more important to the prediction.  The majority of them noted age, creatinine, CPK, and female gender to have more predictive power.  The ensemble methods picked up on more of the traditional variables of sodium, ejection fraction, among others.  Many of these variables are already medically validated as related to heart failure prognosis.  The machine learning algorithms, at least based on this dataset, agreed with these factors.  These factors do differ slightly based on the different algorithms used but many of the algorithms picked out similar important variables.
+
+This dataset is smaller and has a small number of patients.  This is partly due to the low numbers of heart failure overall, which limits its predictive power when faced with new data.  Much larger datasets would be necessary among a large patient demographic to apply to the general population.  
 
 __For full code of the project, please refer to my GitHub repository under Applied Data Science.__

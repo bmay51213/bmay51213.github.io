@@ -613,9 +613,9 @@ The datatypes were encoded to adequately consider the categorical variables in t
 
 In the R portion of this project, high levels of correlation were found between the b and e variables, the expert and automated determination of fetal heart rate, and finally mode, mean, and median variables were all highly correlated with one another.
 
-In this dataset, there is a 10 label multi-class target as well as the 3 label multi-class target variable.  I will be using the 3 label multi-class target variable for my target.__
+__In this dataset, there is a 10 label multi-class target as well as the 3 label multi-class target variable.  I will be using the 3 label multi-class target variable for my target.__
 
-The target variables is NSP which classifies the FHR as Normal, Suspect, or Pathologic.
+The target variable is NSP which classifies the FHR as Normal, Suspect, or Pathologic.
 
 However, I will first include the 10 label target variables as predictors to see if this increases model performance after hyperparameter tuning and then I will do this without the 10 class variables to see if the performance is better or worse.
 
@@ -1438,7 +1438,7 @@ __After Hyper-Parameter Tuning:__
 
 
 
-Based on the results here, the model actually performed worse by the F1-score, even when using hyperparameter tuning, when removing the other 10-class predictors to be used as prediction for our target variable
+Based on the results here, the model actually performed worse by the F1-score, even when using hyperparameter tuning, when removing the other 10-class predictors to be used as prediction for our target variable.
 
 ## Decision Tree Classifier
 
@@ -1474,7 +1474,7 @@ __Before Hyperparameter Tuning:__
 
 
 
-Based on removing the 10 point classifier as predictors, the Decision Tree did perform worse though with the hyperparameter tuning that was used before, the model had fairly positive results except for the Suspect class with a lower F1 score as compared to Normal and Pathologic categories
+Based on removing the 10 point classifier as predictors, the Decision Tree did perform worse. The model had fairly positive results except for the Suspect class with a lower F1 score as compared to Normal and Pathologic categories
 
 ## Random Forest Classifiers
 
@@ -1515,8 +1515,8 @@ __After Hyperparameter Tuning:__
 
 In this case as well, the Random Forest model did perform worse without the 10 classifier system that was in the model before.
 
-Using the results above, both the Random Forest and KNN models performed similarly after hyperparameter tuning and removing the extraneous variables of e, LBE, and Median.  Further the 10 point classification variables used as predictors actually improved the F1, Precision, and Recall scores so those variables should be kept in the model.  One possible explanation is that some of the information in the 10 point classifier could help the algorithm point to a suspect or pathologic pattern and provides more information for the algorithm to make a judgment.
+Using the results above, both the Random Forest and KNN models performed similarly after hyperparameter tuning and removing the extraneous variables of e, LBE, and Median.  Further, the 10 point classification variables used as predictors actually improved the F1, Precision, and Recall scores so those variables should be kept in the model.  One possible explanation is that some of the information in the 10 point classifier could help the algorithm point to a suspect or pathologic pattern and provides more information for the algorithm to make a judgment.
 
-Further model deployment would entail a much larger study population in addition to expert Obstetrician oversight to compare the computerized algorithms determination with known clinical experience.  However, this does indicate that machine learning algorithms could assist clinicians in determining potentially suspect or pathologic patterns.
+Further model deployment would entail a much larger study population in addition to expert Obstetrician oversight to compare the computerized algorithms determination with known clinical experience.  However, this does suggest that machine learning algorithms could assist clinicians in determining potentially suspect or pathologic patterns.
 
 __To view more specifics on the coding and project, please refer to the GitHub repository.__

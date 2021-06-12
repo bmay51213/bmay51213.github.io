@@ -240,4 +240,4 @@ corrplot(corr, method="circle")
 
 There appeared to be high levels of correlation between the beginning and ending measurements variable in addition to high levels of correlation between expert and automated determination of fetal heart rate.  Finally, mode, mean, and median variables were all highly correlated with each other based on the histogram values.  These variables will need to be assessed using feature selection to see if simplification will increase predictive accuracy.
 
-__This project is completed in the similarly named Python based project.__
+__This project is completed in the similarly named Python based project and can be found by clicking next below.__
