@@ -651,7 +651,7 @@ plt.show()
 ![png](/images/lungcancer/output_22_1.png)
 
 
-Age appears to be approximately normally distributed.  FEV1 has negative skew as well as FVC.  There are high values of FEV1 as well noted on this.
+Age appears to be approximately normally distributed.  FEV1 has negative skew as well as FVC.  There are high values of FEV1 as well noted on this.  These are unusually high and not typical.  For the sake of this project, the outliers were included.
 
 Using bar plots, the categorical variables were then visualized.
 

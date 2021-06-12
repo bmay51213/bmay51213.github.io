@@ -10,13 +10,13 @@ excerpt: "KNN, Data Visualization, Data Exploration and Analysis"
 
 #### Topic Background
 
-Suicide has become a topic of interest in recent years and in general, either through increased attention or increased suicide attempts, the perception is that suicide is becoming more prevalent.  Completed suicide attempts affect our world in innumerable ways including emotional, socioeconomic, and personal levels.  For my final project in this course, I sought out to further explore suicide data and trends, perhaps as a way to see if there were certain factors that are predictive of suicide rates.  The dataset is a Suicide Rates Overview from 1985-2016 obtained from Kaggle.com.  
+Suicide has become a topic of interest in recent years and in general, either through increased attention or increased suicide attempts, the perception is that suicide is becoming more prevalent.  Completed suicide attempts affect our world in innumerable ways including emotional, socioeconomic, and personal levels.  I sought to further explore suicide data and trends, perhaps as a way to see if there were certain factors that are predictive of suicide rates.  The dataset is a Suicide Rates Overview from 1985-2016 obtained from Kaggle.com.  
 
 The dataset can be found at: [https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016](https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016).
 
 Per the website on Kaggle, this dataset was compiled using information from the United Nations Development Program, the World Bank, Suicide in the Twenty-First Century Dataset, and the World Health Organization website on suicide prevention, some of which are hosted on Kaggle elsewhere.  The fact that the data has been collected from several different sources could imbue some erroneous data due to multiple data sources.
 
-The variables included in the dataset are Country, Year, Sex, Age, Number of Suicides, Population, Suicide Rate, Country-Year Composite Key, HDI for that Year, GDP for Year, GDP Per Capita, and Generation (i.e. Baby Boomer, Millennial etc.). Since the age ranges in provided in the dataset, in general, correlate with the generation status, I do not intend to use this variable in my analysis.  The HDI variable was almost all NA values so will be removed.  Furthermore, the country-year variable is redundant and will be excluded from the analysis.  One note of caution is that Germany and South Africa do not have suicide data going back as far as the other three countries.  This will be evident on the graphs later.
+The variables included in the dataset are Country, Year, Sex, Age, Number of Suicides, Population, Suicide Rate, Country-Year Composite Key, HDI for that Year, GDP for Year, GDP Per Capita, and Generation (i.e. Baby Boomer, Millennial etc.). Since the age ranges in provided in the dataset correlate with the generation status, I do not intend to use this variable in my analysis.  The HDI variable was almost all NA values so will be removed.  Furthermore, the country-year variable is redundant and will be excluded from the analysis.  One note of caution is that Germany and South Africa do not have suicide data going back as far as the other three countries.  This will be evident on the graphs later.
 
 #### Primary Research Questions
 
@@ -65,11 +65,11 @@ There appears to be a significant contrast between male and female suicide rates
 
 #### Initial Impressions:
 
-Since our histograms appear non-normally distributed based on our histograms and color-coded for gender and have a small sample size since our data is a summary based on year and country, kendall correlation will be used to determine correlations between suicide rate and GDP per capita and country total GDP.  While the GDP and GDP per capita may be very similar, I sought to analyze the relationship between GDP as an indicator of country wealth as opposed to the GDP per individual person.
+Since our histograms appear non-normally distributed based on our histograms and have a small sample size since our data is a summary based on year and country, kendall correlation will be used to determine correlations between suicide rate and GDP per capita and country total GDP.  While the GDP and GDP per capita may be very similar, I sought to analyze the relationship between GDP as an indicator of country wealth as opposed to the GDP per individual person.
 
-Of these values computed, the only statistically significant correlations are between France's suicide rate and gdp per capita, Germany's suicide rate and gdp per capita, and between france and germany's suicide rate and total gdp.  These correlations are negative indicating that as GDP decreases (whether that be per capita or total), suicide rate tends to increase.  The highest R^2 values of the correlation between the five countries appears to be France with R^2 of 0.1342 between suicide rate and GDP per capita and with an R^2 of 0.1359 between suicide rate and total GDP.
+The United States tends to have relatively flat association between GDP and suicide rate.  For males, there actually were less suicides per 100,000 population between approximately 40-50,000 GDP per capita.  Of these values computed, the only statistically significant correlations are between France's suicide rate and gdp per capita, Germany's suicide rate and gdp per capita, and between france and germany's suicide rate and total gdp.  These correlations are negative indicating that as GDP decreases (whether that be per capita or total), suicide rate tends to increase.  The highest R^2 values of the correlation between the five countries appears to be France with R^2 of 0.1342 between suicide rate and GDP per capita and with an R^2 of 0.1359 between suicide rate and total GDP.
 
-Interestingly enough, the South Africa correlations between suicide rate and GDP/GDP per capita shows that as GDP per capita and Total GDP increase, the suicide rate increases.
+Interestingly enough, the South Africa correlations between suicide rate and GDP/GDP per capita suggests that as GDP per capita and Total GDP increase, the suicide rate increases.
 
 #### Suicide Rates Plotted By Country and Gender
 
@@ -119,21 +119,22 @@ ggplot(countryfemale, aes(x = year, y = suicide_rate, col = country)) + geom_lin
 ![png](/images/stats/000003 (4).png)![png](/images/stats/000005 (4).png)
 
 
-For the male gender looking at suicide rates between the five different countries, this graph makes it clearer that suicide rates France, UK, and Germany have a net downward trend with the France suicide rate decreasing the most.  The US suicide rate initially declined and then has increased over recent years.  The UK suicide rate for males increased in the 2000s and then has settled down to its suicide rate similar to what it was in the 1980s.  The South Africa suicide rate for males also appears to be more or less stable.  The US most recently has the highest current suicide rate followed by France, Germany, UK, and then South Africa.  
+For the male gender looking at suicide rates between the five different countries, this graph makes it suggests that suicide rates in France, UK, and Germany have a net downward trend with the France suicide rate decreasing the most.  The US suicide rate initially declined and then has increased over recent years.  The UK suicide rate for males increased in the 2000s and then has settled down to its suicide rate similar to what it was in the 1980s.  The South Africa suicide rate for males also appears to be more or less stable.  The US most recently has the highest current suicide rate followed by France, Germany, UK, and then South Africa.  
 
 
-For the female gender looking at suicide rates between the five different countries, this graph once again makes it clearer that suicide rates for females have a downward trend for France and Germany.  The South Africa and UK suicide rates appears approximately stable.  However, of more concern is the rise in suicide rates in females in the US.  Once again though, relatively speaking, the female suicide rates for all five countries are lower than the male suicide rate.  While looking at South Africa though, the difference is quite small (on the order of 1-2 people per 100,000).
+For the female gender looking at suicide rates between the five different countries, this graph suggests that suicide rates for females have a downward trend for France and Germany.  The South Africa and UK suicide rates appears approximately stable.  However, of more concern is the rise in suicide rates in females in the US.  Once again though, relatively speaking, the female suicide rates for all five countries are lower than the male suicide rate.  While looking at South Africa though, the difference is quite small (on the order of 1-2 people per 100,000).
 
 
 Since most of these graphs appear to show a linear relationship so we will start with a simple linear regression here and also do a multiple regression comparing suicide rate by country with the gdp per capita and gender.
 
 #### Regression Analysis
 
+__Note: Full regression analysis information is in the GitHub repository under the R Markdown project documents.__
+
 Since the relationships on the above graphs appear linear, I started off with linear regression analyses and multiple regression and then checked for outliers and influential cases.
 
 Using these models outlier and influential cases were examined.  There were no statistically significant relationships between GDP and suicide rate for the US, UK, Germany, or South Africa.  However, when adding in gender to our models, there was a statistically significant correlation between these variables with a high R^2 value.  Furthermore, using a 95% confidence interval, none of the values crossed zero which is reassuring.  The residual standard errors decreased for all five countries when added to the models. ANOVA between both models for each country showed that adding gender to the models significantly improved the fit of the model as compared to just GDP per capita.
 
-__Note: Full regression analysis information is in the GitHub repository under the R Markdown project documents.__
 
 #### Outlier Assessment and Influential Cases
 
@@ -256,7 +257,7 @@ For the US Only Ages 25-34 dataset, I estimated the ideal K to be between 7 and 
 
 #### Conclusions and Future Directions:
 
-These data were collated together using multiple different sources so there could be inherent errors in the data itself and such interpreted with caution.  With my various analyses, there were large residuals however, all had cook's distance <1 so they likely were not influencing them model.  Since this dataset is a summary of suicide rates based on these other factors on a year by year basis, outliers should not necessarily be discarded but examined more closely to see if there was something special about the year that the outlier occurred in the country of interest.
+These data were collated together using multiple different sources so there could be inherent errors in the data itself and should be interpreted with caution.  With my various analyses, there were large residuals however, all had cook's distance <1 so they likely were not influencing them model.  Since this dataset is a summary of suicide rates based on these other factors on a year by year basis, outliers should not necessarily be discarded but examined more closely to see if there was some significant event in that year that could explain the variance.
 
 A note of caution based on South Africa's data.  First, it does not have reporting as early as some of the countries.  Germany is the same way.  Furthermore, the suicide rates in South Africa are within a very small range between 0 and 1.5 per 100,000 people so the values we get and the changes we see proportionally may not be as large as some of the other countries.
 
@@ -264,12 +265,10 @@ The differences between these graphs present future opportunities for study.  Fo
 
 Why does the female suicide rate at pretty much all age ranges seem to be increasing in the US while male suicide rates appear to have levelled out for most age ranges?
 
-Some of the more interesting information I collected was that male suicide rates for the five countries in question all appear higher than women suicide rates.  This could be due to the fact that in general, males are more likely to successfully commit suicide as opposed to females.  Even more concerning that out of the five countries, the US male and female suicide rate is the highest.  Some of the European’s countries including France and Germany had the highest suicide rate in the highest age ranges.  Could this be due to health or economic related factors? For females, the age 35-54 age range seems to have the highest suicide rates for the US and UK while it is 75+ age range for France and Germany.  There is significant variability in the South Africa data where it can be hard to make firm conclusions.  The dataset for France and Germany also seemed to show a net downward trend in suicide rate as years have passed indicating that there may be something further to look into there about any potential legislative or healthcare related changes that could account for this.
+Some of the more interesting information I collected was that male suicide rates for the five countries in question all appear higher than women suicide rates.  This could be due to the fact that in general, males are more likely to successfully commit suicide as opposed to females.  Even more concerning that out of the five countries, the US male and female suicide rate is the highest.  Some of the European’s countries including France and Germany had the highest suicide rate in the highest age ranges.  Could this be due to health or economic related factors? For females, the age 35-54 age range seems to have the highest suicide rates for the US and UK while it is 75+ age range for France and Germany.  There is significant variability in the South Africa data where it can be hard to make firm conclusions.  The dataset for France and Germany also seemed to show a net downward trend in suicide rate as years have passed.
 
 The data here based on these limited variables in this collated dataset appear to violate some of our basic assumptions so generalizing trends or opinions outside of this dataset should be treated with caution.  Using K Nearest Neighbors, we saw that based on different variables, our predictive accuracy is unacceptably low in all circumstances.
 
-There are so many different factors that play into a country’s suicide rate based on a variety of different factors including socioeconomics, gender, health status, mental health status, etc.  There may be problems with multicollinearity and confounding factors between all of these variables.  A way to improve this project and analysis would be to look at each specific country looking at specific demographic risk factors, potentially even demographic factors regarding the people who have committed suicide.  Correlating these data together may be helpful.  These data are merely summaries and I believe are meant to draw further insight into other avenues to pursue for future analysis.
-
-Suicide affects us on a personal, national, and international scale.  Deriving further insight from the summary data collected in this analysis can hopefully identify trends and other variables that may influence suicide as an outcome.  It is my hope that someday we can use these data to develop predictive models and accuracy to identify those that are at highest risk of suicide to intervene before it is too late.
+There are many different factors that play into a country’s suicide rate based on a variety of different factors including socioeconomics, gender, health status, mental health status, etc.  Further research would likely require more specific demographic information on population data.
 
 __For full code of the project, please refer to my GitHub repository under Data Science Statistics.__

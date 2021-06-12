@@ -706,11 +706,11 @@ df.describe()
 </table>
 </div>
 
-The youngest person in the analysis was 46 years old which is young for someone to sustain a heart attack.  The oldest was 86 years old and the average age was 64 years old.
+The youngest person in the analysis was 46 years old which is relatively young to have a myocardial infarction.  The oldest was 86 years old and the average age was 64 years old.
 
-The left ventricular diastolic dimension mean was 4.8 which is within normal range.  The largest was 6.73 cm which is very large.  The minimum was 3.42 though there is less of a concern with the lower LVIDD as there is with elevated ones.
+The left ventricular diastolic dimension mean was 4.8 which is within normal range.  The largest was 6.73 cm which is large.  The minimum was 3.42 though there is less of a concern with the lower LVDD as there is with elevated ones.
 
-The higher the level of fractional shortening is the better.  The minimum was very low at 0.01 and the largest was 0.61.  Mean values are around 0.21.
+The higher the level of fractional shortening the better.  The minimum was very low at 0.01 and the largest was 0.61.  Mean values are around 0.21.
 
 
 ```python
@@ -739,7 +739,7 @@ plt.show()
 ```
 ![png](/images/datamining/output_20_1.png)
 
-Age at heart attack and fractional shortening appear to be normally distributed.  The variables of epss, lvdd, and wallmotionindex appear to be positively skewed.
+Age at heart attack appears to be normally distributed.  The variables of fractional shortening, epss, lvdd, and wallmotionindex appear to be positively skewed.
 
 
 ![png](/images/datamining/output_24_0.png)
@@ -749,7 +749,7 @@ Age at heart attack and fractional shortening appear to be normally distributed.
 ![png](/images/datamining/output_24_1.png)
 
 
-The majority of people in the study group did not have a pericardial effusion and were alive after their heart attack.  Those with pericardial effusions are higher cardiac risk so this is a favorable thing.
+The majority of people in the study group did not have a pericardial effusion and were alive after their heart attack.  Those with pericardial effusions could potentially be higher cardiac risk so the fact that many did not have a pericardial effusion is a more favorable finding.
 
 The majority of people in the study were alive after their heart attack.
 
@@ -854,7 +854,7 @@ Scatterplots were completed using our predictor variables.
 ![png](/images/datamining/output_34_0.png)
 
 
-There appeared to be a weak positive correlation between EPSS and LVDD as well as a weak negative correlation between LVDD and Fractional Shortening.
+There appeared to be a positive correlation between EPSS and LVDD as well as a negative correlation between LVDD and Fractional Shortening.
 
 Next step was to plot our two categorical variables as stacked bar charts on top of each other to look how the presence or absence of a pericardial effusion correlated with survival.
 
@@ -888,7 +888,7 @@ plt.show()
 ![png](/images/datamining/output_37_0.png)
 
 
-Looking at this stacked bar chart, for those who did not have a pericardial effusion, approximately 30% were alive and 70% were deceased.  For those who did have a pericardial effusion, approximately 50% survived and 50% died.  I suspect that there may be other variables influencing this.  Pericardial effusions are an uncommon entity and usually increase the risk of death so it is counter-intuitive that those without a pericardial effusion would be dead at 1 year.
+Looking at this stacked bar chart, for those who did not have a pericardial effusion, approximately 30% were alive and 70% were deceased.  For those who did have a pericardial effusion, approximately 50% survived and 50% died.  I suspect that there may be other variables influencing this.  Pericardial effusions are an uncommon entity and usually are higher risk so it is counter-intuitive that those without a pericardial effusion would be dead at 1 year.
 
 ### Dimensionality Reduction and Fitting of Machine Learning Algorithms
 
@@ -1473,10 +1473,10 @@ Using the feature selected variables, the ROC improved to 0.76 and the F1 score 
 
 Overall, the best performing model overall appeared to the logistic regression model.
 
-One limitation of this dataset is the small sample size after null values were removed.  Another limitation of the dataset is that the deceased proportion of individuals was nearly two times those who survived in the dataset which will skew the results.  The models tend to be better here at predicting not survived vs. survived. This is likely explained by the fact that our dataset had 2 times the amount of people deceased vs. survived so there was a smaller amount of data to help predict the survived categories.
+One limitation of this dataset is the small sample size after null values were removed.  Another limitation of the dataset is that the deceased proportion of individuals was nearly two times those who survived in the dataset which will skew the results.  The models tend to be better here at predicting death vs. survival. This is likely explained by the fact that our dataset had 2 times the amount of people deceased vs. survived so there was a smaller amount of data to help predict the survived categories.
 
 Three different methods were used including Logistic Regression, Random Forest Classification, and Support Vector Machine Classification.  The best performing model was Logistic Regression followed closely by Support Vector Machines.  The Random Forest models performed the worst.  Feature selection improved the results of all of the models based on their Precision, Recall, and F1 scores.
 
-For further modeling, more data points would need to be contributed to fine tune the algorithms although the results to date are promising.
+The feature selection eliminated most variables.  With more variables and data points, I suspect that this would not be the case as it would be unlikely for just one value to accurately predict death.  More likely is that there is a complex interaction between various measurements that could impact survival.
 
 __To view more specifics on the coding and project, please refer to the GitHub repository.__

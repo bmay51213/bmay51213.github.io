@@ -728,95 +728,11 @@ Given the high rates of correlation of the above variables, we will drop them fr
 
 There were several outliers identified using the interquartile range.  There were various categories where the outliers were identified with a wide variety of variables.  The most common variable where it was noted was compactness.  The majority of these outliers were mostly identified as malignant though there were some benign diagnoses with outliers in the compactness variables.
 
-__Note:  Given the large number of variables, the plots below may be better visualized in the GitHub repository Jupyter notebook.__
-
-```python
-#Visualizing Outliers Using Boxplots
-
-plt.figure(figsize=[100,100])
-
-fig,axs = plt.subplots(9,3, figsize=(50, 50))
-
-axs[0,0].boxplot(df['radius_mean'])
-axs[0,0].set_title('Boxplot of Mean Radius')
-axs[0,1].boxplot(df['radius_se'])
-axs[0,1].set_title('Boxplot of Radius S.E.')
-axs[0,2].boxplot(df['compactness_mean'])
-axs[0,2].set_title('Boxplot of Mean Compactness')
-axs[1,0].boxplot(df['compactness_se'])
-axs[1,0].set_title('Boxplot of Compactness S.E.')
-axs[1,1].boxplot(df['compactness_worst'])
-axs[1,1].set_title('Boxplot of Worst Compactness')
-axs[1,2].boxplot(df['smoothness_mean'])
-axs[1,2].set_title('Boxplot of Mean Smoothness')
-axs[2,0].boxplot(df['smoothness_se'])
-axs[2,0].set_title('Boxplot of Smoothness S.E.')
-axs[2,1].boxplot(df['smoothness_worst'])
-axs[2,1].set_title('Boxplot of Worst Smoothness')
-axs[2,2].boxplot(df['texture_mean'])
-axs[2,2].set_title('Boxplot of Mean Texture')
-axs[3,0].boxplot(df['texture_se'])
-axs[3,0].set_title('Boxplot of Texture S.E.')
-axs[3,1].boxplot(df['texture_worst'])
-axs[3,1].set_title('Boxplot of Worst Texture')
-axs[3,2].boxplot(df['compactness_mean'])
-axs[3,2].set_title('Boxplot of Mean Compactness')
-axs[4,0].boxplot(df['compactness_se'])
-axs[4,0].set_title('Boxplot of Compactness S.E.')
-axs[4,1].boxplot(df['compactness_worst'])
-axs[4,1].set_title('Boxplot of Worst Compactness')
-axs[4,2].boxplot(df['concavity_mean'])
-axs[4,2].set_title('Boxplot of Mean Concavity')
-axs[5,0].boxplot(df['concavity_se'])
-axs[5,0].set_title('Boxplot of Concavity S.E.')
-axs[5,1].boxplot(df['concavity_worst'])
-axs[5,1].set_title('Boxplot of Worst Concavity')
-axs[5,2].boxplot(df['symmetry_mean'])
-axs[5,2].set_title('Boxplot of Mean Symmetry')
-axs[6,0].boxplot(df['symmetry_se'])
-axs[6,0].set_title('Boxplot of Symmetry S.E.')
-axs[6,1].boxplot(df['symmetry_worst'])
-axs[6,1].set_title('Boxplot of Worst Symmetry')
-axs[6,2].boxplot(df['concavepoints_se'])
-axs[6,2].set_title('Boxplot of Concave Points S.E.')
-axs[7,0].boxplot(df['concavepoints_worst'])
-axs[7,0].set_title('Boxplot of Worst Concave Points')
-axs[7,1].boxplot(df['fractal_dimension_mean'])
-axs[7,1].set_title('Boxplot of Mean Fractal Dimension')
-axs[7,2].boxplot(df['fractal_dimension_se'])
-axs[7,2].set_title('Boxplot of Fractal Dimension S.E.')
-axs[8,0].boxplot(df['fractal_dimension_worst'])
-axs[8,0].set_title('Boxplot of Worst Fractal Dimension')
-
-```
-
-![png](/images/breastcancer/output_18_2.png)
-
+__Note:  Given the large number of variables, the plots below are better visualized in the GitHub repository Jupyter notebook and will only be summarized below.__
 
 Many of the variables had outliers on the positive end of their measurement spectrum.  Given that these outliers could be predictive of being malignant, these will not be removed from the dataset.
 
-
-```python
-#Visualizing Distributions of Numerical Data
-
-#Setting Figure Size
-plt.figure(figsize=[100,100])
-
-f,a = plt.subplots(8,3, figsize=(40,40))
-plt.subplots_adjust(hspace=0.25, wspace = 0.25)
-
-a = a.ravel()
-for idx,ax in enumerate(a):
-    ax.hist(df.iloc[:,idx], bins=100)
-    ax.set_title(df.columns[idx])
-    ax.set_ylabel('Counts')
-plt.show()
-```
-
-![png](/images/breastcancer/output_20_1.png)
-
-
-Many of these variables are positively skewed.  The only variables that appear to be mostly normally distributed are symmetry_mean and possible fractal_dimension_mean.  Concave_points_worst actually appears to be bimodal.
+Further, many of these variables are positively skewed.  The only variables that appear to be mostly normally distributed are symmetry_mean and possible fractal_dimension_mean.  Concave_points_worst actually appears to be bimodal.
 
 
 ```python

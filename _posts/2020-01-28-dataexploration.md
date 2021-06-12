@@ -328,13 +328,13 @@ df.describe()
 
 The oldest person in the dataset was 77 and the youngest was 29 years of age with mean age of 54.
 
-The max systolic resting blood pressure on arrival to the hospital was 200 (this is quite high) and the lowest was 94 (on the lower end of normal).  Average systolic BP was 131 which is considered normal.
+The max systolic resting blood pressure on arrival to the hospital was 200 and the lowest was 94.  Average systolic BP was 131 which is considered within normal limits.
 
-Max cholesterol reading was 564, an extremely high value, and the lowest was 71, which is very low.  The mean cholesterol was 246 and most authorities recommend total cholesterol to be 200 or less.
+Max cholesterol reading was 564, an extremely high value, and the lowest was 71, which is low.  The mean cholesterol was 246 and many authorities recommend total cholesterol to be 200 or less.
 
-The oldpeak variable is a measure by how much the ST segment became depressed during a stress test.  This is indicative of ischemia or vulnerable heart tissue to a heart attack and the higher the number the worse it is.  In this case, there was 4 mm ST depresion (exceedingly high and worrisome) and the lowest was 0.  The mean value was 1 indicating many people did have some ST Depression.
+The oldpeak variable is a measure by how much the ST segment became depressed during a stress test.  This is indicative of ischemia or vulnerable heart tissue and the higher the number the worse it is.  In this case, there was 4 mm ST depression (exceedingly high and worrisome) and the lowest was 0.  The mean value was 1 indicating many people did have some ST depression.
 
-The ca variable describes how many coronary blood vessels were imaged during an angiogram (the gold standard of determining heart disease).  The max was 4 (there are only 4 major branches of the coronary arteries) and the minimum was 0 meaning they were not imaged at all.
+The ca variable describes how many coronary blood vessels were imaged during an angiogram (the gold standard of determining heart disease).  The max was 4 and the minimum was 0 meaning they were not imaged at all.
 
 
 ```python
@@ -453,7 +453,7 @@ plt.show()
 ![png](/images/heartdisease/output_16_2.png)
 
 
-Age, Max HR achieved during exercise (thalach) appeared to be negatively skewed.  Resting Systolic BP, Cholesterol, ST depression during exercise were more positively skewed.
+Age and max HR achieved during exercise (thalach) appeared to be negatively skewed.  Resting Systolic BP, Cholesterol, ST depression during exercise were more positively skewed.
 
 
 ```python
@@ -580,7 +580,7 @@ thinkplot.Show(title = 'PMF Of Cholesterol Values Separated By CAD Presence and 
 
 
 
-Interestingly, when visualizing the distribution of cholesterol values and whether or not CAD was present or absent, there appears to be an association that there were higher cholesterol values with CAD confirmed as negative as opposed to positive.  This is counterintuitive as higher cholesterol levels are generally associated with development of coronary artery disease.
+Interestingly, when visualizing the distribution of cholesterol values and whether or not CAD was present or absent, there appears to be an association that there were higher cholesterol values with no CAD.  This is counterintuitive as higher cholesterol levels are generally associated with development of coronary artery disease.
 
 
 ```python
@@ -632,7 +632,7 @@ thinkplot.Show(title = 'PMF Of Age Separated By CAD Presence and Absence'
 
 
 
-Considering the variable for age, it appears that the older individuals in the dataset were more likely to NOT be diagnosed with CAD.  This is counterintuitive as the probability of developing CAD rises naturally with aging.
+Considering the variable for age, it appears that the older individuals in the dataset were more likely to NOT be diagnosed with CAD.  This is counterintuitive as the probability of developing CAD rises with aging.
 
 
 ```python
@@ -667,7 +667,7 @@ thinkplot.Show(title = 'CDF for Cholesterol', xlabel = "Cholesterol (mg/dL)", yl
 
 
 
-For age, the CDF is essentially a straight line indicating a close to normal distribution.  The cholesterol variable, the middle line of the curve is steeper indicating a higher frequency of those values.  This suggests there were a larger proportion of elevated cholesterols as compared to lower cholesterols.
+For age, the CDF is close to normal distribution.  For the cholesterol variable, the curve is steeper indicating a higher frequency of those values.  This suggests there were a larger proportion of elevated cholesterols as compared to lower cholesterols.  The systolic blood pressure variable is similar to the cholesterol variable.
 
 This could impact the analysis as it seems that the dataset has higher baseline cholesterol values so there would already be an increased likelihood of having CAD given those levels
 
@@ -940,7 +940,7 @@ plt.show()
 ![png](/images/heartdisease/output_37_2.png)
 
 
-As expected, these variables are positively correlated with one another and verify common associations that as you age, your BP and cholesterol values increase.  Likewise, there is a known association between increased cholesterol values and increased blood pressure.
+As expected, these variables are positively correlated with one another and verify common associations that as you age, your BP and cholesterol values tend to increase.  Likewise, there is seems to be an association between increased cholesterol values and increased blood pressure.
 
 ### Using Logistic Regression Model To Predict Heart Disease
 
@@ -1028,8 +1028,6 @@ viz.show()
 
 Based on coefficients, some of the most important features in this logistic regression model were pain that was non-anginal, being asymptomatic, female sex, max HR obtained during stress test, downsloping ST segments, and anginal pain.
 
-Considering factors traditionally associated with having a higher probability of heart disease, anginal pain, downsloping ST segments, and max HR obtained during stress test are predictive of CAD.  Those with angina (typical CAD related pain) and those with lower Max HR during stress tests are more likely to have CAD.  Interestingly enough, female sex was also considered very important as was non-anginal pain.  This is counter intuitive.  This could simply be a result of the population tested in the dataset if not represented of a homogeneous population.
-
-However, this does suggest that logistic regression and other types of machine learning algorithms may be useful in predicting heart disease.
+Considering factors traditionally associated with having a higher probability of heart disease, anginal pain, downsloping ST segments, and max HR obtained during stress test are predictive of CAD.  Those with angina (typical CAD related pain) and those with lower Max HR during stress tests are more likely to have CAD.  Interestingly enough, female sex was also considered very important as was non-anginal pain.  This is counter intuitive.  This could simply be a result of the specific population that was tested.
 
 __To see more complete coding and analysis, please refer to my GitHub repository.__
