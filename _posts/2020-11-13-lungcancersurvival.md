@@ -197,7 +197,7 @@ The initial file was in an ARFF format.  This was converted outside of Python in
 17.	Risk1Y: Survival After 1 Year (T if Died)
 
 
-The columns are not named so that it is easy to ascertain which variable is which so the columns were renamed and the datatypes were changed to make sure were encoded correctly.
+The columns are not named so it was difficult to ascertain which variable is which so the columns were renamed and the datatypes changed to make sure were encoded correctly.
 
 <div>
 <style scoped>
